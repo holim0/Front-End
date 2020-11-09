@@ -1,1 +1,1 @@
-export default () => "Goods";
+export default () => "Goods Page";
