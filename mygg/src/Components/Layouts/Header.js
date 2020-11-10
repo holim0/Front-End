@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import AuthContainer from "Routes/Common";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Container = styled.div`
@@ -33,10 +33,25 @@ const SearchBar = styled.form`
     background: #f5f8fa;
     border-radius: 12px;
     padding: 0 4px;
+
     input {
         all: unset;
         padding: 6px;
         width: 240px;
+        text-align: center;
+
+        &:focus {
+            text-align: left;
+        }
+    }
+
+    button[type="reset"] {
+        font-size: 14px;
+        display: ${(props) => (props.showReset ? "block" : "none")};
+
+        &:hover {
+            color: rgba(0, 0, 0, 0.2);
+        }
     }
 `;
 
@@ -45,6 +60,7 @@ const Sign = styled.div`
 `;
 
 const Header = () => {
+    // signin/signup modal on & off
     const [sign, setSign] = useState(false);
 
     const onSignModal = useCallback(
@@ -54,13 +70,37 @@ const Header = () => {
         [sign]
     );
 
+    // search text & text reset
+    const [search, setSearch] = useState("");
+
+    const onSearch = useCallback(
+        (e) => {
+            setSearch(e.target.value);
+        },
+        [search]
+    );
+
+    const onReset = useCallback(
+        (e) => {
+            setSearch("");
+        },
+        [search]
+    );
+
     return (
         <>
             <Container>
                 <Nav>
                     <Logo>GongGus</Logo>
-                    <SearchBar>
-                        <input type="text" placeholder="검색하세요.." />
+                    <SearchBar onChange={onSearch} showReset={search}>
+                        <button type="reset" onClick={onReset}>
+                            X
+                        </button>
+                        <input
+                            type="text"
+                            value={search}
+                            placeholder="검색하세요.."
+                        />
                         <button type="submit">
                             <AiOutlineSearch size={24} fill="#14171a" />
                         </button>

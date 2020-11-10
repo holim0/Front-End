@@ -29,7 +29,7 @@ const ModalForm = styled.div`
     position: absolute;
     background: #ffffff;
     border-radius: 12px;
-    top: 50%;
+    top: calc(50% - 60px);
     left: 0;
     right: 0;
     bottom: 0;
@@ -157,6 +157,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                         id="userId"
                         name="userId"
                         placeholder="이메일"
+                        autoComplete="off"
                     />
                     <Label htmlFor="userPassword">패스워드</Label>
                     <Input
@@ -164,6 +165,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                         id="userPassword"
                         name="userPassword"
                         placeholder="패스워드"
+                        autoComplete="off"
                     />
                     {signUp && (
                         <>
@@ -175,6 +177,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 id="verifyUserPassword"
                                 name="verifyUserPassword"
                                 placeholder="패스워드확인"
+                                autoComplete="off"
                             />
                             <Label htmlFor="name">이름</Label>
                             <Input
@@ -182,6 +185,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 id="name"
                                 name="name"
                                 placeholder="이름"
+                                autoComplete="off"
                             />
                             <Label htmlFor="nickname">닉네임</Label>
                             <Input
@@ -189,6 +193,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 id="nickname"
                                 name="nickname"
                                 placeholder="닉네임"
+                                autoComplete="off"
                             />
                             <Label htmlFor="schoolName">소속학교</Label>
                             <Input
@@ -196,6 +201,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 id="schoolName"
                                 name="schoolName"
                                 placeholder="소속학교"
+                                autoComplete="off"
                             />
                             <Check>
                                 <input
