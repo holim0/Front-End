@@ -69,7 +69,7 @@ const Input = styled.input`
     padding: 8px;
     margin: 6px 0;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    font-size: 14px;
+
     &:focus {
         border: 1px solid #1da1f2;
     }
