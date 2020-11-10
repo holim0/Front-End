@@ -136,6 +136,11 @@ const SocialButton = styled.div`
         &:nth-child(3) {
             background: #4867aa;
         }
+
+        &:hover {
+            border-radius: 12px;
+            transition: all 500ms;
+        }
     }
 `;
 
@@ -203,7 +208,9 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                         </>
                     )}
 
-                    <Button type="submit">로그인</Button>
+                    <Button type="submit">
+                        {!signUp ? "로그인" : "회원가입"}
+                    </Button>
                     <SocialButton>
                         <button type="button">
                             <div>N</div>
