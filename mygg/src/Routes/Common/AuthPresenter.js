@@ -69,9 +69,20 @@ const Input = styled.input`
     padding: 8px;
     margin: 6px 0;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    ${(props) =>
+        props.err &&
+        css`
+            border: 1px solid #d63031;
+        `}
 
     &:focus {
         border: 1px solid #1da1f2;
+
+        ${(props) =>
+            props.err &&
+            css`
+                border: 1px solid #d63031;
+            `}
     }
 `;
 
@@ -144,13 +155,24 @@ const SocialButton = styled.div`
     }
 `;
 
-const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
+const AuthPresenter = ({
+    onSignModal,
+    onSignUp,
+    signUp,
+    onUserSignUp,
+    onUserSignIn,
+    onChangeSignUp,
+    onChangeSignIn,
+    err,
+}) => {
     return (
         <Container>
             <ModalBackground onClick={onSignModal}></ModalBackground>
             <ModalForm signUp={signUp}>
                 <SignTitle>{!signUp ? "로그인" : "회원가입"}</SignTitle>
-                <SignForm>
+                <SignForm
+                    onChange={!signUp ? onChangeSignIn : onChangeSignUp}
+                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}>
                     <Label htmlFor="userId">이메일</Label>
                     <Input
                         type="email"
@@ -173,6 +195,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 패스워드확인
                             </Label>
                             <Input
+                                err={err}
                                 type="password"
                                 id="verifyUserPassword"
                                 name="verifyUserPassword"
@@ -204,11 +227,7 @@ const AuthPresenter = ({ onSignModal, onSignUp, signUp }) => {
                                 autoComplete="off"
                             />
                             <Check>
-                                <input
-                                    type="checkbox"
-                                    id="check"
-                                    value="check"
-                                />
+                                <input type="checkbox" id="check" required />
                                 <label htmlFor="check">개인정보 동의</label>
                             </Check>
                         </>

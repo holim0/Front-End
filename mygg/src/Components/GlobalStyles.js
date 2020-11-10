@@ -21,5 +21,11 @@ const GlobalStyled = createGlobalStyle`
         all: unset;
         cursor: pointer;
     }
+
+    ul,li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
 `;
 export default GlobalStyled;

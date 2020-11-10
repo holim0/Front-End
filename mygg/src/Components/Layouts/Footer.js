@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 const Container = styled.footer`
     width: 100%;
+    border-top: 1px solid black;
+    padding: 12px;
     div {
-        max-width: 1024px;
+        max-width: 1060px;
         min-height: 100px;
         margin: 0 auto;
         text-align: center;
-        border-bottom: 1px solid black;
     }
 `;
 
