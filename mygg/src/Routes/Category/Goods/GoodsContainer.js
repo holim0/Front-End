@@ -1,8 +1,8 @@
 import React from "react";
-import GoodsPresenter from "./GoodsPresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const GoodsContainer = () => {
-    return <GoodsPresenter />;
+    return <CatePresenter />;
 };
 
 export default GoodsContainer;

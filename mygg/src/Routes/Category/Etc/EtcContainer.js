@@ -1,9 +1,9 @@
 import React from "react";
 
-import EtcPresenter from "./EtcPresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const EtcContainer = () => {
-    return <EtcPresenter />;
+    return <CatePresenter />;
 };
 
 export default EtcContainer;

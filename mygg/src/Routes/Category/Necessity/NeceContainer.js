@@ -1,9 +1,9 @@
 import React from "react";
 
-import NecePresenter from "./NecePresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const NeceContainer = () => {
-    return <NecePresenter />;
+    return <CatePresenter />;
 };
 
 export default NeceContainer;

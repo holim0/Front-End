@@ -1,8 +1,8 @@
 import React from "react";
-import FoodPresenter from "./FoodPresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const FoodContainer = () => {
-    return <FoodPresenter />;
+    return <CatePresenter />;
 };
 
 export default FoodContainer;

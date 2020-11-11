@@ -1,8 +1,8 @@
 import React from "react";
-import ClothPresenter from "./ClothPresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const ClothContainer = () => {
-    return <ClothPresenter />;
+    return <CatePresenter></CatePresenter>;
 };
 
 export default ClothContainer;

@@ -1,9 +1,9 @@
 import React from "react";
 
-import BeautyPresenter from "./BeautyPresenter";
+import CatePresenter from "Routes/Category/CatePresenter";
 
 const BeautyContainer = () => {
-    return <BeautyPresenter />;
+    return <CatePresenter />;
 };
 
 export default BeautyContainer;
