@@ -9,6 +9,7 @@ import {
     FaHome,
 } from "react-icons/fa";
 import theme from "Components/Theme";
+import { Loader } from "Components/Loader";
 
 const Container = styled.div`
     display: flex;
@@ -89,6 +90,7 @@ const Button = styled(Link)`
 const HomePresenter = () => {
     return (
         <Container>
+            <Loader />
             <Button to="/necessity">
                 NECESSITY
                 <FaHome />

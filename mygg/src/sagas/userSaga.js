@@ -20,6 +20,7 @@ function* signUp(action) {
         yield put({
             type: SIGN_UP_SUCCESS,
         });
+
         yield put({
             type: SIGN_IN_SUCCESS,
         });
