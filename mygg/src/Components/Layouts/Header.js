@@ -6,6 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "modules/user";
 import { signFormShowing } from "modules/header";
+import { useInput } from "hooks";
 
 const Container = styled.div`
     position: fixed;
@@ -116,19 +117,12 @@ const Header = () => {
     }, [isSign, dispatch]);
 
     // search text & text reset
-    const [search, setSearch] = useState("");
 
-    const onSearch = useCallback(
-        (e) => {
-            setSearch(e.target.value);
-            console.log(search);
-        },
-        [search]
-    );
+    const [text, setText, onChange] = useInput("");
 
     const onReset = useCallback(() => {
-        setSearch("");
-    }, []);
+        setText("");
+    }, [text]);
 
     // check user
     const [users, setUser] = useState("");
@@ -147,14 +141,14 @@ const Header = () => {
             <Container>
                 <Nav>
                     <Logo>GongGus</Logo>
-                    <SearchBar showReset={search}>
+                    <SearchBar showReset={text}>
                         <button type="reset" onClick={onReset}>
                             X
                         </button>
                         <input
                             type="text"
-                            value={search}
-                            onChange={onSearch}
+                            value={text}
+                            onChange={onChange}
                             placeholder="검색하세요.."
                         />
                         <button type="submit">

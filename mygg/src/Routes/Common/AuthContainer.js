@@ -1,6 +1,6 @@
+import { useFormInput, useSubmit } from "hooks";
 import { signInRequest, signUpRequest } from "modules/user";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import AuthPresenter from "./AuthPresenter";
 
 const AuthContainer = ({ onSignModal }) => {
@@ -15,64 +15,23 @@ const AuthContainer = ({ onSignModal }) => {
     );
 
     // user SignUp & SignIn
-    const dispatch = useDispatch();
-    const [signUpData, setSignUpData] = useState({
-        userId: "",
-        userPassword: "",
-        nickname: "",
-        name: "",
-        schoolName: "",
-    });
-
-    const [signInData, setSignInData] = useState({
-        userId: "",
-        userPassword: "",
-    });
 
     const [err, setErr] = useState("");
+    const { form, onChange } = useFormInput({});
 
-    const onChangeSignUp = useCallback(
-        (e) => {
-            const { name, value } = e.target;
-            setSignUpData({ ...signUpData, [name]: value });
-        },
-        [signUpData]
-    );
-
-    const onChangeSignIn = useCallback(
-        (e) => {
-            const { name, value } = e.target;
-            setSignInData({ ...signInData, [name]: value });
-        },
-        [signInData]
-    );
-
-    const onUserSignUp = useCallback(
-        (e) => {
-            e.preventDefault();
-            dispatch(signUpRequest(signUpData));
-        },
-        [signUpData, dispatch]
-    );
-
-    const onUserSignIn = useCallback(
-        (e) => {
-            e.preventDefault();
-            dispatch(signInRequest(signInData));
-        },
-        [signInData, dispatch]
-    );
+    const { onSubmit: onUserSignIn } = useSubmit(signInRequest, form);
+    const { onSubmit: onUserSignUp } = useSubmit(signUpRequest, form);
 
     useEffect(() => {
-        if (signUpData) {
-            const { userPassword, verifyUserPassword } = signUpData;
+        if (form) {
+            const { userPassword, verifyUserPassword } = form;
             if (userPassword !== verifyUserPassword) {
-                setErr("비밀번호가 일치하지 않습니다.");
+                setErr(true);
             } else {
                 setErr(null);
             }
         }
-    }, [signUpData]);
+    }, [form]);
 
     return (
         <AuthPresenter
@@ -80,8 +39,8 @@ const AuthContainer = ({ onSignModal }) => {
             onUserSignIn={onUserSignIn}
             onSignModal={onSignModal}
             onSignUp={onSignUp}
-            onChangeSignUp={onChangeSignUp}
-            onChangeSignIn={onChangeSignIn}
+            onChangeSignUp={onChange}
+            onChangeSignIn={onChange}
             signUp={signUp}
             err={err}
         />
