@@ -29,7 +29,7 @@ export const useSubmit = (dispatchName, value) => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-            dispatch(dispatch(dispatchName(value)));
+            dispatch(dispatchName(value));
         },
         [value, dispatch]
     );
