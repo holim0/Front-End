@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import theme from "./Theme";
 
 const GlobalStyled = createGlobalStyle`
     * {
@@ -9,7 +10,7 @@ const GlobalStyled = createGlobalStyle`
         margin: 0;
         margin-top: 60px;
         padding: 0;
-        font-size: 14px;
+        font-size: ${theme.ms}
     }
 
     input {

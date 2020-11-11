@@ -4,16 +4,13 @@ import Header from "./Layouts/Header";
 import Home from "Routes/Home";
 import Mypage from "Routes/Mypage";
 import MypageContainer from "Routes/Mypage";
-<<<<<<< HEAD
 import Footer from "./Layouts/Footer";
-=======
 import Necessity from "Routes/Category/Necessity";
 import Food from "Routes/Category/Food";
 import Cloth from "Routes/Category/Cloth";
 import Goods from "Routes/Category/Goods";
 import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
->>>>>>> ups/master
 
 const Router = () => {
     return (

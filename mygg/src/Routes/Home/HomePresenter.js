@@ -8,6 +8,7 @@ import {
     FaPaintBrush,
     FaHome,
 } from "react-icons/fa";
+import theme from "Components/Theme";
 
 const Container = styled.div`
     display: flex;
@@ -15,8 +16,8 @@ const Container = styled.div`
     justify-content: center;
     align-content: center;
     height: 100vh;
-    --def: rgba(85, 88, 218, 1);
-    --inv: #fff;
+    --def: ${theme.bgColor};
+    --inv: ${theme.white};
     *,
     *:before,
     *:after {
