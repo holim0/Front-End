@@ -2,20 +2,23 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FaFacebookF } from "react-icons/fa";
+import theme from "Components/Theme";
 
 const Container = styled.div`
     position: fixed;
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    z-index: 500;
 `;
 
 const ModalBackground = styled.div`
     width: 100%;
     height: 100%;
+    z-index: 500;
     top: 0;
     position: fixed;
-    background: #333333;
+    background: ${theme.black};
     z-index: 100;
     opacity: 0.3;
 `;
@@ -27,7 +30,7 @@ const ModalForm = styled.div`
     margin: 0 auto;
     padding: 12px;
     position: absolute;
-    background: #ffffff;
+    background: ${theme.white};
     border-radius: 12px;
     top: calc(50% - 60px);
     left: 0;
@@ -58,8 +61,8 @@ const SignForm = styled.form`
 `;
 
 const Label = styled.label`
-    font-size: 12px;
-    color: #657786;
+    font-size: ${theme.ss};
+    color: ${theme.lightenBlack};
     width: 300px;
     margin: 2px 0;
 `;
@@ -68,20 +71,20 @@ const Input = styled.input`
     width: 300px;
     padding: 8px;
     margin: 6px 0;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid ${theme.lightenBlack};
     ${(props) =>
         props.err &&
         css`
-            border: 1px solid #d63031;
+            border: 1px solid ${theme.red};
         `}
 
     &:focus {
-        border: 1px solid #1da1f2;
+        border: 1px solid ${theme.blue};
 
         ${(props) =>
             props.err &&
             css`
-                border: 1px solid #d63031;
+                border: 1px solid ${theme.red};
             `}
     }
 `;
@@ -89,7 +92,7 @@ const Input = styled.input`
 const Check = styled.span`
     margin-top: 6px;
     margin-bottom: 16px;
-    font-size: 12px;
+    font-size: ${theme.ss};
     width: 260px;
 `;
 
@@ -101,14 +104,14 @@ const Button = styled.button`
     margin: 6px 0;
     padding: 6px 0;
     font-weight: 500;
-    background: #1da1f2;
-    color: #ffffff;
+    background: ${theme.blue};
+    color: ${theme.white};
 
     ${(props) =>
         props.type === "button" &&
         css`
-            color: #14171a;
-            background: #ffffff;
+            color: ${theme.black};
+            background: ${theme.white};
             &:hover {
                 text-decoration: underline;
             }
@@ -123,7 +126,7 @@ const SocialButton = styled.div`
 
     & > button {
         margin: 6px 8px;
-        color: #ffffff;
+        color: ${theme.white};
         font-weight: 700;
         display: flex;
         width: 32px;
