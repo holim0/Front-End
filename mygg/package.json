@@ -9,10 +9,7 @@
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-icons": "^3.11.0",
-<<<<<<< HEAD
         "react-redux": "^7.2.2",
-=======
->>>>>>> ups/master
         "react-router-dom": "^5.2.0",
         "react-routes": "^0.2.6",
         "react-scripts": "4.0.0",
@@ -23,7 +20,7 @@
         "web-vitals": "^0.2.4"
     },
     "scripts": {
-        "start": "cross-env NODE_PATH=src react-scripts start",
+        "start": "BROWER='google chrome' cross-env NODE_PATH=src react-scripts start",
         "build": "cross-env NODE_PATH=src react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

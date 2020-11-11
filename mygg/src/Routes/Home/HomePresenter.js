@@ -15,6 +15,7 @@ const Container = styled.div`
     justify-content: center;
     align-content: center;
     height: 100vh;
+    margin: 0 auto;
     --def: rgba(85, 88, 218, 1);
     --inv: #fff;
     *,
