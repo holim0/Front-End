@@ -31,7 +31,7 @@
 
 
 
-
+</br></br>
 
 #### [역할 분담]
 
@@ -42,13 +42,40 @@
 - 게시글 디테일  => 글, 링크
 - 게시글 작성
 
+</br></br>
+
+#### [Commit convention]
+
+
+
+<img width="990" alt="스크린샷 2020-11-11 오후 5 01 15" src="https://user-images.githubusercontent.com/48006103/98785204-923ddf00-243f-11eb-9f06-105ce9fafad2.png">
+
+
+
+</br></br>
+
+
+
+#### [Path Structure]
+
+- Home : /
+- Mypage : /mypage/:usrid
+- 생필품 : /necessity
+- 의류 : /cloth
+- 음식 : /food
+- 뷰티 : /beauty
+- 잡화 : /goods
+- 기타 : /etc
+- 게시판 디테일 : /게시판이름/:게시판 아이디
+
+- 게시판 작성: /write/:usrid
+- 게시판 수정: /edit/:게시판 아이디
 
 
 
 
 
-
-####  
+</br> </br>
 
 
 
