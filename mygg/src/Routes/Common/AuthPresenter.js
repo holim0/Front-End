@@ -62,7 +62,7 @@ const SignForm = styled.form`
 
 const Label = styled.label`
     font-size: ${theme.ss};
-    color: ${theme.lightenBlack};
+    color: ${theme.lightenBlue};
     width: 300px;
     margin: 2px 0;
 `;

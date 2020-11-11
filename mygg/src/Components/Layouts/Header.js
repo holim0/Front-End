@@ -36,7 +36,7 @@ const Logo = styled.div`
     cursor: pointer;
 
     a {
-        color: #333333;
+        color: ${theme.black};
         text-decoration: none;
     }
 `;
@@ -44,7 +44,7 @@ const Logo = styled.div`
 const SearchBar = styled.form`
     display: flex;
     align-items: center;
-    background: #f5f8fa;
+    background: ${theme.lightenBlack};
     border-radius: 12px;
     padding: 0 4px;
 
