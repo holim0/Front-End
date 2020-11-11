@@ -7,13 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "modules/user";
 import { signFormShowing } from "modules/header";
 import { useInput } from "hooks";
+import { Link } from "react-router-dom";
+import theme from "Components/Theme";
 
 const Container = styled.div`
     position: fixed;
-    background: #ffffff;
+    background: ${theme.white};
     top: 0;
     height: 60px;
     width: 100%;
+    z-index: 500;
 `;
 
 const Nav = styled.nav`
@@ -28,14 +31,20 @@ const Nav = styled.nav`
 `;
 
 const Logo = styled.div`
-    font-size: 24px;
+    font-size: ${theme.xls};
     font-weight: bold;
+    cursor: pointer;
+
+    a {
+        color: ${theme.black};
+        text-decoration: none;
+    }
 `;
 
 const SearchBar = styled.form`
     display: flex;
     align-items: center;
-    background: #f5f8fa;
+    background: ${theme.lightenBlack};
     border-radius: 12px;
     padding: 0 4px;
 
@@ -51,11 +60,11 @@ const SearchBar = styled.form`
     }
 
     button[type="reset"] {
-        font-size: 14px;
+        font-size: ${theme.ms};
         display: ${(props) => (props.showReset ? "block" : "none")};
 
         &:hover {
-            color: rgba(0, 0, 0, 0.2);
+            color: ${theme.lightenBlack};
         }
     }
 `;
@@ -73,13 +82,13 @@ const UserMenu = styled.div`
         padding: 6px 0;
         height: 165px;
         transition: height 300ms;
-        background: #ffffff;
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: ${theme.white};
+        border: 1px solid ${theme.lightenBlack};
     }
 `;
 
 const UserProfile = styled.div`
-    border: 1px solid #657786;
+    border: 1px solid ${theme.lightenBlack};
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -100,8 +109,8 @@ const UserProfileMenu = styled.ul`
         padding: 6px;
 
         &:hover {
-            background: #1da1f2;
-            color: #ffffff;
+            background: ${theme.blue};
+            color: ${theme.white};
         }
     }
 `;
@@ -140,7 +149,9 @@ const Header = () => {
         <>
             <Container>
                 <Nav>
-                    <Logo>GongGus</Logo>
+                    <Logo>
+                        <Link to="/">GongGus</Link>
+                    </Logo>
                     <SearchBar showReset={text}>
                         <button type="reset" onClick={onReset}>
                             X
