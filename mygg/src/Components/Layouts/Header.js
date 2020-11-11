@@ -8,11 +8,10 @@ import { logOut } from "modules/user";
 import { signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link } from "react-router-dom";
-import theme from "Components/Theme";
 
 const Container = styled.div`
     position: fixed;
-    background: ${theme.white};
+    background: ${(props) => props.theme.white};
     top: 0;
     height: 60px;
     width: 100%;
@@ -31,12 +30,12 @@ const Nav = styled.nav`
 `;
 
 const Logo = styled.div`
-    font-size: ${theme.xls};
+    font-size: ${(props) => props.theme.xls};
     font-weight: bold;
     cursor: pointer;
 
     a {
-        color: ${theme.black};
+        color: ${(props) => props.theme.black};
         text-decoration: none;
     }
 `;
@@ -44,7 +43,7 @@ const Logo = styled.div`
 const SearchBar = styled.form`
     display: flex;
     align-items: center;
-    background: ${theme.lightenBlack};
+    background: ${(props) => props.theme.lightenBlack};
     border-radius: 12px;
     padding: 0 4px;
 
@@ -60,11 +59,11 @@ const SearchBar = styled.form`
     }
 
     button[type="reset"] {
-        font-size: ${theme.ms};
+        font-size: ${(props) => props.theme.ms};
         display: ${(props) => (props.showReset ? "block" : "none")};
 
         &:hover {
-            color: ${theme.lightenBlack};
+            color: ${(props) => props.theme.lightenBlack};
         }
     }
 `;
@@ -82,13 +81,13 @@ const UserMenu = styled.div`
         padding: 6px 0;
         height: 165px;
         transition: height 300ms;
-        background: ${theme.white};
-        border: 1px solid ${theme.lightenBlack};
+        background: ${(props) => props.theme.white};
+        border: 1px solid ${(props) => props.theme.lightenBlack};
     }
 `;
 
 const UserProfile = styled.div`
-    border: 1px solid ${theme.lightenBlack};
+    border: 1px solid ${(props) => props.theme.lightenBlack};
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -109,8 +108,8 @@ const UserProfileMenu = styled.ul`
         padding: 6px;
 
         &:hover {
-            background: ${theme.blue};
-            color: ${theme.white};
+            background: ${(props) => props.theme.blue};
+            color: ${(props) => props.theme.white};
         }
     }
 `;
@@ -123,7 +122,7 @@ const Header = () => {
 
     const onSignModal = useCallback(() => {
         dispatch(signFormShowing());
-    }, [isSign, dispatch]);
+    }, [dispatch]);
 
     // search text & text reset
 
@@ -131,7 +130,7 @@ const Header = () => {
 
     const onReset = useCallback(() => {
         setText("");
-    }, [text]);
+    }, [setText]);
 
     // check user
     const [users, setUser] = useState("");

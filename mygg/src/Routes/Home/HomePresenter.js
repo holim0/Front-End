@@ -8,7 +8,6 @@ import {
     FaPaintBrush,
     FaHome,
 } from "react-icons/fa";
-import theme from "Components/Theme";
 import { Loader } from "Components/Loader";
 
 const Container = styled.div`
@@ -19,8 +18,8 @@ const Container = styled.div`
     height: 100vh;
     margin: 0 auto;
 
-    --def: ${theme.bgColor};
-    --inv: ${theme.white};
+    --def: ${(props) => props.theme.bgColor};
+    --inv: ${(props) => props.theme.white};
     *,
     *:before,
     *:after {
