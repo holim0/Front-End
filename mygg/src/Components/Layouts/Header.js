@@ -35,7 +35,6 @@ const Logo = styled.div`
     font-weight: bold;
     cursor: pointer;
     flex: 1;
-
     a {
         color: ${(props) => props.theme.black};
         text-decoration: none;
@@ -49,13 +48,13 @@ const SearchBar = styled.form`
     justify-content: space-between;
     border-radius: 12px;
     padding: 0 4px;
-
+    flex: 1;
     input {
         all: unset;
         padding: 6px;
         width: 240px;
         text-align: center;
-
+        flex: 1;
         &:focus {
             text-align: left;
         }
@@ -72,15 +71,17 @@ const SearchBar = styled.form`
 `;
 
 const Sign = styled.div`
+    flex: 1;
     cursor: pointer;
+    text-align: right;
 `;
 
 const UserMenu = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    flex: 1;
     justify-content: flex-end;
+    flex: 1;
 
     &:hover ul {
         padding: 6px 0;
@@ -94,7 +95,7 @@ const UserMenu = styled.div`
 const UserProfile = styled.div`
     border: 1px solid ${(props) => props.theme.lightenBlack};
     border-radius: 50%;
-    width: 30px;
+    width: 103px;
     height: 30px;
     line-height: 30px;
     text-align: center;

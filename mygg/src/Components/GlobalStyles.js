@@ -28,5 +28,10 @@ const GlobalStyled = createGlobalStyle`
         margin: 0;
         list-style: none;
     }
+
+    a {
+        color: ${(props) => props.theme.black};
+        text-decoration: none;
+    }
 `;
 export default GlobalStyled;
