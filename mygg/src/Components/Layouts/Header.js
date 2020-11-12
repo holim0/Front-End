@@ -95,7 +95,8 @@ const UserMenu = styled.div`
 const UserProfile = styled.div`
     border: 1px solid ${(props) => props.theme.lightenBlack};
     border-radius: 50%;
-    width: 103px;
+    width: 30px;
+    margin-right: 50px;
     height: 30px;
     line-height: 30px;
     text-align: center;

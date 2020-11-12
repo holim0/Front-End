@@ -2,7 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { ImFire } from "react-icons/im";
-import faker from "faker";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -18,11 +17,30 @@ const CateContent = styled.div`
     margin: 0 auto;
 `;
 
-const CateNav = styled.nav``;
+const CateNav = styled.nav`
+    width: 100%;
 
-const CateSubMenu = styled.ul``;
+    h1 {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+`;
 
-const CateTitle = styled.h3`
+const CateSubMenu = styled.ul`
+    background: ${(props) => props.theme.white};
+    padding: 12px;
+    margin: 24px;
+    margin-left: 0;
+    position: sticky;
+    top: 100px;
+    border-radius: 12px;
+    li {
+        padding: 12px 0;
+        font-size: ${(props) => props.theme.ls};
+    }
+`;
+
+const CateTitle = styled.h2`
     margin: 0;
     margin-bottom: 12px;
     padding: 12px;
@@ -182,7 +200,7 @@ const ProgressBarWrap = styled.div`
     bottom: 0;
     height: 8px;
     border-radius: 12px;
-    background: grey;
+    background: ${(props) => props.theme.yellow};
 `;
 
 const ProgressGage = styled.div`
@@ -219,64 +237,43 @@ const Progressing = styled.div`
     font-size: ${(props) => props.theme.ss};
 `;
 
-const CatePresenter = () => {
-    const createUser = () => {
-        return {
-            img: faker.image.avatar(),
-        };
-    };
+const SelectedCate = styled(Link)`
+    color: ${(props) => props.theme.yellow};
+    pointer-events: none;
+`;
 
-    const limitNumberOfPeople = 8;
-
-    const participateUsers = () => {
-        return Math.round(Math.random() * limitNumberOfPeople);
-    };
-
-    const createBoard = () => {
-        return {
-            id: faker.random.uuid(),
-            title: faker.lorem.sentence(),
-            deadline: "2020-20-02",
-            participateUsers: new Array(participateUsers())
-                .fill(undefined)
-                .map(createUser),
-            limitNumberOfPeople,
-        };
-    };
-
-    const createBoards = (numUsers = 20) => {
-        return new Array(numUsers).fill(undefined).map(createBoard);
-    };
-
-    const boards = createBoards();
-
-    const checkPercent = (percent) => {
-        if (percent > 90) {
-            return "한자리 남았어요!";
-        }
-        if (percent > 70) {
-            return "막차 탑승하세요.";
-        }
-        if (percent > 50) {
-            return "곧 완료됩니다!";
-        }
-        if (percent > 5) {
-            return "여러분을 기다리고 있어요.";
-        }
-        if (percent === 0) {
-            return "관심이 필요해요.";
-        }
-    };
+const CatePresenter = ({
+    cateName,
+    category,
+    boards,
+    checkPercent,
+    limitNumberOfPeople,
+}) => {
+    const selectCate = cateName.split("/")[1].toUpperCase();
 
     return (
         <Container>
             <CateContent>
                 <CateNav>
-                    <CateTitle>카테고뤼!</CateTitle>
-                    <CateSubMenu>다른 카테고뤼</CateSubMenu>
+                    <h1>Category</h1>
+                    <CateSubMenu>
+                        {category.map((list) =>
+                            list.toUpperCase() === selectCate ? (
+                                <li>
+                                    <SelectedCate to={`/${list}`}>
+                                        {list}
+                                    </SelectedCate>
+                                </li>
+                            ) : (
+                                <li>
+                                    <Link to={`/${list}`}>{list}</Link>
+                                </li>
+                            )
+                        )}
+                    </CateSubMenu>
                 </CateNav>
                 <BoardContainer>
-                    <CateTitle>작게 카테고뤼!</CateTitle>
+                    <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
                         <BoardBox key={board.id}>
                             <BoardTitle>

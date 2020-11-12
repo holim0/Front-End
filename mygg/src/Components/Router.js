@@ -21,7 +21,7 @@ const Router = () => {
                     <Route path="/" exact component={Home} />
                     <Route path="/mypage" exact component={Mypage} />
                     <Route path="/necessity" exact component={Necessity} />
-                    <Route path="/food" ㅇexact component={Food} />
+                    <Route path="/food" exact component={Food} />
                     <Route path="/cloth" exact component={Cloth} />
                     <Route path="/goods" exact component={Goods} />
                     <Route path="/beauty" exact component={Beauty} />
