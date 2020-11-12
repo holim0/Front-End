@@ -111,6 +111,7 @@ const HomePresenter = () => {
                 <FaPaintBrush />
             </Button>
             <Button to="/etc">ETC</Button>
+            <Button to="/write">글쓰기</Button>
         </Container>
     );
 };
