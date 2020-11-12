@@ -18,7 +18,7 @@ const Container = styled.div`
     z-index: 500;
 `;
 
-const Nav = styled.nav`
+const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,12 +27,14 @@ const Nav = styled.nav`
     height: 60px;
     max-width: 1060px;
     z-index: 100;
+    padding: 12px;
 `;
 
 const Logo = styled.div`
     font-size: ${(props) => props.theme.xls};
     font-weight: bold;
     cursor: pointer;
+    flex: 1;
 
     a {
         color: ${(props) => props.theme.black};
@@ -44,6 +46,7 @@ const SearchBar = styled.form`
     display: flex;
     align-items: center;
     background: ${(props) => props.theme.lightenBlack};
+    justify-content: space-between;
     border-radius: 12px;
     padding: 0 4px;
 
@@ -76,6 +79,8 @@ const UserMenu = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+    flex: 1;
+    justify-content: flex-end;
 
     &:hover ul {
         padding: 6px 0;
@@ -99,7 +104,7 @@ const UserProfile = styled.div`
 const UserProfileMenu = styled.ul`
     position: absolute;
     top: 30px;
-    left: -8px;
+    right: 0px;
     width: 120px;
     height: 0px;
     overflow: hidden;
@@ -147,7 +152,7 @@ const Header = () => {
     return (
         <>
             <Container>
-                <Nav>
+                <HeaderContainer>
                     <Logo>
                         <Link to="/">GongGus</Link>
                     </Logo>
@@ -183,7 +188,7 @@ const Header = () => {
                             <div onClick={onSignModal}>회원가입/로그인</div>
                         </Sign>
                     )}
-                </Nav>
+                </HeaderContainer>
             </Container>
             {isSign && (
                 <AuthContainer onSignModal={onSignModal} isSign={isSign} />

@@ -20,7 +20,7 @@
         "web-vitals": "^0.2.4"
     },
     "scripts": {
-        "start": "BROWER='google chrome' cross-env NODE_PATH=src react-scripts start",
+        "start": "cross-env NODE_PATH=src react-scripts start",
         "build": "cross-env NODE_PATH=src react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
