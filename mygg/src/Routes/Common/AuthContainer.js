@@ -7,12 +7,9 @@ const AuthContainer = ({ onSignModal }) => {
     // signUp -> signIn change
     const [signUp, setSignUp] = useState(false);
 
-    const onSignUp = useCallback(
-        (e) => {
-            setSignUp((prev) => !prev);
-        },
-        [signUp]
-    );
+    const onSignUp = useCallback((e) => {
+        setSignUp((prev) => !prev);
+    }, []);
 
     // user SignUp & SignIn
 

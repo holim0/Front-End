@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import theme from "./Theme";
 
 const Container = styled.div`
     position: absolute;
@@ -89,7 +88,7 @@ const Container = styled.div`
         --rotateX: -90deg;
     }
     .boxes .box > div:nth-child(4) {
-        background: ${theme.border};
+        background: ${(props) => props.theme.border};
         top: 0;
         left: 0;
         --translateZ: -90px;
@@ -143,26 +142,26 @@ const Container = styled.div`
 export const Loader = () => {
     return (
         <Container>
-            <div class="boxes">
-                <div class="box">
+            <div className="boxes">
+                <div className="box">
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
-                <div class="box">
+                <div className="box">
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
-                <div class="box">
+                <div className="box">
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
-                <div class="box">
+                <div className="box">
                     <div></div>
                     <div></div>
                     <div></div>
