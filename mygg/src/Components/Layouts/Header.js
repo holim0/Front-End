@@ -18,7 +18,7 @@ const Container = styled.div`
     z-index: 500;
 `;
 
-const Nav = styled.nav`
+const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,13 +27,14 @@ const Nav = styled.nav`
     height: 60px;
     max-width: 1060px;
     z-index: 100;
+    padding: 12px;
 `;
 
 const Logo = styled.div`
     font-size: ${(props) => props.theme.xls};
     font-weight: bold;
     cursor: pointer;
-
+    flex: 1;
     a {
         color: ${(props) => props.theme.black};
         text-decoration: none;
@@ -44,15 +45,16 @@ const SearchBar = styled.form`
     display: flex;
     align-items: center;
     background: ${(props) => props.theme.lightenBlack};
+    justify-content: space-between;
     border-radius: 12px;
     padding: 0 4px;
-
+    flex: 1;
     input {
         all: unset;
         padding: 6px;
         width: 240px;
         text-align: center;
-
+        flex: 1;
         &:focus {
             text-align: left;
         }
@@ -69,37 +71,48 @@ const SearchBar = styled.form`
 `;
 
 const Sign = styled.div`
-    cursor: pointer;
+    flex: 1;
+
+    & > div {
+        cursor: pointer;
+        width: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
 `;
 
 const UserMenu = styled.div`
     display: flex;
     align-items: center;
-    position: relative;
-
-    &:hover ul {
-        padding: 6px 0;
-        height: 165px;
-        transition: height 300ms;
-        background: ${(props) => props.theme.white};
-        border: 1px solid ${(props) => props.theme.lightenBlack};
-    }
+    justify-content: flex-end;
+    flex: 1;
 `;
 
 const UserProfile = styled.div`
     border: 1px solid ${(props) => props.theme.lightenBlack};
     border-radius: 50%;
     width: 30px;
+    margin-right: 50px;
     height: 30px;
     line-height: 30px;
     text-align: center;
     cursor: pointer;
+    position: relative;
+
+    &:hover ul {
+        position: absolute;
+        right: -50px;
+        height: 205px;
+        transition: height 300ms;
+        background: ${(props) => props.theme.white};
+        border: 1px solid ${(props) => props.theme.lightenBlack};
+    }
 `;
 
 const UserProfileMenu = styled.ul`
     position: absolute;
     top: 30px;
-    left: -8px;
+    right: 0px;
     width: 120px;
     height: 0px;
     overflow: hidden;
@@ -147,7 +160,7 @@ const Header = () => {
     return (
         <>
             <Container>
-                <Nav>
+                <HeaderContainer>
                     <Logo>
                         <Link to="/">GongGus</Link>
                     </Logo>
@@ -169,21 +182,21 @@ const Header = () => {
                         <UserMenu>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
+                                <UserProfileMenu>
+                                    <li>메뉴1</li>
+                                    <li>메뉴2</li>
+                                    <li>메뉴3</li>
+                                    <li>메뉴4</li>
+                                    <li onClick={onLogOut}>로그아웃</li>
+                                </UserProfileMenu>
                             </UserProfile>
-                            <UserProfileMenu>
-                                <li>메뉴1</li>
-                                <li>메뉴2</li>
-                                <li>메뉴3</li>
-                                <li>메뉴4</li>
-                                <li onClick={onLogOut}>로그아웃</li>
-                            </UserProfileMenu>
                         </UserMenu>
                     ) : (
                         <Sign>
                             <div onClick={onSignModal}>회원가입/로그인</div>
                         </Sign>
                     )}
-                </Nav>
+                </HeaderContainer>
             </Container>
             {isSign && (
                 <AuthContainer onSignModal={onSignModal} isSign={isSign} />

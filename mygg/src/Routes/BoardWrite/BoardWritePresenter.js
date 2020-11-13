@@ -10,6 +10,7 @@ const Container = styled.div`
     width: 50%;
     display: flex;
     flex-direction: column;
+    margin-top: 200px;
 `;
 
 const Box = styled.div`
@@ -182,16 +183,14 @@ const BoardWritePresenter = () => {
                 <Text
                     font={theme.ls}
                     type="text"
-                    placeholder="내용을 입력해 주세요"
-                ></Text>
+                    placeholder="내용을 입력해 주세요"></Text>
             </Form>
             <FormGroup>
                 <Span>https://</Span>
                 <LinkInput
                     type="text"
                     placeholder="domain.tld"
-                    className="form-field"
-                ></LinkInput>
+                    className="form-field"></LinkInput>
             </FormGroup>
             <DateContainer onChange={onChange} value={value} />
             <Input type="text"></Input>

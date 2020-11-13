@@ -1,9 +1,12 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
-import CatePresenter from "Routes/Category/CatePresenter";
+import CateContainer from "../CateContainer";
 
 const BeautyContainer = () => {
-    return <CatePresenter />;
+    const { pathname } = useLocation();
+
+    return <CateContainer cateName={pathname} />;
 };
 
 export default BeautyContainer;

@@ -5,7 +5,6 @@ import BoardWritePresenter from "./BoardWritePresenter";
 
 const Container = styled.div`
     display: flex;
-    margin-top: 200px;
     justify-content: center;
 `;
 const BoardWriteContainer = () => {
