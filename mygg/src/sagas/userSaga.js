@@ -1,38 +1,27 @@
 import {
-    LOGOUT_FAILURE,
-    LOGOUT_SUCCESS,
-    LOGOUT_REQUEST,
-    SIGN_IN_FAILURE,
-    SIGN_IN_REQUEST,
-    SIGN_IN_SUCCESS,
-    SIGN_UP_FAILURE,
-    SIGN_UP_REQUEST,
-    SIGN_UP_SUCCESS,
+    signOutSuccess,
+    signOutFailure,
+    signOutRequest,
+    signUpRequest,
+    signUpSuccess,
+    signUpFailure,
+    signInRequest,
+    signInSuccess,
+    signInFailure,
 } from "modules/user";
-import { SIGN_FORM_SHOWING } from "modules/header";
+import { signFormShowing } from "modules/header";
 import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
 
 function* signUp(action) {
     console.log(action.payload);
     try {
         yield delay(1000);
-
-        yield put({
-            type: SIGN_UP_SUCCESS,
-        });
-
-        yield put({
-            type: SIGN_IN_SUCCESS,
-        });
-        yield put({
-            type: SIGN_FORM_SHOWING,
-        });
+        yield put(signUpSuccess());
+        yield put(signInSuccess());
+        yield put(signFormShowing());
     } catch (err) {
         console.log(err);
-        yield put({
-            type: SIGN_UP_FAILURE,
-            payload: err.message,
-        });
+        yield put(signUpFailure(err.message));
     }
 }
 
@@ -40,50 +29,38 @@ function* signIn(action) {
     console.log(action.payload);
     try {
         yield delay(1000);
-        yield put({
-            type: SIGN_IN_SUCCESS,
-        });
-        yield put({
-            type: SIGN_FORM_SHOWING,
-        });
+        yield put(signInSuccess());
+        yield put(signFormShowing());
     } catch (err) {
         console.log(err);
-        yield put({
-            type: SIGN_IN_FAILURE,
-            payload: err.message,
-        });
+        yield put(signInFailure(err.message));
     }
 }
 
-function* logOut() {
+function* signOut() {
     try {
         yield delay(1000);
-        yield put({
-            type: LOGOUT_SUCCESS,
-        });
+        yield put(signOutSuccess());
     } catch (err) {
         console.log(err);
-        yield put({
-            type: LOGOUT_FAILURE,
-            payload: err.message,
-        });
+        yield put(signOutFailure(err.message));
     }
 }
 
 function* watchSignUp() {
-    yield takeLatest(SIGN_UP_REQUEST, signUp);
+    yield takeLatest(signUpRequest, signUp);
 }
 
 function* watchSignIn() {
-    yield takeLatest(SIGN_IN_REQUEST, signIn);
+    yield takeLatest(signInRequest, signIn);
 }
 
-function* watchLogOut() {
-    yield takeLatest(LOGOUT_REQUEST, logOut);
+function* watchSignOut() {
+    yield takeLatest(signOutRequest, signOut);
 }
 
 function* userSaga() {
-    yield all([fork(watchSignUp), fork(watchSignIn), fork(watchLogOut)]);
+    yield all([fork(watchSignUp), fork(watchSignIn), fork(watchSignOut)]);
 }
 
 export default userSaga;
