@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "./Layouts/Header";
 import Home from "Routes/Home";
@@ -11,6 +11,7 @@ import Cloth from "Routes/Category/Cloth";
 import Goods from "Routes/Category/Goods";
 import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
+import BoardWrite from "Routes/BoardWrite";
 
 const Router = () => {
     return (
@@ -26,6 +27,7 @@ const Router = () => {
                     <Route path="/goods" exact component={Goods} />
                     <Route path="/beauty" exact component={Beauty} />
                     <Route path="/etc" exact component={Etc} />
+                    <Route path="/write" exact component={BoardWrite} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
