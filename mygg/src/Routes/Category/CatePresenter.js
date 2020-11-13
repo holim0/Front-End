@@ -237,7 +237,7 @@ const Progressing = styled.div`
     font-size: ${(props) => props.theme.ss};
 `;
 
-const SelectedCate = styled(Link)`
+const SelectedCate = styled.li`
     color: ${(props) => props.theme.yellow};
     pointer-events: none;
 `;
@@ -259,14 +259,12 @@ const CatePresenter = ({
                     <CateSubMenu>
                         {category.map((list, index) =>
                             list.toUpperCase() === selectCate ? (
-                                <li key={index}>
-                                    <SelectedCate to={`/${list}`}>
-                                        {list}
-                                    </SelectedCate>
-                                </li>
+                                <SelectedCate key={index}>{list}</SelectedCate>
                             ) : (
                                 <li key={index}>
-                                    <Link to={`/${list}`}>{list}</Link>
+                                    <Link to={`/${list.toLowerCase()}`}>
+                                        {list}
+                                    </Link>
                                 </li>
                             )
                         )}

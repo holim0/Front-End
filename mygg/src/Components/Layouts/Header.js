@@ -4,7 +4,7 @@ import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "modules/user";
+import { signOutRequest } from "modules/user";
 import { signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link } from "react-router-dom";
@@ -150,7 +150,7 @@ const Header = () => {
     const user = useSelector((state) => state.user.isLogin);
 
     const onLogOut = useCallback(() => {
-        dispatch(logOut());
+        dispatch(signOutRequest());
     }, [dispatch]);
 
     useEffect(() => {
