@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CatePresenter from "./CatePresenter";
 import faker from "faker";
+import { useSelector } from "react-redux";
 
 const CateContainer = ({ children, ...rest }) => {
+    // islogin
+
+    const user = useSelector((state) => state.user.isLogin);
     // faker data
+    const [loading, setLoad] = useState(true);
     const createUser = () => {
         return {
             img: faker.image.avatar(),
@@ -48,11 +53,22 @@ const CateContainer = ({ children, ...rest }) => {
         }
     };
 
+    // 비동기 가짜 구현.
+    const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
+    const getInfo = async () => {
+        await sleep(1200);
+        setLoad(false);
+    };
+
     // category
     const category = ["Necessity", "Food", "Cloth", "Goods", "Beauty", "Etc"];
 
+    if (user) {
+        category.push("글쓰기");
+    }
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
+        getInfo();
     }, []);
 
     return (
@@ -61,7 +77,9 @@ const CateContainer = ({ children, ...rest }) => {
             category={category}
             boards={boards}
             checkPercent={checkPercent}
-            limitNumberOfPeople={limitNumberOfPeople}>
+            limitNumberOfPeople={limitNumberOfPeople}
+            loading={loading}
+        >
             {children}
         </CatePresenter>
     );
