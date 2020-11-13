@@ -72,24 +72,20 @@ const SearchBar = styled.form`
 
 const Sign = styled.div`
     flex: 1;
-    cursor: pointer;
-    text-align: right;
+
+    & > div {
+        cursor: pointer;
+        width: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
 `;
 
 const UserMenu = styled.div`
     display: flex;
     align-items: center;
-    position: relative;
     justify-content: flex-end;
     flex: 1;
-
-    &:hover ul {
-        padding: 6px 0;
-        height: 165px;
-        transition: height 300ms;
-        background: ${(props) => props.theme.white};
-        border: 1px solid ${(props) => props.theme.lightenBlack};
-    }
 `;
 
 const UserProfile = styled.div`
@@ -101,6 +97,16 @@ const UserProfile = styled.div`
     line-height: 30px;
     text-align: center;
     cursor: pointer;
+    position: relative;
+
+    &:hover ul {
+        position: absolute;
+        right: -50px;
+        height: 205px;
+        transition: height 300ms;
+        background: ${(props) => props.theme.white};
+        border: 1px solid ${(props) => props.theme.lightenBlack};
+    }
 `;
 
 const UserProfileMenu = styled.ul`
@@ -176,14 +182,14 @@ const Header = () => {
                         <UserMenu>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
+                                <UserProfileMenu>
+                                    <li>메뉴1</li>
+                                    <li>메뉴2</li>
+                                    <li>메뉴3</li>
+                                    <li>메뉴4</li>
+                                    <li onClick={onLogOut}>로그아웃</li>
+                                </UserProfileMenu>
                             </UserProfile>
-                            <UserProfileMenu>
-                                <li>메뉴1</li>
-                                <li>메뉴2</li>
-                                <li>메뉴3</li>
-                                <li>메뉴4</li>
-                                <li onClick={onLogOut}>로그아웃</li>
-                            </UserProfileMenu>
                         </UserMenu>
                     ) : (
                         <Sign>

@@ -257,15 +257,15 @@ const CatePresenter = ({
                 <CateNav>
                     <h1>Category</h1>
                     <CateSubMenu>
-                        {category.map((list) =>
+                        {category.map((list, index) =>
                             list.toUpperCase() === selectCate ? (
-                                <li>
+                                <li key={index}>
                                     <SelectedCate to={`/${list}`}>
                                         {list}
                                     </SelectedCate>
                                 </li>
                             ) : (
-                                <li>
+                                <li key={index}>
                                     <Link to={`/${list}`}>{list}</Link>
                                 </li>
                             )
