@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { ImFire } from "react-icons/im";
 import { Link } from "react-router-dom";
+import Loader from "Components/Loader";
 
 const Container = styled.div`
     width: 100%;
@@ -31,6 +32,7 @@ const CateSubMenu = styled.ul`
     padding: 12px;
     margin: 24px;
     margin-left: 0;
+
     position: sticky;
     top: 100px;
     border-radius: 12px;
@@ -242,16 +244,29 @@ const SelectedCate = styled.li`
     pointer-events: none;
 `;
 
+const CateName = styled(Link)`
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    &:hover {
+        color: ${(props) => props.theme.yellow};
+    }
+`;
+
+/////////////////////////////////////////////////////////////////////////////
+
 const CatePresenter = ({
     cateName,
     category,
     boards,
     checkPercent,
     limitNumberOfPeople,
+    loading,
 }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
-
-    return (
+    // console.log(loading);
+    return loading ? (
+        <Loader />
+    ) : (
         <Container>
             <CateContent>
                 <CateNav>
@@ -262,9 +277,15 @@ const CatePresenter = ({
                                 <SelectedCate key={index}>{list}</SelectedCate>
                             ) : (
                                 <li key={index}>
-                                    <Link to={`/${list.toLowerCase()}`}>
+                                    <CateName
+                                        to={
+                                            list === "글쓰기"
+                                                ? "/write"
+                                                : `/${list.toLowerCase()}`
+                                        }
+                                    >
                                         {list}
-                                    </Link>
+                                    </CateName>
                                 </li>
                             )
                         )}
@@ -308,7 +329,8 @@ const CatePresenter = ({
                                             (board.participateUsers.length /
                                                 limitNumberOfPeople) *
                                                 100
-                                        )}>
+                                        )}
+                                    >
                                         {/* 이곳 조건문은 후에 finishcheck가 되면 수정 */}
                                         {board.participateUsers.length ===
                                             board.limitNumberOfPeople && (
