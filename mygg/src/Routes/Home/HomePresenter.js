@@ -8,7 +8,6 @@ import {
     FaPaintBrush,
     FaHome,
 } from "react-icons/fa";
-import theme from "Components/Theme";
 
 const Container = styled.div`
     display: flex;
@@ -17,9 +16,10 @@ const Container = styled.div`
     align-content: center;
     height: 100vh;
     margin: 0 auto;
-
-    --def: ${theme.bgColor};
-    --inv: ${theme.white};
+    color: white;
+    font-size: 40px;
+    --def: ${(props) => props.theme.bgColor};
+    --inv: ${(props) => props.theme.white};
     *,
     *:before,
     *:after {
@@ -32,7 +32,7 @@ const Button = styled(Link)`
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
-    font-size: 40px;
+
     width: 1000px;
     color: var(--inv);
     letter-spacing: 1.1rem;
@@ -86,13 +86,14 @@ const Button = styled(Link)`
     }
 `;
 
-const HomePresenter = () => {
+const HomePresenter = ({ isLogin }) => {
     return (
         <Container>
             <Button to="/necessity">
                 NECESSITY
                 <FaHome />
             </Button>
+
             <Button to="/food">
                 FOOD
                 <FaUtensils />
@@ -110,6 +111,7 @@ const HomePresenter = () => {
                 <FaPaintBrush />
             </Button>
             <Button to="/etc">ETC</Button>
+            {isLogin ? <Button to="/write">글쓰기</Button> : null}
         </Container>
     );
 };

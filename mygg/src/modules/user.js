@@ -1,14 +1,4 @@
-export const SIGN_UP_REQUEST = "user/SIGN_UP_REQUEST";
-export const SIGN_UP_SUCCESS = "user/SIGN_UP_SUCCESS";
-export const SIGN_UP_FAILURE = "user/SIGN_UP_FAILURE";
-
-export const SIGN_IN_REQUEST = "user/SIGN_IN_REQUEST";
-export const SIGN_IN_SUCCESS = "user/SIGN_IN_SUCCESS";
-export const SIGN_IN_FAILURE = "user/SIGN_IN_FAILURE";
-
-export const LOGOUT_REQUEST = "user/LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "user/LOGOUT_SUCCESS";
-export const LOGOUT_FAILURE = "user/LOGOUT_FAILURE";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isLogin: false,
@@ -22,82 +12,61 @@ const initialState = {
     },
 };
 
-export const signUpRequest = (signUpData) => ({
-    type: SIGN_UP_REQUEST,
-    payload: signUpData,
+const user = createSlice({
+    name: "user",
+    initialState,
+    reducers: {
+        signUpRequest(state) {
+            state.isLoading = true;
+            state.error = null;
+        },
+        signUpSuccess(state) {
+            state.isLoading = false;
+        },
+        signUpFailure(state, { payload }) {
+            state.isLoading = false;
+            state.error = payload;
+        },
+
+        signInRequest(state) {
+            state.isLoading = true;
+            state.isLogin = false;
+            state.error = null;
+        },
+        signInSuccess(state) {
+            state.isLoading = false;
+            state.isLogin = true;
+        },
+        signInFailure(state, { payload }) {
+            state.isLoading = false;
+            state.error = payload;
+        },
+
+        signOutRequest(state) {
+            state.isLoading = true;
+            state.error = null;
+        },
+        signOutSuccess(state) {
+            state.isLogin = false;
+            state.isLoading = false;
+        },
+        signOutFailure(state, { payload }) {
+            state.isLoading = false;
+            state.error = payload;
+        },
+    },
 });
 
-export const signInRequest = (signInData) => ({
-    type: SIGN_IN_REQUEST,
-    payload: signInData,
-});
+export const {
+    signInRequest,
+    signInSuccess,
+    signInFailure,
+    signUpSuccess,
+    signUpFailure,
+    signUpRequest,
+    signOutSuccess,
+    signOutRequest,
+    signOutFailure,
+} = user.actions;
 
-export const logOut = () => ({
-    type: LOGOUT_REQUEST,
-});
-
-function user(state = initialState, action) {
-    const { payload } = action;
-    switch (action.type) {
-        case SIGN_UP_REQUEST:
-            return {
-                ...state,
-                isLoading: true,
-                error: null,
-            };
-        case SIGN_UP_SUCCESS:
-            return {
-                ...state,
-                isLoading: false,
-            };
-        case SIGN_UP_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: payload,
-            };
-
-        case SIGN_IN_REQUEST:
-            return {
-                ...state,
-                isLoading: true,
-                isLogin: false,
-                error: null,
-            };
-        case SIGN_IN_SUCCESS:
-            return {
-                ...state,
-                isLoading: false,
-                isLogin: true,
-            };
-        case SIGN_IN_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: payload,
-            };
-
-        case LOGOUT_REQUEST:
-            return {
-                ...state,
-                isLoading: true,
-            };
-        case LOGOUT_SUCCESS:
-            return {
-                ...state,
-                isLogin: false,
-                isLoading: false,
-            };
-        case LOGOUT_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: payload,
-            };
-
-        default:
-            return state;
-    }
-}
-
-export default user;
+export default user.reducer;

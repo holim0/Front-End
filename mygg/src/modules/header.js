@@ -1,23 +1,19 @@
-export const SIGN_FORM_SHOWING = "header/SIGN_FORM_SHOWING";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isSign: false,
 };
 
-export const signFormShowing = () => ({
-    type: SIGN_FORM_SHOWING,
+const header = createSlice({
+    name: "header",
+    initialState,
+    reducers: {
+        signFormShowing(state) {
+            state.isSign = !state.isSign;
+        },
+    },
 });
 
-function header(state = initialState, action) {
-    switch (action.type) {
-        case SIGN_FORM_SHOWING:
-            return {
-                ...state,
-                isSign: state.isSign ? false : true,
-            };
-        default:
-            return state;
-    }
-}
+export const { signFormShowing } = header.actions;
 
-export default header;
+export default header.reducer;

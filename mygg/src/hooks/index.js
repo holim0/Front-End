@@ -16,10 +16,14 @@ export const useFormInput = (initialValue) => {
 
 export const useInput = (initialValue) => {
     const [text, setText] = useState(initialValue);
-    const onChange = useCallback((e) => {
-        const { value } = e.target;
-        setText(value);
-    });
+    const onChange = useCallback(
+        (e) => {
+            const { value } = e.target;
+            setText(value);
+        },
+        // eslint-disable-next-line
+        [text]
+    );
 
     return [text, setText, onChange];
 };
@@ -31,7 +35,7 @@ export const useSubmit = (dispatchName, value) => {
             e.preventDefault();
             dispatch(dispatchName(value));
         },
-        [value, dispatch]
+        [value, dispatch, dispatchName]
     );
 
     return { onSubmit };
