@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import theme from "Components/Theme";
-import ReactQuill from "react-quill";
 import DatePicker from "react-date-picker";
+import Editor from "./Editor";
 
 const Container = styled.div`
     height: 100vh;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+    margin-top: 100px;
 `;
 
+const Head = styled.div`
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+`;
 const Box = styled.div`
     display: flex;
     justify-content: center;
@@ -20,17 +25,17 @@ const Box = styled.div`
 
 const Top = styled.div`
     display: flex;
-
     margin-bottom: 20px;
 `;
 
 const Title = styled.input`
-    border: 1px solid gray;
-    width: 400px;
+    border: 1px solid #cccccc;
+    width: 100%;
+    border-radius: 5px;
 `;
 
 const Cate = styled(Select)`
-    width: 140px;
+    width: 160px;
     margin-right: 20px;
 `;
 
@@ -42,7 +47,7 @@ const Text = styled.textarea`
     border: solid 2px #1e90ff;
     border-radius: 5px;
     width: 100%;
-    height: 200px;
+    height: 500px;
     font-size: ${(props) => props.font};
     resize: none;
 `;
@@ -132,28 +137,49 @@ const LinkInput = styled.input`
 `;
 
 const Input = styled.input`
-    border: 1px solid black;
+    border: 1px solid #cccccc;
     border-radius: 5px;
-    height: 20px;
+    height: 30px;
     width: 100%;
     text-align: right;
     margin-bottom: 10px;
 `;
 
 const Button = styled.button`
-    background-color: #64b5f6;
+    /* background-color: #64b5f6;
     border-radius: 5px;
     height: 30px;
     padding: 2px 4px;
-    margin-right: 5px;
+    margin-right: 20px;
     &:hover {
         transform: scale(0.9);
+    } */
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 1.2rem "Roboto Slab", sans-serif;
+    padding: 1em 2em;
+    letter-spacing: 0.05rem;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    &:hover {
+        color: blue;
     }
 `;
 
 const DateContainer = styled(DatePicker)`
     width: 100%;
-    margin: 10px 0;
+    .react-datepicker {
+        border-radius: 5px;
+    }
+`;
+
+const Subspan = styled.div`
+    margin: 12px 0px;
+    font-weight: bold;
+    font-size: ${(props) => props.theme.ls};
 `;
 
 const category = [
@@ -175,25 +201,35 @@ const BoardWritePresenter = () => {
 
     return (
         <Container>
+            <Head>공동 구매 글쓰기</Head>
             <Top>
                 <Cate options={category} />
                 <Title type="text" placeholder="제목을 입력해 주세요"></Title>
             </Top>
-            <Form onSubmit={handleChange}>
+            {/* <Form onSubmit={handleChange}>
                 <Text
                     font={theme.ls}
                     type="text"
-                    placeholder="내용을 입력해 주세요"></Text>
+                    placeholder="내용을 입력해 주세요"
+                ></Text>
+            </Form> */}
+            <Form>
+                <Editor placeholder={`Write Something...`} />
             </Form>
+
+            <Subspan>제품 링크</Subspan>
             <FormGroup>
                 <Span>https://</Span>
                 <LinkInput
                     type="text"
                     placeholder="domain.tld"
-                    className="form-field"></LinkInput>
+                    className="form-field"
+                ></LinkInput>
             </FormGroup>
+            <Subspan>마감일</Subspan>
             <DateContainer onChange={onChange} value={value} />
-            <Input type="text"></Input>
+            <Subspan>인원 수</Subspan>
+            <Input type="number"></Input>
             <Box>
                 <Button>SUBMIT</Button>
                 <Button>CANCEL</Button>
