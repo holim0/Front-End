@@ -12,6 +12,7 @@ import Goods from "Routes/Category/Goods";
 import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
 import BoardWrite from "Routes/BoardWrite";
+import Editor from "Routes/BoardWrite/Editor";
 
 const Router = () => {
     return (
