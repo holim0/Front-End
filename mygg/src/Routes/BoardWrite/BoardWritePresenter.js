@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import theme from "Components/Theme";
 import DatePicker from "react-date-picker";
 import Editor from "./Editor";
+import { Link } from "react-router-dom";
+import CancelModal from "./CancelModal";
 
 const Container = styled.div`
     height: 100vh;
@@ -146,15 +148,6 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    /* background-color: #64b5f6;
-    border-radius: 5px;
-    height: 30px;
-    padding: 2px 4px;
-    margin-right: 20px;
-    &:hover {
-        transform: scale(0.9);
-    } */
-
     background: none;
     border: none;
     cursor: pointer;
@@ -189,34 +182,33 @@ const category = [
     { value: "goods", label: "Goods" },
     { value: "beauty", label: "Beauty" },
     { value: "etc", label: "Etc" },
-];
+]; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const BoardWritePresenter = () => {
-    const [text, handleText] = useState("");
-    const [value, onChange] = useState(new Date());
-
-    const handleChange = () => {
-        handleText("");
-    };
-
+const BoardWritePresenter = ({
+    date,
+    setDate,
+    handleCate,
+    title,
+    handleTitle,
+    link,
+    handleLink,
+    handlePeople,
+}) => {
     return (
         <Container>
             <Head>공동 구매 글쓰기</Head>
             <Top>
-                <Cate options={category} />
-                <Title type="text" placeholder="제목을 입력해 주세요"></Title>
-            </Top>
-            {/* <Form onSubmit={handleChange}>
-                <Text
-                    font={theme.ls}
+                <Cate options={category} onChange={handleCate} />
+                <Title
                     type="text"
-                    placeholder="내용을 입력해 주세요"
-                ></Text>
-            </Form> */}
+                    placeholder="제목을 입력해 주세요"
+                    onChange={handleTitle}
+                    value={title}
+                ></Title>
+            </Top>
             <Form>
-                <Editor placeholder={`Write Something...`} />
+                <Editor />
             </Form>
-
             <Subspan>제품 링크</Subspan>
             <FormGroup>
                 <Span>https://</Span>
@@ -224,16 +216,19 @@ const BoardWritePresenter = () => {
                     type="text"
                     placeholder="domain.tld"
                     className="form-field"
+                    value={link}
+                    onChange={handleLink}
                 ></LinkInput>
             </FormGroup>
             <Subspan>마감일</Subspan>
-            <DateContainer onChange={onChange} value={value} />
+            <DateContainer onChange={setDate} value={date} />
             <Subspan>인원 수</Subspan>
-            <Input type="number"></Input>
+            <Input type="number" onChange={handlePeople}></Input>
             <Box>
                 <Button>SUBMIT</Button>
                 <Button>CANCEL</Button>
             </Box>
+            <CancelModal />
         </Container>
     );
 };

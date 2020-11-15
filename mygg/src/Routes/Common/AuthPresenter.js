@@ -174,7 +174,8 @@ const AuthPresenter = ({
                 <SignTitle>{!signUp ? "로그인" : "회원가입"}</SignTitle>
                 <SignForm
                     onChange={!signUp ? onChangeSignIn : onChangeSignUp}
-                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}>
+                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}
+                >
                     <Label htmlFor="userId">이메일</Label>
                     <Input
                         type="email"

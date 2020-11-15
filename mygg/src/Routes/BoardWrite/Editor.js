@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { setText } from "modules/boardWrite";
 
 const Container = styled.div`
     margin-bottom: 20px;
@@ -28,14 +30,14 @@ const Container = styled.div`
 `;
 
 function Editor() {
-    const [value, setValue] = useState("");
+    const [content, setContent] = useState("");
 
     return (
         <Container>
             <ReactQuill
                 theme="snow"
-                value={value}
-                onChange={setValue}
+                value={content}
+                onChange={setContent}
                 modules={Editor.modules}
                 formats={Editor.formats}
                 placeholder="내용을 입력해주세요."
