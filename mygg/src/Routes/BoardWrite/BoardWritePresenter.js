@@ -68,6 +68,7 @@ const FormGroup = styled.div`
     --group-color-focus: #fff;
     --group-border-focus: var(--input-border-focus);
     --group-background-focus: #678efe;
+    margin-bottom: 20px;
     position: relative;
     display: flex;
     width: 100%;
@@ -141,7 +142,7 @@ const LinkInput = styled.input`
 const Input = styled.input`
     border: 1px solid #cccccc;
     border-radius: 5px;
-    height: 30px;
+    height: 40px;
     width: 100%;
     text-align: right;
     margin-bottom: 10px;
@@ -164,6 +165,7 @@ const Button = styled.button`
 
 const DateContainer = styled(DatePicker)`
     width: 100%;
+    margin-bottom: 20px;
     .react-datepicker {
         border-radius: 5px;
     }
@@ -182,7 +184,9 @@ const category = [
     { value: "goods", label: "Goods" },
     { value: "beauty", label: "Beauty" },
     { value: "etc", label: "Etc" },
-]; //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+];
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const BoardWritePresenter = ({
     date,
@@ -193,6 +197,7 @@ const BoardWritePresenter = ({
     link,
     handleLink,
     handlePeople,
+    handleSubmit,
 }) => {
     return (
         <Container>
@@ -225,10 +230,14 @@ const BoardWritePresenter = ({
             <Subspan>인원 수</Subspan>
             <Input type="number" onChange={handlePeople}></Input>
             <Box>
-                <Button>SUBMIT</Button>
-                <Button>CANCEL</Button>
+                <Button onClick={handleSubmit} as={Link} to="/">
+                    SUBMIT
+                </Button>
+                <Button as={Link} to="/">
+                    CANCEL
+                </Button>
             </Box>
-            <CancelModal />
+            {/* <CancelModal /> */}
         </Container>
     );
 };

@@ -7,6 +7,7 @@ const initialState = {
     link: "",
     deadline: new Date(),
     numOfPeople: null,
+    loading: true,
 };
 
 const boardWrite = createSlice({
@@ -31,6 +32,9 @@ const boardWrite = createSlice({
         setNumOfPeople: (state, action) => {
             state.numOfPeople = action.payload;
         },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
     },
 });
 
@@ -41,5 +45,6 @@ export const {
     setLink,
     setDeadline,
     setNumOfPeople,
+    setLoading,
 } = boardWrite.actions;
 export default boardWrite.reducer;

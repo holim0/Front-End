@@ -8,9 +8,9 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
 `;
+
 const BoardWriteContainer = () => {
     const dispatch = useDispatch();
-
     ///카테고리 처리
     const cate = useSelector((state) => state.boardWrite.category); // 나중에 통신을 위해.
     const handleCate = (e) => {
@@ -44,6 +44,16 @@ const BoardWriteContainer = () => {
         dispatch(actionPack.setNumOfPeople(e.target.value));
     };
 
+    // 제출 처리
+    const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
+    const loading = useSelector((state) => state.boardWrite.loading);
+
+    const handleSubmit = async () => {
+        await sleep(1000);
+        dispatch(actionPack.setLoading(false));
+        console.log(loading, cate, title, link, date, numOfpeople);
+    };
+
     return (
         <Container>
             <BoardWritePresenter
@@ -55,6 +65,7 @@ const BoardWriteContainer = () => {
                 link={link}
                 handleLink={handleLink}
                 handlePeople={handlePeople}
+                handleSubmit={handleSubmit}
             />
         </Container>
     );
