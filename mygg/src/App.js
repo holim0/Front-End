@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Router from "./Components/Router";
 import GlobalStyled from "Components/GlobalStyles";
 import theme from "Components/Theme";

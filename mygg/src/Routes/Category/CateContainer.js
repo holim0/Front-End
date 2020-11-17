@@ -78,8 +78,7 @@ const CateContainer = ({ children, ...rest }) => {
             boards={boards}
             checkPercent={checkPercent}
             limitNumberOfPeople={limitNumberOfPeople}
-            loading={loading}
-        >
+            loading={loading}>
             {children}
         </CatePresenter>
     );

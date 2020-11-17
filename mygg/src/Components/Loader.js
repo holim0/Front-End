@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+const WrapLoader = styled.div`
+    position: relative;
+    min-height: calc(100vh - 60px);
+`;
+
 const Container = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-
     transform: translate(-50%, -50%);
     .boxes {
         height: 32px;
@@ -142,34 +146,36 @@ const Container = styled.div`
 
 export const Loader = () => {
     return (
-        <Container>
-            <div className="boxes">
-                <div className="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        <WrapLoader>
+            <Container>
+                <div className="boxes">
+                    <div className="box">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div className="box">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div className="box">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div className="box">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
-                <div className="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div className="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div className="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </Container>
+            </Container>
+        </WrapLoader>
     );
 };
 
