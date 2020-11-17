@@ -295,10 +295,11 @@ const CatePresenter = ({
                     <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
                         <Link
+                            key={board.id}
                             onClick={onClick}
                             data-id={board.id}
                             to={`/detail/${board.id}`}>
-                            <BoardBox key={board.id}>
+                            <BoardBox>
                                 <BoardTitle>
                                     <div>
                                         <Link to="/">{board.title}</Link>
