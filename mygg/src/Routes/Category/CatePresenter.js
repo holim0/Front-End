@@ -282,8 +282,7 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }
-                                    >
+                                        }>
                                         {list}
                                     </CateName>
                                 </li>
@@ -294,67 +293,68 @@ const CatePresenter = ({
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
-                        <BoardBox key={board.id}>
-                            <BoardTitle>
-                                <div>
-                                    <Link to="/">{board.title}</Link>
-                                </div>
+                        <Link to={`/detail/${board.id}`}>
+                            <BoardBox key={board.id}>
+                                <BoardTitle>
+                                    <div>
+                                        <Link to="/">{board.title}</Link>
+                                    </div>
 
-                                <BsStarFill size={18} fill="white" />
-                                <BsStar size={18} />
-                                <BoardParty>
-                                    {board.participateUsers
-                                        .slice(0, 5)
-                                        .map((user, index) => (
-                                            <div key={index}>
-                                                <img
-                                                    src={user.img}
-                                                    alt="user"
-                                                />
-                                            </div>
-                                        ))}
-                                    {board.participateUsers.length > 5 && (
-                                        <span>...</span>
-                                    )}
-                                </BoardParty>
-                            </BoardTitle>
-                            <BoardInfo>
-                                <div>{board.deadline}</div>
-                                <div>{board.participateUsers.length}</div>
-                                <div>{board.limitNumberOfPeople}</div>
-                                <ProgressBar>
-                                    <ProgressBarWrap></ProgressBarWrap>
-                                    <ProgressGage
-                                        progress={Math.round(
-                                            (board.participateUsers.length /
-                                                limitNumberOfPeople) *
-                                                100
+                                    <BsStarFill size={18} fill="white" />
+                                    <BsStar size={18} />
+                                    <BoardParty>
+                                        {board.participateUsers
+                                            .slice(0, 5)
+                                            .map((user, index) => (
+                                                <div key={index}>
+                                                    <img
+                                                        src={user.img}
+                                                        alt="user"
+                                                    />
+                                                </div>
+                                            ))}
+                                        {board.participateUsers.length > 5 && (
+                                            <span>...</span>
                                         )}
-                                    >
-                                        {/* 이곳 조건문은 후에 finishcheck가 되면 수정 */}
-                                        {board.participateUsers.length ===
-                                            board.limitNumberOfPeople && (
-                                            <Finished>
-                                                <ImFire />
-                                            </Finished>
-                                        )}
-                                    </ProgressGage>
-                                    {board.participateUsers.length ===
-                                        board.limitNumberOfPeople || (
-                                        <Progressing>
-                                            {checkPercent(
-                                                Math.round(
-                                                    (board.participateUsers
-                                                        .length /
-                                                        limitNumberOfPeople) *
-                                                        100
-                                                )
+                                    </BoardParty>
+                                </BoardTitle>
+                                <BoardInfo>
+                                    <div>{board.deadline}</div>
+                                    <div>{board.participateUsers.length}</div>
+                                    <div>{board.limitNumberOfPeople}</div>
+                                    <ProgressBar>
+                                        <ProgressBarWrap></ProgressBarWrap>
+                                        <ProgressGage
+                                            progress={Math.round(
+                                                (board.participateUsers.length /
+                                                    limitNumberOfPeople) *
+                                                    100
+                                            )}>
+                                            {/* 이곳 조건문은 후에 finishcheck가 되면 수정 */}
+                                            {board.participateUsers.length ===
+                                                board.limitNumberOfPeople && (
+                                                <Finished>
+                                                    <ImFire />
+                                                </Finished>
                                             )}
-                                        </Progressing>
-                                    )}
-                                </ProgressBar>
-                            </BoardInfo>
-                        </BoardBox>
+                                        </ProgressGage>
+                                        {board.participateUsers.length ===
+                                            board.limitNumberOfPeople || (
+                                            <Progressing>
+                                                {checkPercent(
+                                                    Math.round(
+                                                        (board.participateUsers
+                                                            .length /
+                                                            limitNumberOfPeople) *
+                                                            100
+                                                    )
+                                                )}
+                                            </Progressing>
+                                        )}
+                                    </ProgressBar>
+                                </BoardInfo>
+                            </BoardBox>
+                        </Link>
                     ))}
                 </BoardContainer>
             </CateContent>

@@ -13,6 +13,7 @@ import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
 import BoardWrite from "Routes/BoardWrite";
 import Editor from "Routes/BoardWrite/Editor";
+import BoardDetail from "Routes/BoardDetail";
 
 const Router = () => {
     return (
@@ -29,6 +30,7 @@ const Router = () => {
                     <Route path="/beauty" exact component={Beauty} />
                     <Route path="/etc" exact component={Etc} />
                     <Route path="/write" exact component={BoardWrite} />
+                    <Route path="/detail/:id" exact component={BoardDetail} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />
