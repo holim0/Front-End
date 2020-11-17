@@ -102,7 +102,7 @@ const UserProfile = styled.div`
     &:hover ul {
         position: absolute;
         right: -50px;
-        height: 205px;
+        height: 80px;
         transition: height 300ms;
         background: ${(props) => props.theme.white};
         border: 1px solid ${(props) => props.theme.lightenBlack};
@@ -124,6 +124,16 @@ const UserProfileMenu = styled.ul`
             background: ${(props) => props.theme.blue};
             color: ${(props) => props.theme.white};
         }
+    }
+`;
+
+const Mypage = styled(Link)`
+    cursor: pointer;
+    padding: 15px 25px;
+
+    &:hover {
+        background: ${(props) => props.theme.blue};
+        color: ${(props) => props.theme.white};
     }
 `;
 
@@ -172,7 +182,7 @@ const Header = () => {
                             type="text"
                             value={text}
                             onChange={onChange}
-                            placeholder="검색하세요.."
+                            placeholder="검색하세요"
                         />
                         <button type="submit">
                             <AiOutlineSearch size={24} fill="#14171a" />
@@ -183,10 +193,7 @@ const Header = () => {
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
                                 <UserProfileMenu>
-                                    <li>메뉴1</li>
-                                    <li>메뉴2</li>
-                                    <li>메뉴3</li>
-                                    <li>메뉴4</li>
+                                    <Mypage to="/mypage">마이페이지</Mypage>
                                     <li onClick={onLogOut}>로그아웃</li>
                                 </UserProfileMenu>
                             </UserProfile>
