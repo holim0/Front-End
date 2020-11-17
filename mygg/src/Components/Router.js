@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "./Layouts/Header";
 import Home from "Routes/Home";
 import Mypage from "Routes/Mypage";
-import MypageContainer from "Routes/Mypage";
 import Footer from "./Layouts/Footer";
 import Necessity from "Routes/Category/Necessity";
 import Food from "Routes/Category/Food";
@@ -14,6 +13,8 @@ import Etc from "Routes/Category/Etc";
 import BoardWrite from "Routes/BoardWrite";
 import Editor from "Routes/BoardWrite/Editor";
 import BoardDetail from "Routes/BoardDetail";
+import BookMark from "Routes/BookMark";
+import Participate from "Routes/Participate";
 
 const Router = () => {
     return (
@@ -31,6 +32,8 @@ const Router = () => {
                     <Route path="/etc" exact component={Etc} />
                     <Route path="/write" exact component={BoardWrite} />
                     <Route path="/detail/:id" exact component={BoardDetail} />
+                    <Route path="/participate" exact component={Participate} />
+                    <Route path="/bookmark" exact component={BookMark} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />

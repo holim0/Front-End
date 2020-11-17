@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CatePresenter from "./CatePresenter";
 import faker from "faker";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getBoardRequest } from "modules/board";
 
 const CateContainer = ({ children, ...rest }) => {
     // islogin
@@ -66,9 +67,18 @@ const CateContainer = ({ children, ...rest }) => {
     if (user) {
         category.push("글쓰기");
     }
+
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
         getInfo();
+    }, []);
+
+    // detail 가기
+    const dispatch = useDispatch();
+
+    const onClick = useCallback((e) => {
+        const { id } = e.target.dataset;
+        dispatch(getBoardRequest(id));
     }, []);
 
     return (
@@ -78,7 +88,8 @@ const CateContainer = ({ children, ...rest }) => {
             boards={boards}
             checkPercent={checkPercent}
             limitNumberOfPeople={limitNumberOfPeople}
-            loading={loading}>
+            loading={loading}
+            onClick={onClick}>
             {children}
         </CatePresenter>
     );

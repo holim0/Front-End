@@ -261,6 +261,7 @@ const CatePresenter = ({
     checkPercent,
     limitNumberOfPeople,
     loading,
+    onClick,
 }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
     // console.log(loading);
@@ -293,7 +294,10 @@ const CatePresenter = ({
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
-                        <Link to={`/detail/${board.id}`}>
+                        <Link
+                            onClick={onClick}
+                            data-id={board.id}
+                            to={`/detail/${board.id}`}>
                             <BoardBox key={board.id}>
                                 <BoardTitle>
                                     <div>

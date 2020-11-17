@@ -3,19 +3,19 @@ import {
     getBoardFaliure,
     getBoardSuccess,
 } from "modules/board";
-import { fork, all, takeLatest, put, call } from "redux-saga/effects";
+import { fork, all, takeLatest, put, call, delay } from "redux-saga/effects";
 import faker from "faker";
 
 function getBoardById(id) {
     const fakeBoard = {
         id,
         title: faker.lorem.sentence(),
-        owner: faker.name.firstName(),
+        owner: faker.name.findName(),
         category: "sample",
         content: faker.lorem.text(),
         createdDate: Date.now(),
-        goodsLink: "https://naver.com",
-        deadline: Date.now().toLocaleString(),
+        goodsLink: "https://www.naver.com",
+        deadline: new Date().toLocaleString(),
         limitNumberOfPeople: Math.ceil(Math.random() * 10),
         participateUsers: [
             {
@@ -29,9 +29,10 @@ function getBoardById(id) {
     return fakeBoard;
 }
 
-function* getBoard({ payload }) {
+function* getBoard(action) {
     try {
-        const boardDetail = yield call(getBoardById, payload);
+        yield delay(1000);
+        const boardDetail = yield call(getBoardById, action.payload);
         yield put(getBoardSuccess(boardDetail));
     } catch (err) {
         console.log(err);
