@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MypagePresenter from "./MypagePresenter";
 
 const MypageContainer = () => {
-    return <MypagePresenter />;
+    const [name, setName] = useState("holim0");
+
+    const [username, setUsername] = useState("holim1226");
+
+    return <MypagePresenter name={name} username={username} />;
 };
 
 export default MypageContainer;
