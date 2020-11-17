@@ -8,6 +8,7 @@ import { signOutRequest } from "modules/user";
 import { signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link } from "react-router-dom";
+import LogoImg from "assets/GongGus_Logo_1.jpg";
 
 const Container = styled.div`
     position: fixed;
@@ -31,6 +32,9 @@ const HeaderContainer = styled.header`
 `;
 
 const Logo = styled.div`
+    width: 100%;
+    display: flex;
+
     font-size: ${(props) => props.theme.xls};
     font-weight: bold;
     cursor: pointer;

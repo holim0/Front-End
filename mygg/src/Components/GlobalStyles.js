@@ -14,7 +14,7 @@ const GlobalStyled = createGlobalStyle`
         font-size: ${(props) => props.theme.ms}
     }
 
-    input {
+    /* input {
         border: none;
         outline: none;
     }
@@ -22,7 +22,7 @@ const GlobalStyled = createGlobalStyle`
     button {
         all: unset;
         cursor: pointer;
-    }
+    } */
 
     ul,li {
         padding: 0;

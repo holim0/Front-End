@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import CatePresenter from "./CatePresenter";
 import faker from "faker";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
-const CateContainer = ({ children, ...rest }) => {
+const CateContainer = ({ children, ...cateName }) => {
     // islogin
-
     const user = useSelector((state) => state.user.isLogin);
     // faker data
     const [loading, setLoad] = useState(true);
+
     const createUser = () => {
         return {
             img: faker.image.avatar(),
@@ -73,7 +74,7 @@ const CateContainer = ({ children, ...rest }) => {
 
     return (
         <CatePresenter
-            {...rest}
+            {...cateName}
             category={category}
             boards={boards}
             checkPercent={checkPercent}
