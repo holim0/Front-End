@@ -24,6 +24,12 @@ function getBoardById(id) {
                 userId: "sampleuser",
                 nickname: "samplenickname",
             },
+            {
+                id: "2",
+                name: faker.name.findName(),
+                userId: "sampleuser2",
+                nickname: "samplenickname2",
+            },
         ],
     };
     return fakeBoard;

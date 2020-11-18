@@ -32,20 +32,37 @@ const DetailTitle = styled.div`
 const DetailOwner = styled.div`
     display: flex;
     justify-content: space-between;
-`;
-
-const Content = styled.div`
-    min-height: 360px;
+    padding: 6px 0;
 `;
 
 const GoodsLink = styled.div`
     width: 200px;
+    padding-bottom: 6px;
+`;
+
+const Content = styled.div`
+    min-height: 300px;
+    border-top: 1px solid ${(props) => props.theme.lightenBlack};
+    padding-top: 10px;
+`;
+
+const LimitUser = styled.div`
+    color: ${(props) => props.theme.red};
+`;
+
+const ParticipateUser = styled.div`
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 12px;
+    padding-left: 0;
 `;
 
 const Participate = styled.div`
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     width: 300px;
+    text-align: center;
 `;
 
 const BoardDetailPresenter = ({ boardById }) => {
@@ -63,25 +80,30 @@ const BoardDetailPresenter = ({ boardById }) => {
             </DeatailBox>
             <GoodsLink>
                 <a href={`${boardById.goodsLink}`} target="blank">
-                    {boardById.goodsLink}
+                    Link : {boardById.goodsLink}
                 </a>
             </GoodsLink>
             <Content>
                 <div>{boardById.content}</div>
             </Content>
 
-            <Participate>
-                <div>
-                    {boardById.participateUsers.map((user) => (
-                        <div key={user.id}>
-                            참가
-                            <div>{user.nickname}</div>
+            <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
+
+            <ParticipateUser>
+                현재 참여 중입니다!
+                {boardById.participateUsers.map((user) => (
+                    <div key={user.id}>
+                        <div>
+                            {user.nickname.length > 0 ? (
+                                `${user.nickname}`
+                            ) : (
+                                <div>아직 참여 인원이 없습니다.</div>
+                            )}
                         </div>
-                    ))}
-                </div>
-                <div>
-                    <div>{boardById.limitNumberOfPeople}</div>
-                </div>
+                    </div>
+                ))}
+            </ParticipateUser>
+            <Participate>
                 <Progress
                     participateUsers={boardById.participateUsers}
                     limitNumberOfPeople={boardById.limitNumberOfPeople}
