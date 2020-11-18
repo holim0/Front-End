@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const WrapLoader = styled.div`
@@ -145,6 +145,10 @@ const Container = styled.div`
 `;
 
 export const Loader = () => {
+    useEffect(() => {
+        window.scroll({ top: 0, behavior: "smooth" });
+    });
+
     return (
         <WrapLoader>
             <Container>

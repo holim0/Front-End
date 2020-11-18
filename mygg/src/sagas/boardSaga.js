@@ -36,13 +36,13 @@ function getBoardById(id) {
                 id: "1",
                 writer: "samplenickname",
                 content: faker.lorem.words(),
-                createdDate: "20.10.2",
+                createdDate: "20.10.02",
             },
             {
                 id: "2",
                 writer: "samplenickname",
                 content: faker.lorem.text(),
-                createdDate: "20.11.2",
+                createdDate: "20.11.02",
             },
         ],
     };
