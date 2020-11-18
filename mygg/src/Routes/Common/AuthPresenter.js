@@ -67,6 +67,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
+    outline: none;
     width: 300px;
     padding: 8px;
     margin: 6px 0;
@@ -96,6 +97,7 @@ const Check = styled.span`
 `;
 
 const Button = styled.button`
+    all: unset;
     cursor: pointer;
     width: 300px;
     text-align: center;
@@ -124,6 +126,8 @@ const SocialButton = styled.div`
     text-align: center;
 
     & > button {
+        all: unset;
+        cursor: pointer;
         margin: 6px 8px;
         color: ${(props) => props.theme.white};
         font-weight: 700;
@@ -174,8 +178,7 @@ const AuthPresenter = ({
                 <SignTitle>{!signUp ? "로그인" : "회원가입"}</SignTitle>
                 <SignForm
                     onChange={!signUp ? onChangeSignIn : onChangeSignUp}
-                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}
-                >
+                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}>
                     <Label htmlFor="userId">이메일</Label>
                     <Input
                         type="email"
