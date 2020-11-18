@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-    FaUtensils,
-    FaTshirt,
-    FaBox,
-    FaPaintBrush,
-    FaHome,
-} from "react-icons/fa";
+import Logo from "assets/GongGus_Logo_1.jpg";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
     align-content: center;
     height: 100vh;
     margin: 0 auto;
@@ -86,33 +80,31 @@ const Button = styled(Link)`
     }
 `;
 
+const Img = styled.img`
+    height: 500px;
+    width: 500px;
+    border-radius: 100%;
+    box-shadow: 10px 10px 20px black;
+
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+`;
+
 const HomePresenter = ({ isLogin }) => {
     return (
-        <Container>
-            <Button to="/necessity">
-                NECESSITY
-                <FaHome />
-            </Button>
-
-            <Button to="/food">
-                FOOD
-                <FaUtensils />
-            </Button>
-            <Button to="/cloth">
-                ClOTH
-                <FaTshirt />
-            </Button>
-            <Button to="/goods">
-                GOODS
-                <FaBox />
-            </Button>
-            <Button to="/beauty">
-                BEAUTY
-                <FaPaintBrush />
-            </Button>
-            <Button to="/etc">ETC</Button>
-            {isLogin ? <Button to="/write">글쓰기</Button> : null}
-        </Container>
+        <>
+            <Container>
+                <Img src={Logo}></Img>
+                <Button to="/necessity">NECESSITY</Button>
+                <Button to="/food">FOOD</Button>
+                <Button to="/cloth">ClOTH</Button>
+                <Button to="/goods">GOODS</Button>
+                <Button to="/beauty">BEAUTY</Button>
+                <Button to="/etc">ETC</Button>
+                {isLogin ? <Button to="/write">글쓰기</Button> : null}
+            </Container>
+        </>
     );
 };
 
