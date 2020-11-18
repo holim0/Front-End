@@ -20,9 +20,10 @@ const GlobalStyled = createGlobalStyle`
     }
     
     button {
-        all: unset;
         cursor: pointer;
-    } */
+    } 
+    */
+
 
     ul,li {
         padding: 0;

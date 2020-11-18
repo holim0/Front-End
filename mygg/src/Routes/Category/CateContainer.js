@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import CatePresenter from "./CatePresenter";
 import faker from "faker";
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 const CateContainer = ({ children, ...cateName }) => {
     // islogin
@@ -35,25 +34,6 @@ const CateContainer = ({ children, ...cateName }) => {
     };
     const boards = createBoards();
 
-    // valid
-    const checkPercent = (percent) => {
-        if (percent > 90) {
-            return "한자리 남았어요!";
-        }
-        if (percent > 70) {
-            return "막차 탑승하세요.";
-        }
-        if (percent > 50) {
-            return "곧 완료됩니다!";
-        }
-        if (percent > 5) {
-            return "여러분을 기다리고 있어요.";
-        }
-        if (percent === 0) {
-            return "관심이 필요해요.";
-        }
-    };
-
     // 비동기 가짜 구현.
     const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
     const getInfo = async () => {
@@ -67,6 +47,7 @@ const CateContainer = ({ children, ...cateName }) => {
     if (user) {
         category.push("글쓰기");
     }
+
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
         getInfo();
@@ -77,10 +58,7 @@ const CateContainer = ({ children, ...cateName }) => {
             {...cateName}
             category={category}
             boards={boards}
-            checkPercent={checkPercent}
-            limitNumberOfPeople={limitNumberOfPeople}
-            loading={loading}
-        >
+            loading={loading}>
             {children}
         </CatePresenter>
     );

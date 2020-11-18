@@ -10,7 +10,7 @@ const theme = {
     lightenBlack: "#f5f8fa",
     blue: "#1da1f2",
     red: "#d63031",
-    border: "rgba (0,0,0,0.2)",
+    border: "#b2bec3",
     bgColor: "rgba(85, 88, 218, 1)",
 };
 
