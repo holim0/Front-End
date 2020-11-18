@@ -15,6 +15,7 @@ import Editor from "Routes/BoardWrite/Editor";
 import BoardDetail from "Routes/BoardDetail";
 import BookMark from "Routes/BookMark";
 import Participate from "Routes/Participate";
+import MypageEdit from "Routes/MypageEdit";
 
 const Router = () => {
     return (
@@ -24,6 +25,7 @@ const Router = () => {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/mypage" exact component={Mypage} />
+                    <Route path="/mypage/edit" exact component={MypageEdit} />
                     <Route path="/necessity" exact component={Necessity} />
                     <Route path="/food" exact component={Food} />
                     <Route path="/cloth" exact component={Cloth} />

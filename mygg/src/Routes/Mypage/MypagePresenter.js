@@ -60,7 +60,6 @@ const BtnGroup = styled.div`
     & > * {
         border: 3px solid #80d6ff;
         padding: 20px 20px;
-        /* background-color: #80d6ff; */
         color: #80d6ff;
         font-size: ${(props) => props.theme.xls};
         transition: all 0.4s ease-in-out;
@@ -91,10 +90,12 @@ const MypagePresenter = ({ name, username }) => {
                 <Name>Username</Name>
                 <RealName>{username}</RealName>
                 <BtnGroup>
-                    <B1 to="/bookmark">찜 목록</B1>
+                    <B1 to="/bookmark">찜 목록 </B1>
                     <B2 to="/participate">참여 공구</B2>
                 </BtnGroup>
-                <Button>Edit Profile</Button>
+                <Button as={Link} to="/mypage/edit">
+                    Edit Profile
+                </Button>
             </ProfileBox>
         </Container>
     );

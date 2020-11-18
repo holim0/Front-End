@@ -1,9 +1,9 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { BsStar, BsStarFill } from "react-icons/bs";
-import { ImFire } from "react-icons/im";
 import { Link } from "react-router-dom";
 import Loader from "Components/Loader";
+import Progress from "Components/Progress/Progress";
 
 const Container = styled.div`
     width: 100%;
@@ -188,57 +188,6 @@ const BoardInfo = styled.div`
     }
 `;
 
-const ProgressBar = styled.div`
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-`;
-
-const ProgressBarWrap = styled.div`
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    height: 8px;
-    border-radius: 12px;
-    background: ${(props) => props.theme.yellow};
-`;
-
-const ProgressGage = styled.div`
-    position: absolute;
-    bottom: 0;
-    height: 8px;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    width: ${(props) => `${props.progress}%`};
-    z-index: 2;
-    background: ${(props) => props.theme.blue};
-    ${(props) =>
-        props.progress === 100 &&
-        css`
-            background: ${(props) => props.theme.red};
-        `}
-`;
-
-const Finished = styled.div`
-    position: absolute;
-    bottom: 10px;
-    color: ${(props) => props.theme.red};
-    right: 0;
-`;
-
-const Progressing = styled.div`
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
-    font-size: ${(props) => props.theme.ss};
-`;
-
 const SelectedCate = styled.li`
     color: ${(props) => props.theme.yellow};
     pointer-events: none;
@@ -252,19 +201,8 @@ const CateName = styled(Link)`
     }
 `;
 
-/////////////////////////////////////////////////////////////////////////////
-
-const CatePresenter = ({
-    cateName,
-    category,
-    boards,
-    checkPercent,
-    limitNumberOfPeople,
-    loading,
-    onClick,
-}) => {
+const CatePresenter = ({ cateName, category, boards, loading }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
-    // console.log(loading);
     return loading ? (
         <Loader />
     ) : (
@@ -294,11 +232,7 @@ const CatePresenter = ({
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
-                        <Link
-                            key={board.id}
-                            onClick={onClick}
-                            data-id={board.id}
-                            to={`/detail/${board.id}`}>
+                        <Link key={board.id} to={`/detail/${board.id}`}>
                             <BoardBox>
                                 <BoardTitle>
                                     <div>
@@ -327,36 +261,14 @@ const CatePresenter = ({
                                     <div>{board.deadline}</div>
                                     <div>{board.participateUsers.length}</div>
                                     <div>{board.limitNumberOfPeople}</div>
-                                    <ProgressBar>
-                                        <ProgressBarWrap></ProgressBarWrap>
-                                        <ProgressGage
-                                            progress={Math.round(
-                                                (board.participateUsers.length /
-                                                    limitNumberOfPeople) *
-                                                    100
-                                            )}>
-                                            {/* 이곳 조건문은 후에 finishcheck가 되면 수정 */}
-                                            {board.participateUsers.length ===
-                                                board.limitNumberOfPeople && (
-                                                <Finished>
-                                                    <ImFire />
-                                                </Finished>
-                                            )}
-                                        </ProgressGage>
-                                        {board.participateUsers.length ===
-                                            board.limitNumberOfPeople || (
-                                            <Progressing>
-                                                {checkPercent(
-                                                    Math.round(
-                                                        (board.participateUsers
-                                                            .length /
-                                                            limitNumberOfPeople) *
-                                                            100
-                                                    )
-                                                )}
-                                            </Progressing>
-                                        )}
-                                    </ProgressBar>
+                                    <Progress
+                                        participateUsers={
+                                            board.participateUsers
+                                        }
+                                        limitNumberOfPeople={
+                                            board.limitNumberOfPeople
+                                        }
+                                    />
                                 </BoardInfo>
                             </BoardBox>
                         </Link>

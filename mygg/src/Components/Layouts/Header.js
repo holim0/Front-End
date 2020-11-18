@@ -31,6 +31,9 @@ const HeaderContainer = styled.header`
 `;
 
 const Logo = styled.div`
+    width: 100%;
+    display: flex;
+
     font-size: ${(props) => props.theme.xls};
     font-weight: bold;
     cursor: pointer;
@@ -59,8 +62,14 @@ const SearchBar = styled.form`
             text-align: left;
         }
     }
+    button {
+        all: unset;
+        cursor: pointer;
+    }
 
     button[type="reset"] {
+        all: unset;
+        cursor: pointer;
         font-size: ${(props) => props.theme.ms};
         display: ${(props) => (props.showReset ? "block" : "none")};
 
@@ -102,7 +111,7 @@ const UserProfile = styled.div`
     &:hover ul {
         position: absolute;
         right: -50px;
-        height: 80px;
+        height: auto;
         transition: height 300ms;
         background: ${(props) => props.theme.white};
         border: 1px solid ${(props) => props.theme.lightenBlack};
@@ -123,13 +132,16 @@ const UserProfileMenu = styled.ul`
         &:hover {
             background: ${(props) => props.theme.blue};
             color: ${(props) => props.theme.white};
+
+            a {
+                color: ${(props) => props.theme.white};
+            }
         }
     }
 `;
 
 const Mypage = styled(Link)`
     cursor: pointer;
-    padding: 15px 25px;
 
     &:hover {
         background: ${(props) => props.theme.blue};
@@ -193,7 +205,9 @@ const Header = () => {
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
                                 <UserProfileMenu>
-                                    <Mypage to="/mypage">마이페이지</Mypage>
+                                    <li>
+                                        <Mypage to="/mypage">마이페이지</Mypage>
+                                    </li>
                                     <li onClick={onLogOut}>로그아웃</li>
                                 </UserProfileMenu>
                             </UserProfile>
