@@ -1,14 +1,28 @@
 import Loader from "Components/Loader";
 import { getBoardRequest } from "modules/board";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
 
 const BoardDetailContainer = () => {
     const { isLoading, boardById } = useSelector((state) => state.board);
     const { id } = useParams();
+    const history = useHistory();
     const dispatch = useDispatch();
+    const [isParticipate, setIsParticipate] = useState(false);
+
+    const onGoBack = useCallback((e) => {
+        history.goBack();
+    }, []);
+
+    const onClick = useCallback(
+        (e) => {
+            setIsParticipate((prev) => !prev);
+        },
+        [isParticipate]
+    );
+
     // detail
 
     useEffect(() => {
@@ -19,7 +33,13 @@ const BoardDetailContainer = () => {
         return <Loader />;
     }
 
-    return <BoardDetailPresenter boardById={boardById}></BoardDetailPresenter>;
+    return (
+        <BoardDetailPresenter
+            boardById={boardById}
+            isParticipate={isParticipate}
+            onGoBack={onGoBack}
+            onClick={onClick}></BoardDetailPresenter>
+    );
 };
 
 export default BoardDetailContainer;

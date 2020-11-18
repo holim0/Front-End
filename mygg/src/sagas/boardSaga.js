@@ -11,7 +11,7 @@ function getBoardById(id) {
         id,
         title: faker.lorem.sentence(),
         owner: faker.name.findName(),
-        category: "sample",
+        category: "category",
         content: faker.lorem.text(),
         createdDate: Date.now(),
         goodsLink: "https://www.naver.com",
@@ -29,6 +29,20 @@ function getBoardById(id) {
                 name: faker.name.findName(),
                 userId: "sampleuser2",
                 nickname: "samplenickname2",
+            },
+        ],
+        comments: [
+            {
+                id: "1",
+                writer: "samplenickname",
+                content: faker.lorem.words(),
+                createdDate: "20.10.2",
+            },
+            {
+                id: "2",
+                writer: "samplenickname",
+                content: faker.lorem.text(),
+                createdDate: "20.11.2",
             },
         ],
     };

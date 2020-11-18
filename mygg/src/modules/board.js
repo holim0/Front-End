@@ -15,6 +15,7 @@ const initialState = {
         deadline: "",
         limitNumberOfPeople: 0,
         participateUsers: [],
+        comments: [],
     },
 };
 
@@ -40,6 +41,7 @@ const board = createSlice({
                 deadline: payload.deadline,
                 limitNumberOfPeople: payload.limitNumberOfPeople,
                 participateUsers: payload.participateUsers,
+                comments: payload.comments,
             };
         },
         getBoardFaliure(state, { payload }) {

@@ -17,8 +17,14 @@ const DeatailBox = styled.div`
 `;
 
 const DetailCategory = styled.div`
+    display: flex;
+    justify-content: space-between;
     font-size: ${(props) => props.theme.ms};
     color: ${(props) => props.theme.black};
+
+    & > div {
+        cursor: pointer;
+    }
 `;
 
 const DetailTitle = styled.div`
@@ -42,7 +48,7 @@ const GoodsLink = styled.div`
 
 const Content = styled.div`
     min-height: 300px;
-    border-top: 1px solid ${(props) => props.theme.lightenBlack};
+    border-top: 1px solid ${(props) => props.theme.border};
     padding-top: 10px;
 `;
 
@@ -65,11 +71,105 @@ const Participate = styled.div`
     text-align: center;
 `;
 
-const BoardDetailPresenter = ({ boardById }) => {
+const BoardComment = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const CommentsList = styled.div`
+    margin-top: 30px;
+    font-size: ${(props) => props.theme.ms};
+    font-weight: bold;
+`;
+
+const CommentWriting = styled.form`
+    display: flex;
+    border: 1px solid ${(props) => props.theme.border};
+    margin: 20px 0;
+
+    & > input {
+        all: unset;
+        flex: 2;
+        padding: 6px;
+        height: 30px;
+        &:focus {
+            background-color: #f5f8fa;
+        }
+    }
+
+    & > button {
+        all: unset;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        padding: 6px;
+        background-color: ${(props) => props.theme.blue};
+        color: ${(props) => props.theme.white};
+    }
+`;
+
+const CommentBox = styled.div`
+    width: 100%;
+    border: 1px solid ${(props) => props.theme.border};
+`;
+
+const CommentBoxList = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid ${(props) => props.theme.border};
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    & > div {
+        display: flex;
+        height: 100%;
+        padding: 20px;
+
+        &:nth-child(1) {
+            padding-right: 6px;
+        }
+
+        &:nth-child(2) {
+            flex: 2;
+            border-right: 1px solid ${(props) => props.theme.border};
+        }
+
+        &:nth-child(3) {
+            padding: 0 6px;
+        }
+    }
+`;
+
+const ButtonBox = styled.button`
+    all: unset;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin-bottom: 6px;
+    background-color: ${(props) =>
+        props.isParticipate ? props.theme.red : props.theme.blue};
+    color: ${(props) => props.theme.white};
+`;
+
+const BoardDetailPresenter = ({
+    boardById,
+    onClick,
+    isParticipate,
+    onGoBack,
+}) => {
     return (
         <Container>
             <DeatailBox>
-                <DetailCategory>{boardById.category}</DetailCategory>
+                <DetailCategory>
+                    {boardById.category}
+                    <div onClick={onGoBack}>목록으로</div>
+                </DetailCategory>
                 <DetailTitle>
                     <div>{boardById.title}</div>
                 </DetailTitle>
@@ -87,10 +187,15 @@ const BoardDetailPresenter = ({ boardById }) => {
                 <div>{boardById.content}</div>
             </Content>
 
+            <ButtonBox
+                type="button"
+                isParticipate={isParticipate}
+                onClick={onClick}>
+                {isParticipate ? "나가기" : "참여"}
+            </ButtonBox>
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
-
             <ParticipateUser>
-                현재 참여 중입니다!
+                현재 참여 중인 인원입니다!
                 {boardById.participateUsers.map((user) => (
                     <div key={user.id}>
                         <div>
@@ -109,6 +214,28 @@ const BoardDetailPresenter = ({ boardById }) => {
                     limitNumberOfPeople={boardById.limitNumberOfPeople}
                 />
             </Participate>
+            <BoardComment>
+                <CommentsList>
+                    Comments: {boardById.comments.length}개
+                </CommentsList>
+                <CommentWriting>
+                    <input placeholder="댓글 입력" />
+                    <button type="submit">등록</button>
+                </CommentWriting>
+                <CommentBox>
+                    {boardById.comments.length > 0 ? (
+                        boardById.comments.map((cm) => (
+                            <CommentBoxList>
+                                <div>{cm.writer}</div>
+                                <div>{cm.content}</div>
+                                <div>{cm.createdDate}</div>
+                            </CommentBoxList>
+                        ))
+                    ) : (
+                        <div>댓글이 현재 없어요</div>
+                    )}
+                </CommentBox>
+            </BoardComment>
         </Container>
     );
 };
