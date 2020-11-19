@@ -8,7 +8,7 @@ import {
     signInRequest,
     signInSuccess,
     signInFailure,
-} from "modules/user";
+} from "modules/sign";
 import { signFormShowing } from "modules/header";
 import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
 
@@ -59,8 +59,8 @@ function* watchSignOut() {
     yield takeLatest(signOutRequest, signOut);
 }
 
-function* userSaga() {
+function* signSaga() {
     yield all([fork(watchSignUp), fork(watchSignIn), fork(watchSignOut)]);
 }
 
-export default userSaga;
+export default signSaga;

@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isSign: false,
+    isSearchLoading: false,
+    error: null,
+    searchBoard: {},
 };
 
 const header = createSlice({
@@ -11,9 +14,27 @@ const header = createSlice({
         signFormShowing(state) {
             state.isSign = !state.isSign;
         },
+        searchRequest(state) {
+            state.isSearchLoading = true;
+            state.error = null;
+        },
+        searchSuccess(state, { payload }) {
+            state.isSearchLoading = false;
+            state.error = null;
+            state.searchBoard = payload;
+        },
+        searchFailure(state, { payload }) {
+            state.isSearchLoading = false;
+            state.error = payload;
+        },
     },
 });
 
-export const { signFormShowing } = header.actions;
+export const {
+    signFormShowing,
+    searchRequest,
+    searchSuccess,
+    searchFailure,
+} = header.actions;
 
 export default header.reducer;

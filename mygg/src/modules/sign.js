@@ -4,16 +4,10 @@ const initialState = {
     isLogin: false,
     isLoading: false,
     error: "",
-    userData: {
-        userId: "",
-        nickname: "",
-        name: "",
-        schoolName: "",
-    },
 };
 
-const user = createSlice({
-    name: "user",
+const sign = createSlice({
+    name: "sign",
     initialState,
     reducers: {
         signUpRequest(state) {
@@ -67,6 +61,6 @@ export const {
     signOutSuccess,
     signOutRequest,
     signOutFailure,
-} = user.actions;
+} = sign.actions;
 
-export default user.reducer;
+export default sign.reducer;

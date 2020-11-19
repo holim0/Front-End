@@ -4,10 +4,10 @@ import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { signOutRequest } from "modules/user";
-import { signFormShowing } from "modules/header";
+import { signOutRequest } from "modules/sign";
+import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
     position: fixed;
@@ -160,16 +160,25 @@ const Header = () => {
     }, [dispatch]);
 
     // search text & text reset
-
+    const history = useHistory();
     const [text, setText, onChange] = useInput("");
-
     const onReset = useCallback(() => {
         setText("");
     }, [setText]);
 
+    const onSearch = useCallback(
+        (e) => {
+            e.preventDefault();
+            dispatch(searchRequest(text));
+            setText("");
+            history.push(`/searchpost?search=${text}`);
+        },
+        [text, setText, dispatch, history]
+    );
+
     // check user
     const [users, setUser] = useState("");
-    const user = useSelector((state) => state.user.isLogin);
+    const user = useSelector((state) => state.sign.isLogin);
 
     const onLogOut = useCallback(() => {
         dispatch(signOutRequest());
@@ -186,7 +195,7 @@ const Header = () => {
                     <Logo>
                         <Link to="/">GongGus</Link>
                     </Logo>
-                    <SearchBar showReset={text}>
+                    <SearchBar showReset={text} onSubmit={onSearch}>
                         <button type="reset" onClick={onReset}>
                             X
                         </button>
