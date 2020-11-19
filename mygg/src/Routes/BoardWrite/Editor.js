@@ -29,15 +29,13 @@ const Container = styled.div`
     }
 `;
 
-function Editor() {
-    const [content, setContent] = useState("");
-
+function Editor({ content, handleContent }) {
     return (
         <Container>
             <ReactQuill
                 theme="snow"
                 value={content}
-                onChange={setContent}
+                onChange={handleContent}
                 modules={Editor.modules}
                 formats={Editor.formats}
                 placeholder="내용을 입력해주세요."
