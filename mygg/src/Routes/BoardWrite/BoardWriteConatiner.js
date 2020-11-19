@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import BoardWritePresenter from "./BoardWritePresenter";
 import * as actionPack from "modules/boardWrite";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -11,30 +13,35 @@ const Container = styled.div`
 
 const BoardWriteContainer = () => {
     const dispatch = useDispatch();
+
+    const history = useHistory();
     ///카테고리 처리
-    const cate = useSelector((state) => state.boardWrite.category); // 나중에 통신을 위해.
+    const {
+        category,
+        title,
+        content,
+        link,
+        deadline,
+        numOfPeople,
+        loading,
+    } = useSelector((state) => state.boardWrite);
+
     const handleCate = (e) => {
         dispatch(actionPack.setCategory(e.value));
     };
 
+    const setDate = (e) => {
+        dispatch(actionPack.setDeadline(e));
+    };
     //제목 처리
-    const title = useSelector((state) => state.boardWrite.title);
 
     const handleTitle = (e) => {
         dispatch(actionPack.setTitle(e.target.value));
     };
-
     // 링크 처리
-
-    const link = useSelector((state) => state.boardWrite.link);
-
     const handleLink = (e) => {
         dispatch(actionPack.setLink(e.target.value));
     };
-
-    // 마감일 처리
-
-    const [date, setDate] = useState(new Date());
 
     // 인원 수 처리
 
@@ -43,21 +50,35 @@ const BoardWriteContainer = () => {
     const handlePeople = (e) => {
         dispatch(actionPack.setNumOfPeople(e.target.value));
     };
-
     // 제출 처리
-    const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
-    const loading = useSelector((state) => state.boardWrite.loading);
 
     const handleSubmit = async () => {
-        await sleep(1000);
-        dispatch(actionPack.setLoading(false));
-        console.log(loading, cate, title, link, date, numOfpeople);
+        const BoardData = {
+            category,
+            title,
+            content,
+            link,
+            deadline,
+            numOfPeople,
+        };
+        try {
+            const res = await axios.post("/makepostsubmit", BoardData);
+            console.log(res);
+            history.push("/");
+        } catch (e) {
+            console.log(e);
+            dispatch(actionPack.setLoading(false));
+        }
+    };
+
+    const handleContent = (content, delta, source, editor) => {
+        dispatch(actionPack.setText(content));
     };
 
     return (
         <Container>
             <BoardWritePresenter
-                date={date}
+                date={deadline}
                 setDate={setDate}
                 handleCate={handleCate}
                 title={title}
@@ -66,6 +87,9 @@ const BoardWriteContainer = () => {
                 handleLink={handleLink}
                 handlePeople={handlePeople}
                 handleSubmit={handleSubmit}
+                handleContent={handleContent}
+                content={content}
+                loading={loading}
             />
         </Container>
     );

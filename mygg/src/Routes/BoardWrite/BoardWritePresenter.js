@@ -6,6 +6,7 @@ import DatePicker from "react-date-picker";
 import Editor from "./Editor";
 import { Link } from "react-router-dom";
 import CancelModal from "./CancelModal";
+import Loader from "Components/Loader";
 
 const Container = styled.div`
     height: 100vh;
@@ -198,6 +199,9 @@ const BoardWritePresenter = ({
     handleLink,
     handlePeople,
     handleSubmit,
+    handleContent,
+    content,
+    loading,
 }) => {
     return (
         <Container>
@@ -212,7 +216,7 @@ const BoardWritePresenter = ({
                 ></Title>
             </Top>
             <Form>
-                <Editor />
+                <Editor content={content} handleContent={handleContent} />
             </Form>
             <Subspan>제품 링크</Subspan>
             <FormGroup>
@@ -230,14 +234,11 @@ const BoardWritePresenter = ({
             <Subspan>인원 수</Subspan>
             <Input type="number" onChange={handlePeople}></Input>
             <Box>
-                <Button onClick={handleSubmit} as={Link} to="/">
-                    SUBMIT
-                </Button>
+                <Button onClick={handleSubmit}>SUBMIT</Button>
                 <Button as={Link} to="/">
                     CANCEL
                 </Button>
             </Box>
-            {/* <CancelModal /> */}
         </Container>
     );
 };
