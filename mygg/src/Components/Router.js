@@ -11,11 +11,11 @@ import Goods from "Routes/Category/Goods";
 import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
 import BoardWrite from "Routes/BoardWrite";
-import Editor from "Routes/BoardWrite/Editor";
 import BoardDetail from "Routes/BoardDetail";
 import BookMark from "Routes/BookMark";
 import Participate from "Routes/Participate";
 import MypageEdit from "Routes/MypageEdit";
+import Search from "Routes/Search";
 
 const Router = () => {
     return (
@@ -36,6 +36,7 @@ const Router = () => {
                     <Route path="/detail/:id" exact component={BoardDetail} />
                     <Route path="/participate" exact component={Participate} />
                     <Route path="/bookmark" exact component={BookMark} />
+                    <Route path="/searchpost" exact component={Search} />
                     <Redirect from="*" to="/" />
                 </Switch>
                 <Footer />

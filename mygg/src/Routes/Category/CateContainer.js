@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const CateContainer = ({ children, ...cateName }) => {
     // islogin
-    const user = useSelector((state) => state.user.isLogin);
+    const user = useSelector((state) => state.sign.isLogin);
     // faker data
     const [loading, setLoad] = useState(true);
 
@@ -58,9 +58,7 @@ const CateContainer = ({ children, ...cateName }) => {
             {...cateName}
             category={category}
             boards={boards}
-            loading={loading}>
-            {children}
-        </CatePresenter>
+            loading={loading}></CatePresenter>
     );
 };
 
