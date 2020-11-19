@@ -53,16 +53,23 @@ const BoardWriteContainer = () => {
     // 제출 처리
 
     const handleSubmit = async () => {
+        const Date =
+            String(deadline.getFullYear()) +
+            "-" +
+            String(Number(deadline.getMonth()) + 1) +
+            "-" +
+            String(deadline.getDate());
         const BoardData = {
             category,
             title,
             content,
             link,
-            deadline,
+            Date,
             numOfPeople,
         };
         try {
             const res = await axios.post("/makepostsubmit", BoardData);
+
             console.log(res);
             history.push("/");
         } catch (e) {
