@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOutRequest } from "modules/sign";
 import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Container = styled.div`
     position: fixed;
@@ -160,9 +160,8 @@ const Header = () => {
     }, [dispatch]);
 
     // search text & text reset
-
+    const history = useHistory();
     const [text, setText, onChange] = useInput("");
-
     const onReset = useCallback(() => {
         setText("");
     }, [setText]);
@@ -172,8 +171,9 @@ const Header = () => {
             e.preventDefault();
             dispatch(searchRequest(text));
             setText("");
+            history.push(`/searchpost?search=${text}`);
         },
-        [text, dispatch]
+        [text, setText, dispatch, history]
     );
 
     // check user
