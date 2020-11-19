@@ -1,3 +1,4 @@
+import Axios from "axios";
 import { getAuthFailure, getAuthRequest, getAuthSuccess } from "modules/auth";
 import { signInFailure, signInSuccess } from "modules/sign";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
@@ -17,8 +18,6 @@ function getAuthByToken() {
 }
 
 function* getAuth(action) {
-    console.log("auth");
-    console.log(action);
     try {
         const auth = yield call(getAuthByToken);
         yield put(getAuthSuccess(auth));
