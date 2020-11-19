@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const HomeContainer = () => {
-    const user = useSelector((state) => state.user.isLogin);
+    const user = useSelector((state) => state.sign.isLogin);
     return (
         <Container>
             <HomePresenster isLogin={user} />

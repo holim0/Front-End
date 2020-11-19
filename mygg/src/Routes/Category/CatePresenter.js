@@ -235,9 +235,7 @@ const CatePresenter = ({ cateName, category, boards, loading }) => {
                         <Link key={board.id} to={`/detail/${board.id}`}>
                             <BoardBox>
                                 <BoardTitle>
-                                    <div>
-                                        <Link to="/">{board.title}</Link>
-                                    </div>
+                                    <div>{board.title}</div>
 
                                     <BsStarFill size={18} fill="white" />
                                     <BsStar size={18} />
