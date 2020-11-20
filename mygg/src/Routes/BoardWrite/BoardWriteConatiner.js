@@ -12,24 +12,24 @@ const Container = styled.div`
 `;
 
 const BoardWriteContainer = () => {
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
     const history = useHistory();
-    ///카테고리 처리
+
     const {
         category,
         title,
         content,
-        link,
-        deadline,
-        numOfPeople,
-        loading,
+        goodslink,
+        deadDate,
+        limitNumberOfPeople,
     } = useSelector((state) => state.boardWrite);
-
+    // 카테고리 처리
     const handleCate = (e) => {
         dispatch(actionPack.setCategory(e.value));
     };
-
+    // 마감일 처리
     const setDate = (e) => {
         dispatch(actionPack.setDeadline(e));
     };
@@ -38,6 +38,11 @@ const BoardWriteContainer = () => {
     const handleTitle = (e) => {
         dispatch(actionPack.setTitle(e.target.value));
     };
+    // 본문 처리
+    const handleContent = (content, delta, source, editor) => {
+        dispatch(actionPack.setText(content));
+    };
+
     // 링크 처리
     const handleLink = (e) => {
         dispatch(actionPack.setLink(e.target.value));
@@ -45,52 +50,50 @@ const BoardWriteContainer = () => {
 
     // 인원 수 처리
 
-    const numOfpeople = useSelector((state) => state.boardWrite.numOfPeople);
-
     const handlePeople = (e) => {
         dispatch(actionPack.setNumOfPeople(e.target.value));
     };
+
     // 제출 처리
 
     const handleSubmit = async () => {
-        const Date =
-            String(deadline.getFullYear()) +
+        const deadline =
+            String(deadDate.getFullYear()) +
             "-" +
-            String(Number(deadline.getMonth()) + 1) +
+            String(Number(deadDate.getMonth()) + 1) +
             "-" +
-            String(deadline.getDate());
+            String(deadDate.getDate());
+
         const BoardData = {
             category,
             title,
             content,
-            link,
-            Date,
-            numOfPeople,
+            goodslink,
+            deadline,
+            limitNumberOfPeople,
         };
+        // console.log(BoardData);
+
         try {
             const res = await axios.post("/makepostsubmit", BoardData);
-
             console.log(res);
+            alert("저장 성공!");
             history.push("/");
         } catch (e) {
-            console.log(e);
-            dispatch(actionPack.setLoading(false));
+            alert(`저장 실패!\n${e}`);
+            setLoading(false);
         }
-    };
-
-    const handleContent = (content, delta, source, editor) => {
-        dispatch(actionPack.setText(content));
     };
 
     return (
         <Container>
             <BoardWritePresenter
-                date={deadline}
+                date={deadDate}
                 setDate={setDate}
                 handleCate={handleCate}
                 title={title}
                 handleTitle={handleTitle}
-                link={link}
+                goodslink={goodslink}
                 handleLink={handleLink}
                 handlePeople={handlePeople}
                 handleSubmit={handleSubmit}
