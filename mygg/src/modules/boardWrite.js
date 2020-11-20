@@ -4,10 +4,9 @@ const initialState = {
     category: null,
     title: "",
     content: "",
-    link: "",
-    deadline: new Date(),
-    numOfPeople: null,
-    loading: true,
+    goodslink: "",
+    deadDate: new Date(),
+    limitNumberOfPeople: null,
 };
 
 const boardWrite = createSlice({
@@ -24,16 +23,13 @@ const boardWrite = createSlice({
             state.content = action.payload;
         },
         setLink: (state, action) => {
-            state.link = action.payload;
+            state.goodslink = action.payload;
         },
         setDeadline: (state, action) => {
-            state.deadline = action.payload;
+            state.deadDate = action.payload;
         },
         setNumOfPeople: (state, action) => {
-            state.numOfPeople = action.payload;
-        },
-        setLoading: (state, action) => {
-            state.loading = action.payload;
+            state.limitNumberOfPeople = action.payload;
         },
     },
 });
@@ -45,6 +41,5 @@ export const {
     setLink,
     setDeadline,
     setNumOfPeople,
-    setLoading,
 } = boardWrite.actions;
 export default boardWrite.reducer;
