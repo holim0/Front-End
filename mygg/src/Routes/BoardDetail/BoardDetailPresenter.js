@@ -130,7 +130,7 @@ const CommentBoxList = styled.div`
         padding: 20px;
 
         &:nth-child(1) {
-            padding-right: 6px;
+            border-right: 1px solid ${(props) => props.theme.border};
         }
 
         &:nth-child(2) {
@@ -158,10 +158,13 @@ const ButtonBox = styled.button`
 `;
 
 const BoardDetailPresenter = ({
+    comment,
     boardById,
     onClick,
     isParticipate,
     onGoBack,
+    handleComment,
+    commentSubmit,
 }) => {
     return (
         <Container>
@@ -219,14 +222,18 @@ const BoardDetailPresenter = ({
                 <CommentsList>
                     Comments: {boardById.comments.length}개
                 </CommentsList>
-                <CommentWriting onSubmit={}>
-                    <input placeholder="댓글 입력" onChange={} />
+                <CommentWriting onSubmit={commentSubmit}>
+                    <input
+                        placeholder="댓글을 남겨보세요"
+                        onChange={handleComment}
+                        value={comment}
+                    />
                     <button type="submit">등록</button>
                 </CommentWriting>
                 <CommentBox>
                     {boardById.comments.length > 0 ? (
                         boardById.comments.map((cm) => (
-                            <CommentBoxList>
+                            <CommentBoxList key={cm.createdDate}>
                                 <div>{cm.writer}</div>
                                 <div>{cm.content}</div>
                                 <div>{cm.createdDate}</div>

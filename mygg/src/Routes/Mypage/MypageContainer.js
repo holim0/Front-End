@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import MypagePresenter from "./MypagePresenter";
+import { useSelector } from "react-redux";
 
 const MypageContainer = () => {
-    const [name, setName] = useState("holim0");
-
-    const [username, setUsername] = useState("holim1226");
+    const name = useSelector((state) => state.auth.userData.name);
+    const username = useSelector((state) => state.auth.userData.nickname);
 
     return <MypagePresenter name={name} username={username} />;
 };

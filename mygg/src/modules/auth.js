@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isAuthLoading: false,
     isBookMarkLoading: false,
     error: null,
-    token: '',
+    token: "",
     userData: {
-        id: '',
-        name: '',
-        userId: '',
-        userPassword: '',
-        nickname: '',
-        schollName: '',
+        id: "",
+        name: "이희제",
+        userId: "holim0",
+        userPassword: "",
+        nickname: "성균관 선비",
+        schollName: "",
         participatePosts: [],
         ownPosts: [],
         bookmarkPosts: [],
@@ -19,7 +19,7 @@ const initialState = {
 };
 
 const auth = createSlice({
-    name: 'auth',
+    name: "auth",
     initialState,
     reducers: {
         getAuthRequest(state) {
