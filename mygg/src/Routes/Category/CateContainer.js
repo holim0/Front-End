@@ -3,13 +3,13 @@ import CatePresenter from './CatePresenter';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookMarkRequest, removeBookMarkRequest } from 'modules/auth';
 import { signFormShowing } from 'modules/header';
+import { getBoardAllRequest } from 'modules/board';
 
 const CateContainer = ({ children, ...cateName }) => {
     const dispatch = useDispatch();
 
     // islogin
     const { isLogin } = useSelector((state) => state.sign);
-
     // userData
     const { userData } = useSelector((state) => state.auth);
     // faker data
@@ -64,12 +64,13 @@ const CateContainer = ({ children, ...cateName }) => {
                 dispatch(addBookMarkRequest(id));
             }
         },
-        [dispatch, userData]
+        [dispatch, userData, isLogin]
     );
 
     useEffect(() => {
         window.scroll({ top: 0, behavior: 'smooth' });
         getInfo();
+        dispatch(getBoardAllRequest());
     }, []);
 
     return (

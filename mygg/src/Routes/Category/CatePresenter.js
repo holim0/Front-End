@@ -211,7 +211,6 @@ const CatePresenter = ({
     loading,
     userData,
 }) => {
-    console.log(userData.bookmarkPosts);
     const selectCate = cateName.split('/')[1].toUpperCase();
     return loading ? (
         <Loader />
