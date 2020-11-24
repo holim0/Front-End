@@ -1,16 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isAuthLoading: false,
+    isBookMarkLoading: false,
     error: null,
-    token: "",
+    token: '',
     userData: {
-        id: "",
-        name: "",
-        userId: "",
-        userPassword: "",
-        nickname: "",
-        schollName: "",
+        id: '',
+        name: '',
+        userId: '',
+        userPassword: '',
+        nickname: '',
+        schollName: '',
         participatePosts: [],
         ownPosts: [],
         bookmarkPosts: [],
@@ -18,7 +19,7 @@ const initialState = {
 };
 
 const auth = createSlice({
-    name: "auth",
+    name: 'auth',
     initialState,
     reducers: {
         getAuthRequest(state) {
@@ -42,9 +43,47 @@ const auth = createSlice({
             state.isAuthLoading = false;
             state.error = payload;
         },
+
+        addBookMarkRequest(state) {
+            state.isBookMarkLoading = true;
+            state.error = null;
+        },
+        addBookMarkSuccess(state, { payload }) {
+            state.isBookMarkLoading = false;
+            state.userData.bookmarkPosts.push(payload);
+        },
+        addBookMarkFailure(state, { payload }) {
+            state.isBookMarkLoading = false;
+            state.error = payload;
+        },
+
+        removeBookMarkRequest(state) {
+            state.isBookMarkLoading = true;
+            state.error = null;
+        },
+        removeBookMarkSuccess(state, { payload }) {
+            state.isBookMarkLoading = false;
+            state.userData.bookmarkPosts = state.userData.bookmarkPosts.filter(
+                (f) => f !== payload
+            );
+        },
+        removeBookMarkFailure(state, { payload }) {
+            state.isBookMarkLoading = false;
+            state.error = payload;
+        },
     },
 });
 
-export const { getAuthRequest, getAuthSuccess, getAuthFailure } = auth.actions;
+export const {
+    getAuthRequest,
+    getAuthSuccess,
+    getAuthFailure,
+    addBookMarkRequest,
+    addBookMarkSuccess,
+    addBookMarkFailure,
+    removeBookMarkRequest,
+    removeBookMarkSuccess,
+    removeBookMarkFailure,
+} = auth.actions;
 
 export default auth.reducer;

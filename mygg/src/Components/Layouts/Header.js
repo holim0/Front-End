@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -177,16 +177,11 @@ const Header = () => {
     );
 
     // check user
-    const [users, setUser] = useState("");
     const user = useSelector((state) => state.sign.isLogin);
 
     const onLogOut = useCallback(() => {
         dispatch(signOutRequest());
     }, [dispatch]);
-
-    useEffect(() => {
-        setUser(user);
-    }, [user]);
 
     return (
         <>
@@ -209,7 +204,7 @@ const Header = () => {
                             <AiOutlineSearch size={24} fill="#14171a" />
                         </button>
                     </SearchBar>
-                    {users ? (
+                    {user ? (
                         <UserMenu>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
