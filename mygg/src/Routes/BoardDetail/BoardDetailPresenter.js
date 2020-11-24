@@ -157,12 +157,7 @@ const ButtonBox = styled.button`
     color: ${(props) => props.theme.white};
 `;
 
-const BoardDetailPresenter = ({
-    boardById,
-    onClick,
-    isParticipate,
-    onGoBack,
-}) => {
+const BoardDetailPresenter = ({ boardById, onClick, userData, onGoBack }) => {
     return (
         <Container>
             <DeatailBox>
@@ -187,13 +182,25 @@ const BoardDetailPresenter = ({
                 <div>{boardById.content}</div>
             </Content>
 
-            <ButtonBox
-                type="button"
-                isParticipate={isParticipate}
-                onClick={onClick}
-            >
-                {isParticipate ? "나가기" : "참여"}
-            </ButtonBox>
+            {userData.participatePosts.find((v) => v === boardById.id) ? (
+                <ButtonBox
+                    type="button"
+                    onClick={onClick}
+                    data-id={boardById.id}
+                    isParticipate={true}
+                >
+                    나가기
+                </ButtonBox>
+            ) : (
+                <ButtonBox
+                    type="button"
+                    onClick={onClick}
+                    isParticipate={false}
+                    data-id={boardById.id}
+                >
+                    참여
+                </ButtonBox>
+            )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
             <ParticipateUser>
                 현재 참여 중인 인원입니다!
