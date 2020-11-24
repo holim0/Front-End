@@ -9,6 +9,12 @@ import {
     removeBookMarkRequest,
     removeBookMarkSuccess,
     removeBookMarkFailure,
+    addPartyRequest,
+    addPartySuccess,
+    addPartyFailure,
+    removePartyRequest,
+    removePartySuccess,
+    removePartyFailure,
 } from "modules/auth";
 import { signInFailure, signInSuccess } from "modules/sign";
 import {
@@ -31,6 +37,14 @@ function addBookmarkPost(id) {
 
 function removeBookMarkPost(id) {
     // return Axios.delete('/', id)
+}
+
+function addPartyPost() {
+    // return Axios.post('/')
+}
+
+function removePartyPost() {
+    // return Axios.delete('/')
 }
 
 function* getAuth() {
@@ -65,6 +79,26 @@ function* removeBookMark(action) {
     }
 }
 
+function* addParty(action) {
+    try {
+        yield call(addPartyPost, action.payload);
+        yield put(addPartySuccess(action.payload));
+    } catch (err) {
+        console.log(err);
+        yield put(addPartyFailure(err.message));
+    }
+}
+
+function* removeParty(action) {
+    try {
+        yield call(removePartyPost, action.payload);
+        yield put(removePartySuccess(action.payload));
+    } catch (err) {
+        console.log(err);
+        yield put(removePartyFailure(err.message));
+    }
+}
+
 function* watchAuth() {
     yield takeEvery(getAuthRequest, getAuth);
 }
@@ -77,11 +111,21 @@ function* watchRemoveBookMark() {
     yield takeLatest(removeBookMarkRequest, removeBookMark);
 }
 
+function* watchAddParty() {
+    yield takeLatest(addPartyRequest, addParty);
+}
+
+function* watchRemoveParty() {
+    yield takeLatest(removePartyRequest, removeParty);
+}
+
 function* authSaga() {
     yield all([
         fork(watchAuth),
         fork(watchBookMark),
         fork(watchRemoveBookMark),
+        fork(watchAddParty),
+        fork(watchRemoveParty),
     ]);
 }
 

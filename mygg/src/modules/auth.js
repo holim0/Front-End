@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isAuthLoading: false,
     isBookMarkLoading: false,
+    isPartyLoading: false,
     error: null,
     token: "",
     userData: {
@@ -71,6 +72,34 @@ const auth = createSlice({
             state.isBookMarkLoading = false;
             state.error = payload;
         },
+
+        addPartyRequest(state) {
+            state.isPartyLoading = true;
+            state.error = null;
+        },
+        addPartySuccess(state, { payload }) {
+            state.isPartyLoading = false;
+            state.userData.participatePosts.push(payload);
+        },
+        addPartyFailure(state, { payload }) {
+            state.isPartyLoading = false;
+            state.error = payload;
+        },
+
+        removePartyRequest(state) {
+            state.isPartyLoading = true;
+            state.error = null;
+        },
+        removePartySuccess(state, { payload }) {
+            state.isPartyLoading = false;
+            state.userData.participatePosts = state.userData.participatePosts.filter(
+                (f) => f !== payload
+            );
+        },
+        removePartyFailure(state, { payload }) {
+            state.isPartyLoading = false;
+            state.error = payload;
+        },
     },
 });
 
@@ -84,6 +113,12 @@ export const {
     removeBookMarkRequest,
     removeBookMarkSuccess,
     removeBookMarkFailure,
+    addPartyRequest,
+    addPartySuccess,
+    addPartyFailure,
+    removePartyRequest,
+    removePartySuccess,
+    removePartyFailure,
 } = auth.actions;
 
 export default auth.reducer;
