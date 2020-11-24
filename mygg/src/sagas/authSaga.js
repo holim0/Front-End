@@ -25,7 +25,15 @@ function getAuthByToken() {
     return console.log('준비중');
 }
 
-function* getAuth(action) {
+function addBookmarkPost(id) {
+    // return Axios.post('/', id)
+}
+
+function removeBookMarkPost(id) {
+    // return Axios.delete('/', id)
+}
+
+function* getAuth() {
     try {
         const auth = yield call(getAuthByToken);
         yield put(getAuthSuccess(auth));
@@ -39,6 +47,7 @@ function* getAuth(action) {
 
 function* addBookMark(action) {
     try {
+        yield call(addBookmarkPost, action.payload);
         yield put(addBookMarkSuccess(action.payload));
     } catch (err) {
         console.log(err);
@@ -48,6 +57,7 @@ function* addBookMark(action) {
 
 function* removeBookMark(action) {
     try {
+        yield call(removeBookMarkPost, action.payload);
         yield put(removeBookMarkSuccess(action.payload));
     } catch (err) {
         console.log(err);

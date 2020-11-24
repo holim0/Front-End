@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isLogin: false,
     isLoading: false,
-    error: "",
+    error: '',
 };
 
 const sign = createSlice({
-    name: "sign",
+    name: 'sign',
     initialState,
     reducers: {
         signUpRequest(state) {

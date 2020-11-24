@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import CatePresenter from './CatePresenter';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookMarkRequest, removeBookMarkRequest } from 'modules/auth';
+import { signFormShowing } from 'modules/header';
 
 const CateContainer = ({ children, ...cateName }) => {
     const dispatch = useDispatch();
@@ -48,6 +49,10 @@ const CateContainer = ({ children, ...cateName }) => {
     // bookmark
     const onBook = useCallback(
         (e) => {
+            if (!isLogin) {
+                alert('로그인 하셔야 가능합니다.');
+                return dispatch(signFormShowing());
+            }
             let { id } = e.target.dataset;
             if (!id) {
                 id = e.target.parentNode.dataset.id;
