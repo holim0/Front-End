@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const useFormInput = (initialValue) => {
     const [form, setForm] = useState(initialValue);

@@ -1,12 +1,15 @@
 import {
-    getBoardRequest,
-    getBoardFaliure,
-    getBoardSuccess,
+    getBoardByIdRequest,
+    getBoardByIdSuccess,
+    getBoardByIdFaliure,
+    getBoardAllRequest,
+    getBoardAllSuccess,
+    getBoardAllFaliure,
 } from "modules/board";
-import { fork, all, takeLatest, put, call, delay } from "redux-saga/effects";
+import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import faker from "faker";
 
-function getBoardById(id) {
+function getBoardId(id) {
     const fakeBoard = {
         id,
         title: faker.lorem.sentence(),
@@ -49,23 +52,40 @@ function getBoardById(id) {
     return fakeBoard;
 }
 
-function* getBoard(action) {
+function getBoard() {
+    // return Axios.get('/')
+}
+
+function* getBoardById(action) {
     try {
-        yield delay(1000);
-        const boardDetail = yield call(getBoardById, action.payload);
-        yield put(getBoardSuccess(boardDetail));
+        const boardDetail = yield call(getBoardId, action.payload);
+        yield put(getBoardByIdSuccess(boardDetail));
     } catch (err) {
         console.log(err);
-        yield put(getBoardFaliure(err.message));
+        yield put(getBoardByIdFaliure(err.message));
     }
 }
 
-function* watchGetBoard() {
-    yield takeLatest(getBoardRequest, getBoard);
+function* getBoardAll() {
+    try {
+        const boardAll = yield call(getBoard);
+        yield put(getBoardAllSuccess(boardAll));
+    } catch (err) {
+        console.log(err);
+        yield put(getBoardAllFaliure(err.message));
+    }
+}
+
+function* watchGetBoardById() {
+    yield takeLatest(getBoardByIdRequest, getBoardById);
+}
+
+function* watchGetBoardAll() {
+    yield takeLatest(getBoardAllRequest, getBoardAll);
 }
 
 function* boardSaga() {
-    yield all([fork(watchGetBoard)]);
+    yield all([fork(watchGetBoardById), fork(watchGetBoardAll)]);
 }
 
 export default boardSaga;

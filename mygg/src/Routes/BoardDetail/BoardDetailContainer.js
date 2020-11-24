@@ -1,5 +1,5 @@
 import Loader from "Components/Loader";
-import { getBoardRequest } from "modules/board";
+import { getBoardByIdRequest } from "modules/board";
 import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -26,7 +26,7 @@ const BoardDetailContainer = () => {
     // detail
 
     useEffect(() => {
-        dispatch(getBoardRequest(id));
+        dispatch(getBoardByIdRequest(id));
     }, [dispatch, id]);
 
     if (isLoading) {
@@ -38,7 +38,8 @@ const BoardDetailContainer = () => {
             boardById={boardById}
             isParticipate={isParticipate}
             onGoBack={onGoBack}
-            onClick={onClick}></BoardDetailPresenter>
+            onClick={onClick}
+        ></BoardDetailPresenter>
     );
 };
 

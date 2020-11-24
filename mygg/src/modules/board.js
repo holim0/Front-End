@@ -1,18 +1,20 @@
-const { createSlice } = require("@reduxjs/toolkit");
+const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
-    getBoard: false,
+    getBoardById: false,
     isLoading: false,
+    getBoardAll: false,
     error: null,
+    boardAll: [],
     boardById: {
-        id: "",
-        title: "",
-        owner: "",
-        category: "",
-        content: "",
-        createdDate: "",
-        goodsLink: "",
-        deadline: "",
+        id: '',
+        title: '',
+        owner: '',
+        category: '',
+        content: '',
+        createdDate: '',
+        goodsLink: '',
+        deadline: '',
         limitNumberOfPeople: 0,
         participateUsers: [],
         comments: [],
@@ -20,16 +22,17 @@ const initialState = {
 };
 
 const board = createSlice({
-    name: "board",
+    name: 'board',
     initialState: initialState,
     reducers: {
-        getBoardRequest(state) {
+        getBoardByIdRequest(state) {
             state.isLoading = true;
+            state.getBoardById = false;
             state.error = null;
         },
-        getBoardSuccess(state, { payload }) {
+        getBoardByIdSuccess(state, { payload }) {
             state.isLoading = false;
-            state.getBoard = true;
+            state.getBoardById = true;
             state.boardById = {
                 id: payload.id,
                 title: payload.title,
@@ -44,7 +47,22 @@ const board = createSlice({
                 comments: payload.comments,
             };
         },
-        getBoardFaliure(state, { payload }) {
+        getBoardByIdFaliure(state, { payload }) {
+            state.isLoading = false;
+            state.error = payload;
+        },
+
+        getBoardAllRequest(state) {
+            state.isLoading = true;
+            state.error = null;
+            state.getBoardAll = false;
+        },
+        getBoardAllSuccess(state, { payload }) {
+            state.isLoading = false;
+            state.getBoardAll = true;
+            state.boardAll = state.boardAll.push(payload);
+        },
+        getBoardAllFaliure(state, { payload }) {
             state.isLoading = false;
             state.error = payload;
         },
@@ -52,9 +70,12 @@ const board = createSlice({
 });
 
 export const {
-    getBoardRequest,
-    getBoardSuccess,
-    getBoardFaliure,
+    getBoardByIdRequest,
+    getBoardByIdSuccess,
+    getBoardByIdFaliure,
+    getBoardAllRequest,
+    getBoardAllSuccess,
+    getBoardAllFaliure,
 } = board.actions;
 
 export default board.reducer;

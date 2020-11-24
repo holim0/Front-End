@@ -190,7 +190,8 @@ const BoardDetailPresenter = ({
             <ButtonBox
                 type="button"
                 isParticipate={isParticipate}
-                onClick={onClick}>
+                onClick={onClick}
+            >
                 {isParticipate ? "나가기" : "참여"}
             </ButtonBox>
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
