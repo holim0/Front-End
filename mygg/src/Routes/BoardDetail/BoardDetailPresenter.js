@@ -190,7 +190,8 @@ const BoardDetailPresenter = ({
             <ButtonBox
                 type="button"
                 isParticipate={isParticipate}
-                onClick={onClick}>
+                onClick={onClick}
+            >
                 {isParticipate ? "나가기" : "참여"}
             </ButtonBox>
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
@@ -218,8 +219,8 @@ const BoardDetailPresenter = ({
                 <CommentsList>
                     Comments: {boardById.comments.length}개
                 </CommentsList>
-                <CommentWriting>
-                    <input placeholder="댓글 입력" />
+                <CommentWriting onSubmit={}>
+                    <input placeholder="댓글 입력" onChange={} />
                     <button type="submit">등록</button>
                 </CommentWriting>
                 <CommentBox>

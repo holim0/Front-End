@@ -7,8 +7,8 @@ function getAuthByToken() {
     const userData = {
         id: "id",
         name: "name",
-        userId: "userId",
-        nickname: "nickname",
+        userId: "holim0",
+        nickname: "성균관선비",
         schollName: "schollName",
         participatePosts: "participatePosts",
         ownPosts: "ownPosts",
