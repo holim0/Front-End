@@ -11,6 +11,9 @@ const BoardDetailContainer = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [isParticipate, setIsParticipate] = useState(false);
+    const userId = useSelector((state) => state.auth.userData.userId);
+    const nickName = useSelector((state) => state.auth.userData.nickname);
+    const isLogin = useSelector((state) => state.sign.isLogin);
 
     const onGoBack = useCallback((e) => {
         history.goBack();
