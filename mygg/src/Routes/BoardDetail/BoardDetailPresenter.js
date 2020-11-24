@@ -226,8 +226,8 @@ const BoardDetailPresenter = ({ boardById, onClick, userData, onGoBack }) => {
                 <CommentsList>
                     Comments: {boardById.comments.length}개
                 </CommentsList>
-                <CommentWriting>
-                    <input placeholder="댓글 입력" />
+                <CommentWriting onSubmit={}>
+                    <input placeholder="댓글 입력" onChange={} />
                     <button type="submit">등록</button>
                 </CommentWriting>
                 <CommentBox>

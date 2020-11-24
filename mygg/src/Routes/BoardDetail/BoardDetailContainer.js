@@ -10,10 +10,12 @@ import BoardDetailPresenter from "./BoardDetailPresenter";
 const BoardDetailContainer = () => {
     const { isLoading, boardById } = useSelector((state) => state.board);
     const { userData } = useSelector((state) => state.auth);
-    const { isLogin } = useSelector((state) => state.sign);
     const { id } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+    const userId = useSelector((state) => state.auth.userData.userId);
+    const nickName = useSelector((state) => state.auth.userData.nickname);
+    const isLogin = useSelector((state) => state.sign.isLogin);
 
     const onGoBack = useCallback(
         (e) => {
