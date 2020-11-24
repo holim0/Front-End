@@ -1,38 +1,35 @@
-import React, { useEffect, useState } from "react";
-import CatePresenter from "./CatePresenter";
-import faker from "faker";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from 'react';
+import CatePresenter from './CatePresenter';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBookMarkRequest, removeBookMarkRequest } from 'modules/auth';
 
 const CateContainer = ({ children, ...cateName }) => {
+    const dispatch = useDispatch();
+
     // islogin
-    const user = useSelector((state) => state.sign.isLogin);
+    const { isLogin } = useSelector((state) => state.sign);
+
+    // userData
+    const { userData } = useSelector((state) => state.auth);
     // faker data
     const [loading, setLoad] = useState(true);
 
-    const createUser = () => {
-        return {
-            img: faker.image.avatar(),
-        };
-    };
-    const limitNumberOfPeople = 8;
-    const participateUsers = () => {
-        return Math.round(Math.random() * limitNumberOfPeople);
-    };
-    const createBoard = () => {
-        return {
-            id: faker.random.uuid(),
-            title: faker.lorem.sentence(),
-            deadline: "2020-20-02",
-            participateUsers: new Array(participateUsers())
-                .fill(undefined)
-                .map(createUser),
-            limitNumberOfPeople,
-        };
-    };
-    const createBoards = (numUsers = 20) => {
-        return new Array(numUsers).fill(undefined).map(createBoard);
-    };
-    const boards = createBoards();
+    const boards = [
+        {
+            id: '1',
+            title: '실험',
+            deadline: '2020-10-02',
+            participateUsers: [],
+            limitNumberOfPeople: 5,
+        },
+        {
+            id: '2',
+            title: '실험2',
+            deadline: '2020-10-12',
+            participateUsers: [],
+            limitNumberOfPeople: 2,
+        },
+    ];
 
     // 비동기 가짜 구현.
     const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
@@ -42,23 +39,44 @@ const CateContainer = ({ children, ...cateName }) => {
     };
 
     // category
-    const category = ["Necessity", "Food", "Cloth", "Goods", "Beauty", "Etc"];
+    const category = ['Necessity', 'Food', 'Cloth', 'Goods', 'Beauty', 'Etc'];
 
-    if (user) {
-        category.push("글쓰기");
+    if (isLogin) {
+        category.push('글쓰기');
     }
 
+    // bookmark
+    const onBook = useCallback(
+        (e) => {
+            let { id } = e.target.dataset;
+            if (!id) {
+                id = e.target.parentNode.dataset.id;
+            }
+
+            if (userData.bookmarkPosts.find((v) => v === id)) {
+                dispatch(removeBookMarkRequest(id));
+            } else {
+                dispatch(addBookMarkRequest(id));
+            }
+        },
+        [dispatch, userData]
+    );
+
     useEffect(() => {
-        window.scroll({ top: 0, behavior: "smooth" });
+        window.scroll({ top: 0, behavior: 'smooth' });
         getInfo();
     }, []);
 
     return (
         <CatePresenter
             {...cateName}
+            isLogin={isLogin}
             category={category}
             boards={boards}
-            loading={loading}></CatePresenter>
+            loading={loading}
+            userData={userData}
+            onBook={onBook}
+        ></CatePresenter>
     );
 };
 

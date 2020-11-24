@@ -1,18 +1,18 @@
-const { createSlice } = require("@reduxjs/toolkit");
+const { createSlice } = require('@reduxjs/toolkit');
 
 const initialState = {
     getBoard: false,
     isLoading: false,
     error: null,
     boardById: {
-        id: "",
-        title: "",
-        owner: "",
-        category: "",
-        content: "",
-        createdDate: "",
-        goodsLink: "",
-        deadline: "",
+        id: '',
+        title: '',
+        owner: '',
+        category: '',
+        content: '',
+        createdDate: '',
+        goodsLink: '',
+        deadline: '',
         limitNumberOfPeople: 0,
         participateUsers: [],
         comments: [],
@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const board = createSlice({
-    name: "board",
+    name: 'board',
     initialState: initialState,
     reducers: {
         getBoardRequest(state) {

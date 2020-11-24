@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import AuthContainer from "Routes/Common";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaUserAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { signOutRequest } from "modules/sign";
-import { searchRequest, signFormShowing } from "modules/header";
-import { useInput } from "hooks";
-import { Link, useHistory } from "react-router-dom";
+import React, { useCallback } from 'react';
+import styled from 'styled-components';
+import AuthContainer from 'Routes/Common';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { FaUserAlt } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutRequest } from 'modules/sign';
+import { searchRequest, signFormShowing } from 'modules/header';
+import { useInput } from 'hooks';
+import { Link, useHistory } from 'react-router-dom';
 
 const Container = styled.div`
     position: fixed;
@@ -67,11 +67,11 @@ const SearchBar = styled.form`
         cursor: pointer;
     }
 
-    button[type="reset"] {
+    button[type='reset'] {
         all: unset;
         cursor: pointer;
         font-size: ${(props) => props.theme.ms};
-        display: ${(props) => (props.showReset ? "block" : "none")};
+        display: ${(props) => (props.showReset ? 'block' : 'none')};
 
         &:hover {
             color: ${(props) => props.theme.lightenBlack};
@@ -161,32 +161,27 @@ const Header = () => {
 
     // search text & text reset
     const history = useHistory();
-    const [text, setText, onChange] = useInput("");
+    const [text, setText, onChange] = useInput('');
     const onReset = useCallback(() => {
-        setText("");
+        setText('');
     }, [setText]);
 
     const onSearch = useCallback(
         (e) => {
             e.preventDefault();
             dispatch(searchRequest(text));
-            setText("");
+            setText('');
             history.push(`/searchpost?search=${text}`);
         },
         [text, setText, dispatch, history]
     );
 
     // check user
-    const [users, setUser] = useState("");
     const user = useSelector((state) => state.sign.isLogin);
 
     const onLogOut = useCallback(() => {
         dispatch(signOutRequest());
     }, [dispatch]);
-
-    useEffect(() => {
-        setUser(user);
-    }, [user]);
 
     return (
         <>
@@ -209,7 +204,7 @@ const Header = () => {
                             <AiOutlineSearch size={24} fill="#14171a" />
                         </button>
                     </SearchBar>
-                    {users ? (
+                    {user ? (
                         <UserMenu>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />

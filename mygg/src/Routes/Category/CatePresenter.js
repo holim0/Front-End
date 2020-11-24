@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import Loader from "Components/Loader";
-import Progress from "Components/Progress/Progress";
+import React from 'react';
+import styled from 'styled-components';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import Loader from 'Components/Loader';
+import Progress from 'Components/Progress/Progress';
 
 const Container = styled.div`
     width: 100%;
@@ -51,6 +51,14 @@ const CateTitle = styled.h2`
 
 const BoardContainer = styled.div`
     margin: 0 auto;
+    svg {
+        cursor: pointer;
+        z-index: 5;
+
+        path {
+            z-index: -20;
+        }
+    }
 `;
 
 const BoardBox = styled.div`
@@ -82,12 +90,6 @@ const BoardTitle = styled.div`
         a:hover {
             text-decoration: underline;
         }
-    }
-    svg {
-        position: absolute;
-        right: 10px;
-        top: 0px;
-        cursor: pointer;
     }
 `;
 
@@ -142,7 +144,7 @@ const BoardInfo = styled.div`
     & > div:nth-child(1) {
         position: relative;
         &::before {
-            content: "마감";
+            content: '마감';
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -158,7 +160,7 @@ const BoardInfo = styled.div`
         position: relative;
 
         &::before {
-            content: "현재";
+            content: '현재';
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -174,7 +176,7 @@ const BoardInfo = styled.div`
         position: relative;
 
         &::before {
-            content: "제한";
+            content: '제한';
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -201,8 +203,16 @@ const CateName = styled(Link)`
     }
 `;
 
-const CatePresenter = ({ cateName, category, boards, loading }) => {
-    const selectCate = cateName.split("/")[1].toUpperCase();
+const CatePresenter = ({
+    onBook,
+    cateName,
+    category,
+    boards,
+    loading,
+    userData,
+}) => {
+    console.log(userData.bookmarkPosts);
+    const selectCate = cateName.split('/')[1].toUpperCase();
     return loading ? (
         <Loader />
     ) : (
@@ -218,10 +228,11 @@ const CatePresenter = ({ cateName, category, boards, loading }) => {
                                 <li key={index}>
                                     <CateName
                                         to={
-                                            list === "글쓰기"
-                                                ? "/write"
+                                            list === '글쓰기'
+                                                ? '/write'
                                                 : `/${list.toLowerCase()}`
-                                        }>
+                                        }
+                                    >
                                         {list}
                                     </CateName>
                                 </li>
@@ -232,44 +243,60 @@ const CatePresenter = ({ cateName, category, boards, loading }) => {
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
                     {boards.map((board) => (
-                        <Link key={board.id} to={`/detail/${board.id}`}>
-                            <BoardBox>
-                                <BoardTitle>
-                                    <div>{board.title}</div>
+                        <div key={board.id}>
+                            {userData.bookmarkPosts.find(
+                                (v) => v === board.id
+                            ) ? (
+                                <BsStarFill
+                                    data-id={board.id}
+                                    onClick={onBook}
+                                    size={18}
+                                />
+                            ) : (
+                                <BsStar
+                                    data-id={board.id}
+                                    size={18}
+                                    onClick={onBook}
+                                />
+                            )}
+                            <Link to={`/detail/${board.id}`}>
+                                <BoardBox>
+                                    <BoardTitle>
+                                        <div>{board.title}</div>
 
-                                    <BsStarFill size={18} fill="white" />
-                                    <BsStar size={18} />
-                                    <BoardParty>
-                                        {board.participateUsers
-                                            .slice(0, 5)
-                                            .map((user, index) => (
-                                                <div key={index}>
-                                                    <img
-                                                        src={user.img}
-                                                        alt="user"
-                                                    />
-                                                </div>
-                                            ))}
-                                        {board.participateUsers.length > 5 && (
-                                            <span>...</span>
-                                        )}
-                                    </BoardParty>
-                                </BoardTitle>
-                                <BoardInfo>
-                                    <div>{board.deadline}</div>
-                                    <div>{board.participateUsers.length}</div>
-                                    <div>{board.limitNumberOfPeople}</div>
-                                    <Progress
-                                        participateUsers={
-                                            board.participateUsers
-                                        }
-                                        limitNumberOfPeople={
-                                            board.limitNumberOfPeople
-                                        }
-                                    />
-                                </BoardInfo>
-                            </BoardBox>
-                        </Link>
+                                        <BoardParty>
+                                            {board.participateUsers
+                                                .slice(0, 5)
+                                                .map((user, index) => (
+                                                    <div key={index}>
+                                                        <img
+                                                            src={user.img}
+                                                            alt="user"
+                                                        />
+                                                    </div>
+                                                ))}
+                                            {board.participateUsers.length >
+                                                5 && <span>...</span>}
+                                        </BoardParty>
+                                    </BoardTitle>
+                                    <BoardInfo>
+                                        <div>{board.deadline}</div>
+                                        <div>
+                                            {board.participateUsers.length}
+                                        </div>
+                                        <div>{board.limitNumberOfPeople}</div>
+                                        <Progress
+                                            participateUsers={
+                                                board.participateUsers
+                                            }
+                                            limitNumberOfPeople={
+                                                board.limitNumberOfPeople
+                                            }
+                                        />
+                                    </BoardInfo>
+                                </BoardBox>
+                            </Link>
+                        </div>
                     ))}
                 </BoardContainer>
             </CateContent>
