@@ -1,18 +1,14 @@
 import Loader from "Components/Loader";
-<<<<<<< HEAD
-import { getBoardByIdRequest, updateComment } from "modules/board";
-import React, { useEffect, useCallback, useState } from "react";
-=======
 import { addPartyRequest, removePartyRequest } from "modules/auth";
-import { getBoardByIdRequest } from "modules/board";
+import { getBoardByIdRequest, updateComment } from "modules/board";
 import { signFormShowing } from "modules/header";
-import React, { useEffect, useCallback } from "react";
->>>>>>> gongus/master
+import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
 import axios from "axios";
 
+// 날짜 포맷 변경 함수
 function getToday() {
     var date = new Date();
     var year = date.getFullYear();
@@ -34,7 +30,6 @@ const BoardDetailContainer = () => {
 
     // 댓글 작성시 닉네임 형태로 보여주기 위해 가져옴.
 
-    const userId = useSelector((state) => state.auth.userData.userId);
     const nickName = useSelector((state) => state.auth.userData.nickname);
 
     // 로그인이 안돼 있으면 댓글 방지.

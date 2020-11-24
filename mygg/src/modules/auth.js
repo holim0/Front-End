@@ -44,6 +44,10 @@ const auth = createSlice({
             state.isAuthLoading = false;
             state.error = payload;
         },
+        editAuth(state, { payload }) {
+            state.userData.name = payload.name;
+            state.userData.nickname = payload.nickname;
+        },
 
         addBookMarkRequest(state) {
             state.isBookMarkLoading = true;
@@ -107,6 +111,7 @@ export const {
     getAuthRequest,
     getAuthSuccess,
     getAuthFailure,
+    editAuth,
     addBookMarkRequest,
     addBookMarkSuccess,
     addBookMarkFailure,

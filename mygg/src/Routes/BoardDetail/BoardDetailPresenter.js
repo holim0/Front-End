@@ -165,6 +165,7 @@ const BoardDetailPresenter = ({
     onGoBack,
     handleComment,
     commentSubmit,
+    userData,
 }) => {
     return (
         <Container>
@@ -189,7 +190,6 @@ const BoardDetailPresenter = ({
             <Content>
                 <div>{boardById.content}</div>
             </Content>
-
             {userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
