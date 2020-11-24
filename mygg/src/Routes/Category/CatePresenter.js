@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { BsStar, BsStarFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import Loader from 'Components/Loader';
-import Progress from 'Components/Progress/Progress';
+import React from "react";
+import styled from "styled-components";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import Loader from "Components/Loader";
+import Progress from "Components/Progress/Progress";
 
 const Container = styled.div`
     width: 100%;
@@ -144,7 +144,7 @@ const BoardInfo = styled.div`
     & > div:nth-child(1) {
         position: relative;
         &::before {
-            content: '마감';
+            content: "마감";
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -160,7 +160,7 @@ const BoardInfo = styled.div`
         position: relative;
 
         &::before {
-            content: '현재';
+            content: "현재";
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -176,7 +176,7 @@ const BoardInfo = styled.div`
         position: relative;
 
         &::before {
-            content: '제한';
+            content: "제한";
             width: 96%;
             height: 16px;
             font-size: ${(props) => props.theme.ss};
@@ -211,7 +211,7 @@ const CatePresenter = ({
     loading,
     userData,
 }) => {
-    const selectCate = cateName.split('/')[1].toUpperCase();
+    const selectCate = cateName.split("/")[1].toUpperCase();
     return loading ? (
         <Loader />
     ) : (
@@ -227,8 +227,8 @@ const CatePresenter = ({
                                 <li key={index}>
                                     <CateName
                                         to={
-                                            list === '글쓰기'
-                                                ? '/write'
+                                            list === "글쓰기"
+                                                ? "/write"
                                                 : `/${list.toLowerCase()}`
                                         }
                                     >

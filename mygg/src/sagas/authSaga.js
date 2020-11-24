@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from "axios";
 import {
     getAuthFailure,
     getAuthRequest,
@@ -9,8 +9,8 @@ import {
     removeBookMarkRequest,
     removeBookMarkSuccess,
     removeBookMarkFailure,
-} from 'modules/auth';
-import { signInFailure, signInSuccess } from 'modules/sign';
+} from "modules/auth";
+import { signInFailure, signInSuccess } from "modules/sign";
 import {
     all,
     call,
@@ -18,11 +18,11 @@ import {
     put,
     takeEvery,
     takeLatest,
-} from 'redux-saga/effects';
+} from "redux-saga/effects";
 
 function getAuthByToken() {
     //    return Axios.get('/checklogin');
-    return console.log('준비중');
+    return console.log("준비중");
 }
 
 function addBookmarkPost(id) {

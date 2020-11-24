@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import CatePresenter from './CatePresenter';
-import { useDispatch, useSelector } from 'react-redux';
-import { addBookMarkRequest, removeBookMarkRequest } from 'modules/auth';
-import { signFormShowing } from 'modules/header';
-import { getBoardAllRequest } from 'modules/board';
+import React, { useCallback, useEffect, useState } from "react";
+import CatePresenter from "./CatePresenter";
+import { useDispatch, useSelector } from "react-redux";
+import { addBookMarkRequest, removeBookMarkRequest } from "modules/auth";
+import { signFormShowing } from "modules/header";
+import { getBoardAllRequest } from "modules/board";
 
 const CateContainer = ({ children, ...cateName }) => {
     const dispatch = useDispatch();
@@ -17,16 +17,16 @@ const CateContainer = ({ children, ...cateName }) => {
 
     const boards = [
         {
-            id: '1',
-            title: '실험',
-            deadline: '2020-10-02',
+            id: "1",
+            title: "실험",
+            deadline: "2020-10-02",
             participateUsers: [],
             limitNumberOfPeople: 5,
         },
         {
-            id: '2',
-            title: '실험2',
-            deadline: '2020-10-12',
+            id: "2",
+            title: "실험2",
+            deadline: "2020-10-12",
             participateUsers: [],
             limitNumberOfPeople: 2,
         },
@@ -40,17 +40,17 @@ const CateContainer = ({ children, ...cateName }) => {
     };
 
     // category
-    const category = ['Necessity', 'Food', 'Cloth', 'Goods', 'Beauty', 'Etc'];
+    const category = ["Necessity", "Food", "Cloth", "Goods", "Beauty", "Etc"];
 
     if (isLogin) {
-        category.push('글쓰기');
+        category.push("글쓰기");
     }
 
     // bookmark
     const onBook = useCallback(
         (e) => {
             if (!isLogin) {
-                alert('로그인 하셔야 가능합니다.');
+                alert("로그인 하셔야 가능합니다.");
                 return dispatch(signFormShowing());
             }
             let { id } = e.target.dataset;
@@ -68,7 +68,7 @@ const CateContainer = ({ children, ...cateName }) => {
     );
 
     useEffect(() => {
-        window.scroll({ top: 0, behavior: 'smooth' });
+        window.scroll({ top: 0, behavior: "smooth" });
         getInfo();
         dispatch(getBoardAllRequest());
     }, []);
