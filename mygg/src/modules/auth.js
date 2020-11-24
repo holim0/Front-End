@@ -8,10 +8,10 @@ const initialState = {
     token: "",
     userData: {
         id: "",
-        name: "",
-        userId: "",
+        name: "이희제",
+        userId: "holim0",
         userPassword: "",
-        nickname: "",
+        nickname: "성균관 선비",
         schollName: "",
         participatePosts: [],
         ownPosts: [],
@@ -43,6 +43,10 @@ const auth = createSlice({
         getAuthFailure(state, { payload }) {
             state.isAuthLoading = false;
             state.error = payload;
+        },
+        editAuth(state, { payload }) {
+            state.userData.name = payload.name;
+            state.userData.nickname = payload.nickname;
         },
 
         addBookMarkRequest(state) {
@@ -107,6 +111,7 @@ export const {
     getAuthRequest,
     getAuthSuccess,
     getAuthFailure,
+    editAuth,
     addBookMarkRequest,
     addBookMarkSuccess,
     addBookMarkFailure,

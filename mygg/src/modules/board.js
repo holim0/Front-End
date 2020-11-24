@@ -1,4 +1,4 @@
-const { createSlice } = require('@reduxjs/toolkit');
+const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
     getBoardById: false,
@@ -7,14 +7,14 @@ const initialState = {
     error: null,
     boardAll: [],
     boardById: {
-        id: '',
-        title: '',
-        owner: '',
-        category: '',
-        content: '',
-        createdDate: '',
-        goodsLink: '',
-        deadline: '',
+        id: "",
+        title: "",
+        owner: "",
+        category: "",
+        content: "",
+        createdDate: "",
+        goodsLink: "",
+        deadline: "",
         limitNumberOfPeople: 0,
         participateUsers: [],
         comments: [],
@@ -22,7 +22,7 @@ const initialState = {
 };
 
 const board = createSlice({
-    name: 'board',
+    name: "board",
     initialState: initialState,
     reducers: {
         getBoardByIdRequest(state) {
@@ -66,6 +66,9 @@ const board = createSlice({
             state.isLoading = false;
             state.error = payload;
         },
+        updateComment(state, { payload }) {
+            state.boardById.comments.push(payload);
+        },
     },
 });
 
@@ -76,6 +79,7 @@ export const {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
+    updateComment,
 } = board.actions;
 
 export default board.reducer;

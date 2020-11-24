@@ -5,6 +5,7 @@ import {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
+    updateComment,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import faker from "faker";
@@ -39,13 +40,13 @@ function getBoardId(id) {
                 id: "1",
                 writer: "samplenickname",
                 content: faker.lorem.words(),
-                createdDate: "20.10.02",
+                createdDate: "2020.10.02",
             },
             {
                 id: "2",
                 writer: "samplenickname",
                 content: faker.lorem.text(),
-                createdDate: "20.11.02",
+                createdDate: "2020.11.02",
             },
         ],
     };
@@ -54,6 +55,7 @@ function getBoardId(id) {
 
 function getBoard() {
     // return Axios.get('/')
+    // 서버 요청.
 }
 
 function* getBoardById(action) {
@@ -76,6 +78,15 @@ function* getBoardAll() {
     }
 }
 
+function* getComment(action) {
+    try {
+        const comment = yield call(getBoardId.comments, action.payload);
+        yield put(updateComment(comment));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 function* watchGetBoardById() {
     yield takeLatest(getBoardByIdRequest, getBoardById);
 }
@@ -84,8 +95,16 @@ function* watchGetBoardAll() {
     yield takeLatest(getBoardAllRequest, getBoardAll);
 }
 
+function* watchComment() {
+    yield takeLatest(updateComment, getComment);
+}
+
 function* boardSaga() {
-    yield all([fork(watchGetBoardById), fork(watchGetBoardAll)]);
+    yield all([
+        fork(watchGetBoardById),
+        fork(watchGetBoardAll),
+        fork(watchComment),
+    ]);
 }
 
 export default boardSaga;

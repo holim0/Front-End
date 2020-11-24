@@ -130,7 +130,7 @@ const CommentBoxList = styled.div`
         padding: 20px;
 
         &:nth-child(1) {
-            padding-right: 6px;
+            border-right: 1px solid ${(props) => props.theme.border};
         }
 
         &:nth-child(2) {
@@ -157,7 +157,16 @@ const ButtonBox = styled.button`
     color: ${(props) => props.theme.white};
 `;
 
-const BoardDetailPresenter = ({ boardById, onClick, userData, onGoBack }) => {
+const BoardDetailPresenter = ({
+    comment,
+    boardById,
+    onClick,
+    isParticipate,
+    onGoBack,
+    handleComment,
+    commentSubmit,
+    userData,
+}) => {
     return (
         <Container>
             <DeatailBox>
@@ -181,7 +190,6 @@ const BoardDetailPresenter = ({ boardById, onClick, userData, onGoBack }) => {
             <Content>
                 <div>{boardById.content}</div>
             </Content>
-
             {userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
@@ -226,14 +234,18 @@ const BoardDetailPresenter = ({ boardById, onClick, userData, onGoBack }) => {
                 <CommentsList>
                     Comments: {boardById.comments.length}개
                 </CommentsList>
-                <CommentWriting onSubmit={}>
-                    <input placeholder="댓글 입력" onChange={} />
+                <CommentWriting onSubmit={commentSubmit}>
+                    <input
+                        placeholder="댓글을 남겨보세요"
+                        onChange={handleComment}
+                        value={comment}
+                    />
                     <button type="submit">등록</button>
                 </CommentWriting>
                 <CommentBox>
                     {boardById.comments.length > 0 ? (
                         boardById.comments.map((cm) => (
-                            <CommentBoxList>
+                            <CommentBoxList key={cm.createdDate}>
                                 <div>{cm.writer}</div>
                                 <div>{cm.content}</div>
                                 <div>{cm.createdDate}</div>

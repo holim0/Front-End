@@ -3,7 +3,7 @@ import styled from "styled-components";
 import theme from "Components/Theme";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
+const Container = styled.form`
     height: 100vh;
     background-color: #f9fafb;
     display: flex;
@@ -36,8 +36,9 @@ const Input = styled.input`
     font-size: ${(props) => props.theme.ls};
     border-radius: 0.375rem;
     border: 2px solid #aeaeae;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 7px;
+    color: #000a12;
     transition: all 0.4s ease;
     -webkit-transition: all 0.4s ease;
     &:focus {
@@ -48,11 +49,12 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    position: absolute;
     font-size: ${(props) => props.theme.ls};
     height: 50px;
     width: 100px;
+    margin: 0 auto;
     top: 500px;
+    position: absolute;
     background-color: #004ba0;
     color: white;
     border: 1px solid #004ba0;
@@ -65,16 +67,22 @@ const Button = styled.button`
     }
 `;
 
-const MypageEditPresenter = () => {
+const MypageEditPresenter = ({
+    name,
+    username,
+    handleName,
+    handleUsername,
+    handleSubmit,
+}) => {
     return (
-        <Container>
+        <Container onSubmit={handleSubmit}>
             <ProfileBox>
                 <Name>Name</Name>
-                <Input type="text" />
+                <Input type="text" value={name} onChange={handleName} />
                 <Name>Username</Name>
-                <Input type="text" />
+                <Input type="text" value={username} onChange={handleUsername} />
             </ProfileBox>
-            <Button>SAVE</Button>
+            <Button type="submit">SAVE</Button>
         </Container>
     );
 };
