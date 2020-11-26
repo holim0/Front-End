@@ -32,19 +32,25 @@ function getAuthByToken() {
 }
 
 function addBookmarkPost(id) {
-    // return Axios.post('/', id)
+    return Axios.post(`/post/${id}/registerbookmark`, id);
+    // 유저정보에 북마크 추가
 }
 
 function removeBookMarkPost(id) {
-    // return Axios.delete('/', id)
+    return Axios.delete(`/post/${id}/deletebookmark`, id);
+    // 유저정보에 북마크 삭제
 }
 
-function addPartyPost() {
-    // return Axios.post('/')
+function addPartyPost(id) {
+    return Axios.post(`/post/${id}/participatepost`, id);
+
+    // 유저정보에 참가 추가
 }
 
-function removePartyPost() {
-    // return Axios.delete('/')
+function removePartyPost(id) {
+    return Axios.delete(`/post/${id}/withdrawpost`, id);
+
+    // 유저정보에 참가 삭제
 }
 
 function* getAuth() {

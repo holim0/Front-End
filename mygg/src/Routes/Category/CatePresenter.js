@@ -210,6 +210,7 @@ const CatePresenter = ({
     boards,
     loading,
     userData,
+    boardAll,
 }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
     return loading ? (
@@ -230,8 +231,7 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }
-                                    >
+                                        }>
                                         {list}
                                     </CateName>
                                 </li>

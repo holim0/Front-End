@@ -7,7 +7,7 @@ import { searchRequest } from "modules/header";
 const SearchContainer = () => {
     const { search } = useLocation();
     const searchText = search.split("=")[1];
-    const { isSearchDone } = useSelector((state) => state.header);
+    const { isSearchDone, searchBoard } = useSelector((state) => state.header);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,7 +15,9 @@ const SearchContainer = () => {
             dispatch(searchRequest(searchText));
         }
     }, [dispatch, searchText, isSearchDone]);
-    return <SearchPresenter />;
+    return (
+        <SearchPresenter searchText={searchText} searchBoard={searchBoard} />
+    );
 };
 
 export default SearchContainer;

@@ -4,14 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBookMarkRequest, removeBookMarkRequest } from "modules/auth";
 import { signFormShowing } from "modules/header";
 import { getBoardAllRequest } from "modules/board";
+import { useLocation } from "react-router-dom";
 
 const CateContainer = ({ children, ...cateName }) => {
     const dispatch = useDispatch();
-
+    const { pathname } = useLocation();
     // islogin
     const { isLogin } = useSelector((state) => state.sign);
     // userData
     const { userData } = useSelector((state) => state.auth);
+
+    // get board
+    const { boardAll } = useSelector((state) => state.board);
+    console.log(boardAll);
+
     // faker data
     const [loading, setLoad] = useState(true);
 
@@ -69,8 +75,9 @@ const CateContainer = ({ children, ...cateName }) => {
 
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
+        const path = pathname.split("/")[1];
         getInfo();
-        dispatch(getBoardAllRequest());
+        dispatch(getBoardAllRequest(path));
     }, []);
 
     return (
@@ -81,8 +88,8 @@ const CateContainer = ({ children, ...cateName }) => {
             boards={boards}
             loading={loading}
             userData={userData}
-            onBook={onBook}
-        ></CatePresenter>
+            boardAll={boardAll}
+            onBook={onBook}></CatePresenter>
     );
 };
 

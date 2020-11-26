@@ -10,8 +10,7 @@ function getSearchResults(text) {
 function* searchResults(action) {
     try {
         const results = yield call(getSearchResults, action.payload);
-        console.log(results);
-        yield put(searchSuccess());
+        yield put(searchSuccess(results));
     } catch (err) {
         console.log(err);
         yield put(searchFailure(err.message));

@@ -8,54 +8,15 @@ import {
     updateComment,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
-import faker from "faker";
+import Axios from "axios";
 
 function getBoardId(id) {
-    const fakeBoard = {
-        id,
-        title: faker.lorem.sentence(),
-        owner: faker.name.findName(),
-        category: "category",
-        content: faker.lorem.text(),
-        createdDate: Date.now(),
-        goodsLink: "https://www.naver.com",
-        deadline: new Date().toLocaleString(),
-        limitNumberOfPeople: Math.ceil(Math.random() * 10),
-        participateUsers: [
-            {
-                id: "1",
-                name: faker.name.findName(),
-                userId: "sampleuser",
-                nickname: "samplenickname",
-            },
-            {
-                id: "2",
-                name: faker.name.findName(),
-                userId: "sampleuser2",
-                nickname: "samplenickname2",
-            },
-        ],
-        comments: [
-            {
-                id: "1",
-                writer: "samplenickname",
-                content: faker.lorem.words(),
-                createdDate: "2020.10.02",
-            },
-            {
-                id: "2",
-                writer: "samplenickname",
-                content: faker.lorem.text(),
-                createdDate: "2020.11.02",
-            },
-        ],
-    };
-    return fakeBoard;
+    return Axios.get(`/post/${id}`, (res) => res.data);
 }
 
-function getBoard() {
-    // return Axios.get('/')
-    // 서버 요청.
+function getBoard(category) {
+    return Axios.get(`/${category}`, (res) => res.data);
+    // 서버 요청. 전체 받아오기
 }
 
 function* getBoardById(action) {
@@ -68,9 +29,9 @@ function* getBoardById(action) {
     }
 }
 
-function* getBoardAll() {
+function* getBoardAll(action) {
     try {
-        const boardAll = yield call(getBoard);
+        const boardAll = yield call(getBoard, action.payload);
         yield put(getBoardAllSuccess(boardAll));
     } catch (err) {
         console.log(err);
