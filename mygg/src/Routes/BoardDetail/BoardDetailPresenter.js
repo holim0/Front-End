@@ -210,21 +210,17 @@ const BoardDetailPresenter = ({
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
             <ParticipateUser>
                 현재 참여 중인 인원입니다!
-                {boardById.participateUsers.lenght > 0 ? (
-                    boardById.participateUsers.map((user) => (
-                        <div key={user.id}>
-                            <div>`${user.nickname}`</div>
-                        </div>
-                    ))
+                {boardById.currentNumberOfPeople ? (
+                    <div>{boardById.currentNumberOfPeople}</div>
                 ) : (
                     <div>아직 참여 인원이 없습니다.</div>
                 )}
             </ParticipateUser>
             <Participate>
-                <Progress
+                {/* <Progress
                     participateUsers={boardById.participateUsers}
                     limitNumberOfPeople={boardById.limitNumberOfPeople}
-                />
+                /> */}
             </Participate>
             <BoardComment>
                 <CommentsList>

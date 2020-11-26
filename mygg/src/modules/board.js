@@ -60,7 +60,7 @@ const board = createSlice({
         getBoardAllSuccess(state, { payload }) {
             state.isLoading = false;
             state.getBoardAll = true;
-            state.boardAll = state.boardAll.push(payload);
+            state.boardAll = payload;
         },
         getBoardAllFaliure(state, { payload }) {
             state.isLoading = false;

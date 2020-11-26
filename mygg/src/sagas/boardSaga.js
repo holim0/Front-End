@@ -11,11 +11,11 @@ import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
 
 function getBoardId(id) {
-    return Axios.get(`/post/${id}`, (res) => res.data);
+    return Axios.get(`/post/${id}`).then((res) => res.data);
 }
 
 function getBoard(category) {
-    return Axios.get(`/${category}`, (res) => res.data);
+    return Axios.get(`/${category}`).then((res) => res.data);
     // 서버 요청. 전체 받아오기
 }
 
