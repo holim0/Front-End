@@ -212,7 +212,7 @@ const CatePresenter = ({
     boardAll,
 }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
-    return getBoardAll ? (
+    return !getBoardAll ? (
         <Loader />
     ) : (
         <Container>
@@ -240,29 +240,30 @@ const CatePresenter = ({
                 </CateNav>
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
-                    {boardAll.map((board) => (
-                        <div key={board.id}>
-                            {userData.bookmarkPosts.find(
-                                (v) => v === board.id
-                            ) ? (
-                                <BsStarFill
-                                    data-id={board.id}
-                                    onClick={onBook}
-                                    size={18}
-                                />
-                            ) : (
-                                <BsStar
-                                    data-id={board.id}
-                                    size={18}
-                                    onClick={onBook}
-                                />
-                            )}
-                            <Link to={`/detail/${board.id}`}>
-                                <BoardBox>
-                                    <BoardTitle>
-                                        <div>{board.title}</div>
+                    {boardAll.length > 0 &&
+                        boardAll.map((board) => (
+                            <div key={board.id}>
+                                {userData.bookmarkPosts.find(
+                                    (v) => v === board.id
+                                ) ? (
+                                    <BsStarFill
+                                        data-id={board.id}
+                                        onClick={onBook}
+                                        size={18}
+                                    />
+                                ) : (
+                                    <BsStar
+                                        data-id={board.id}
+                                        size={18}
+                                        onClick={onBook}
+                                    />
+                                )}
+                                <Link to={`/detail/${board.id}`}>
+                                    <BoardBox>
+                                        <BoardTitle>
+                                            <div>{board.title}</div>
 
-                                        <BoardParty>
+                                            {/* <BoardParty>
                                             {board.participateUsers
                                                 .slice(0, 5)
                                                 .map((user, index) => (
@@ -275,27 +276,29 @@ const CatePresenter = ({
                                                 ))}
                                             {board.participateUsers.length >
                                                 5 && <span>...</span>}
-                                        </BoardParty>
-                                    </BoardTitle>
-                                    <BoardInfo>
-                                        <div>{board.deadline}</div>
-                                        <div>
-                                            {board.participateUsers.length}
-                                        </div>
-                                        <div>{board.limitNumberOfPeople}</div>
-                                        <Progress
+                                        </BoardParty> */}
+                                        </BoardTitle>
+                                        <BoardInfo>
+                                            <div>{board.deadline}</div>
+                                            <div>
+                                                {board.currentNumberOfPeople}
+                                            </div>
+                                            <div>
+                                                {board.limitNumberOfPeople}
+                                            </div>
+                                            {/* <Progress
                                             participateUsers={
-                                                board.participateUsers
+                                                board.currentNumberOfPeople
                                             }
                                             limitNumberOfPeople={
                                                 board.limitNumberOfPeople
                                             }
-                                        />
-                                    </BoardInfo>
-                                </BoardBox>
-                            </Link>
-                        </div>
-                    ))}
+                                        /> */}
+                                        </BoardInfo>
+                                    </BoardBox>
+                                </Link>
+                            </div>
+                        ))}
                 </BoardContainer>
             </CateContent>
         </Container>
