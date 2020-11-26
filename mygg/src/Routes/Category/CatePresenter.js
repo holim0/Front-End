@@ -230,7 +230,8 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }>
+                                        }
+                                    >
                                         {list}
                                     </CateName>
                                 </li>
@@ -261,7 +262,6 @@ const CatePresenter = ({
                                 <BoardBox>
                                     <BoardTitle>
                                         <div>{board.title}</div>
-
                                         <BoardParty>
                                             {board.participateUsers
                                                 .slice(0, 5)
