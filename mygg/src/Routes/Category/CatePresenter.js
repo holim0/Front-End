@@ -230,7 +230,8 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }>
+                                        }
+                                    >
                                         {list}
                                     </CateName>
                                 </li>
@@ -240,6 +241,30 @@ const CatePresenter = ({
                 </CateNav>
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
+<<<<<<< HEAD
+                    {boardAll.map((board) => (
+                        <div key={board.id}>
+                            {userData.bookmarkPosts.find(
+                                (v) => v === board.id
+                            ) ? (
+                                <BsStarFill
+                                    data-id={board.id}
+                                    onClick={onBook}
+                                    size={18}
+                                />
+                            ) : (
+                                <BsStar
+                                    data-id={board.id}
+                                    size={18}
+                                    onClick={onBook}
+                                />
+                            )}
+                            <Link to={`/detail/${board.id}`}>
+                                <BoardBox>
+                                    <BoardTitle>
+                                        <div>{board.title}</div>
+                                        <BoardParty>
+=======
                     {boardAll.length > 0 &&
                         boardAll.map((board) => (
                             <div key={board.id}>
@@ -264,6 +289,7 @@ const CatePresenter = ({
                                             <div>{board.title}</div>
 
                                             {/* <BoardParty>
+>>>>>>> gongus/master
                                             {board.participateUsers
                                                 .slice(0, 5)
                                                 .map((user, index) => (
