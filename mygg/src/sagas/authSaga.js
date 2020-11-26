@@ -36,7 +36,7 @@ function addBookmarkPost(id) {
 }
 
 function removeBookMarkPost(id) {
-    return Axios.post(`/post/${id}/deletebookmark`, id);
+    return Axios.delete(`/post/${id}/deletebookmark`);
     // 유저정보에 북마크 삭제
 }
 
@@ -47,8 +47,7 @@ function addPartyPost(id) {
 }
 
 function removePartyPost(id) {
-    return Axios.post(`/post/${id}/withdrawpost`, id);
-
+    return Axios.delete(`/post/${id}/withdrawpost`);
     // 유저정보에 참가 삭제
 }
 
