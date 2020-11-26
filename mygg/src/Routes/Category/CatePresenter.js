@@ -243,7 +243,8 @@ const CatePresenter = ({
                     {boardAll.length > 0 &&
                         boardAll.map((board) => (
                             <div key={board.id}>
-                                {userData.bookmarkPosts.find(
+                                {userData &&
+                                userData.bookmarkPosts.find(
                                     (v) => v === board.id
                                 ) ? (
                                     <BsStarFill

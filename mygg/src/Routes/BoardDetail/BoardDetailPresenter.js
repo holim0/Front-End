@@ -161,7 +161,6 @@ const BoardDetailPresenter = ({
     comment,
     boardById,
     onClick,
-    isParticipate,
     onGoBack,
     handleComment,
     commentSubmit,
@@ -190,7 +189,8 @@ const BoardDetailPresenter = ({
             <Content>
                 <div>{boardById.content}</div>
             </Content>
-            {userData.participatePosts.find((v) => v === boardById.id) ? (
+            {userData &&
+            userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
                     onClick={onClick}
