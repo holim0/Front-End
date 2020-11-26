@@ -1,7 +1,12 @@
 import React from "react";
 
-const SearchPresenter = () => {
-    return <div></div>;
+const SearchPresenter = ({ searchBoard, searchText }) => {
+    console.log(searchBoard);
+    return (
+        <div>
+            <div>검색 : {searchText}</div>
+        </div>
+    );
 };
 
 export default SearchPresenter;
