@@ -6,7 +6,6 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
-import axios from "axios";
 
 // 날짜 포맷 변경 함수
 function getToday() {
@@ -24,7 +23,6 @@ const BoardDetailContainer = () => {
     const { id } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-    const [isParticipate, setIsParticipate] = useState(false);
     const [comment, setComment] = useState("");
     const [date, setDate] = useState(getToday());
 
@@ -82,7 +80,7 @@ const BoardDetailContainer = () => {
             // }
             setComment("");
         },
-        [comment]
+        [comment, dispatch, date, nickName]
     );
 
     // detail
@@ -104,8 +102,7 @@ const BoardDetailContainer = () => {
             onClick={onClick}
             handleComment={handleComment}
             commentSubmit={commentSubmit}
-            userData={userData}
-        ></BoardDetailPresenter>
+            userData={userData}></BoardDetailPresenter>
     );
 };
 

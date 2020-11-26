@@ -8,10 +8,10 @@ const initialState = {
     token: "",
     userData: {
         id: "",
-        name: "이희제",
-        userId: "holim0",
+        name: "",
+        userId: "",
         userPassword: "",
-        nickname: "성균관 선비",
+        nickname: "",
         schollName: "",
         participatePosts: [],
         ownPosts: [],
@@ -26,6 +26,7 @@ const auth = createSlice({
         getAuthRequest(state) {
             state.isAuthLoading = true;
             state.error = null;
+            state.userData = null;
         },
         getAuthSuccess(state, { payload }) {
             state.isAuthLoading = false;
@@ -42,6 +43,7 @@ const auth = createSlice({
         },
         getAuthFailure(state, { payload }) {
             state.isAuthLoading = false;
+            state.userData = null;
             state.error = payload;
         },
         editAuth(state, { payload }) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import CatePresenter from "./CatePresenter";
 import { useDispatch, useSelector } from "react-redux";
 import { addBookMarkRequest, removeBookMarkRequest } from "modules/auth";
@@ -15,35 +15,8 @@ const CateContainer = ({ children, ...cateName }) => {
     const { userData } = useSelector((state) => state.auth);
 
     // get board
-    const { boardAll } = useSelector((state) => state.board);
+    const { boardAll, getBoardAll } = useSelector((state) => state.board);
     console.log(boardAll);
-
-    // faker data
-    const [loading, setLoad] = useState(true);
-
-    const boards = [
-        {
-            id: "1",
-            title: "실험",
-            deadline: "2020-10-02",
-            participateUsers: [],
-            limitNumberOfPeople: 5,
-        },
-        {
-            id: "2",
-            title: "실험2",
-            deadline: "2020-10-12",
-            participateUsers: [],
-            limitNumberOfPeople: 2,
-        },
-    ];
-
-    // 비동기 가짜 구현.
-    const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
-    const getInfo = async () => {
-        await sleep(1200);
-        setLoad(false);
-    };
 
     // category
     const category = ["Necessity", "Food", "Cloth", "Goods", "Beauty", "Etc"];
@@ -76,17 +49,15 @@ const CateContainer = ({ children, ...cateName }) => {
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
         const path = pathname.split("/")[1];
-        getInfo();
         dispatch(getBoardAllRequest(path));
-    }, []);
+    }, [dispatch, pathname]);
 
     return (
         <CatePresenter
             {...cateName}
             isLogin={isLogin}
             category={category}
-            boards={boards}
-            loading={loading}
+            getBoardAll={getBoardAll}
             userData={userData}
             boardAll={boardAll}
             onBook={onBook}></CatePresenter>

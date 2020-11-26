@@ -207,13 +207,12 @@ const CatePresenter = ({
     onBook,
     cateName,
     category,
-    boards,
-    loading,
+    getBoardAll,
     userData,
     boardAll,
 }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
-    return loading ? (
+    return getBoardAll ? (
         <Loader />
     ) : (
         <Container>
@@ -241,7 +240,7 @@ const CatePresenter = ({
                 </CateNav>
                 <BoardContainer>
                     <CateTitle>{selectCate}</CateTitle>
-                    {boards.map((board) => (
+                    {boardAll.map((board) => (
                         <div key={board.id}>
                             {userData.bookmarkPosts.find(
                                 (v) => v === board.id
