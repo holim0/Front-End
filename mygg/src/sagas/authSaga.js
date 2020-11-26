@@ -27,7 +27,7 @@ import {
 } from "redux-saga/effects";
 
 function getAuthByToken() {
-    return Axios.post("/checklogin");
+    return Axios.post("/checklogin").then((res) => res.data);
 }
 
 function addBookmarkPost(id) {
@@ -53,10 +53,9 @@ function removePartyPost(id) {
 
 function* getAuth() {
     try {
-        const {
-            res: { data },
-        } = yield call(getAuthByToken);
-        yield put(getAuthSuccess(data));
+        const res = yield call(getAuthByToken);
+        console.log(res);
+        yield put(getAuthSuccess(res));
         yield put(signInSuccess());
     } catch (err) {
         console.log(err);
