@@ -8,23 +8,23 @@ import {
     signInRequest,
     signInSuccess,
     signInFailure,
-} from 'modules/sign';
-import { signFormShowing } from 'modules/header';
-import { all, call, delay, fork, put, takeLatest } from 'redux-saga/effects';
-import Axios from 'axios';
-import { getAuthSuccess } from 'modules/auth';
+} from "modules/sign";
+import { signFormShowing } from "modules/header";
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
+import Axios from "axios";
+import { getAuthFailure, getAuthSuccess } from "modules/auth";
 
 function signUpPost(data) {
-    return Axios.post('/register', data).then((res) => res.data);
+    return Axios.post("/register", data).then((res) => res.data);
 }
 
 function signInPost(data) {
-    return Axios.post('/login', data).then((res) => res.data);
+    return Axios.post("/login", data).then((res) => res.data);
 }
 
-// function signOutPost() {
-//     return Axios.get("/logout");
-// }
+function signOutPost() {
+    return Axios.post("/logout");
+}
 
 function* signUp(action) {
     try {
@@ -40,7 +40,6 @@ function* signUp(action) {
 }
 
 function* signIn(action) {
-    console.log(action.payload);
     try {
         const getUser = yield call(signInPost, action.payload);
         yield put(signInSuccess());
@@ -54,9 +53,9 @@ function* signIn(action) {
 
 function* signOut() {
     try {
-        yield delay(1000);
-        // yield call(signOutPost);
+        yield call(signOutPost);
         yield put(signOutSuccess());
+        yield put(getAuthFailure());
     } catch (err) {
         console.log(err);
         yield put(signOutFailure(err.message));

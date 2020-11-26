@@ -195,8 +195,7 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     data-id={boardById.id}
-                    isParticipate={true}
-                >
+                    isParticipate={true}>
                     나가기
                 </ButtonBox>
             ) : (
@@ -204,25 +203,22 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     isParticipate={false}
-                    data-id={boardById.id}
-                >
+                    data-id={boardById.id}>
                     참여
                 </ButtonBox>
             )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
             <ParticipateUser>
                 현재 참여 중인 인원입니다!
-                {boardById.participateUsers.map((user) => (
-                    <div key={user.id}>
-                        <div>
-                            {user.nickname.length > 0 ? (
-                                `${user.nickname}`
-                            ) : (
-                                <div>아직 참여 인원이 없습니다.</div>
-                            )}
+                {boardById.participateUsers.lenght > 0 ? (
+                    boardById.participateUsers.map((user) => (
+                        <div key={user.id}>
+                            <div>`${user.nickname}`</div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <div>아직 참여 인원이 없습니다.</div>
+                )}
             </ParticipateUser>
             <Participate>
                 <Progress

@@ -27,8 +27,7 @@ import {
 } from "redux-saga/effects";
 
 function getAuthByToken() {
-    //    return Axios.get('/checklogin');
-    return console.log("준비중");
+    return Axios.post("/checklogin");
 }
 
 function addBookmarkPost(id) {
@@ -37,7 +36,7 @@ function addBookmarkPost(id) {
 }
 
 function removeBookMarkPost(id) {
-    return Axios.delete(`/post/${id}/deletebookmark`, id);
+    return Axios.post(`/post/${id}/deletebookmark`, id);
     // 유저정보에 북마크 삭제
 }
 
@@ -48,15 +47,17 @@ function addPartyPost(id) {
 }
 
 function removePartyPost(id) {
-    return Axios.delete(`/post/${id}/withdrawpost`, id);
+    return Axios.post(`/post/${id}/withdrawpost`, id);
 
     // 유저정보에 참가 삭제
 }
 
 function* getAuth() {
     try {
-        const auth = yield call(getAuthByToken);
-        yield put(getAuthSuccess(auth));
+        const {
+            res: { data },
+        } = yield call(getAuthByToken);
+        yield put(getAuthSuccess(data));
         yield put(signInSuccess());
     } catch (err) {
         console.log(err);

@@ -35,7 +35,6 @@ const sign = createSlice({
             state.isLoading = false;
             state.isLogin = false;
             state.error = payload;
-            state.isLogin = true;
         },
 
         signOutRequest(state) {
