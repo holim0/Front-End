@@ -1,26 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-const Container = styled.footer`
-    width: 100%;
-    padding: 12px;
-    div {
-        max-width: 1060px;
-        min-height: 100px;
-        margin: 0 auto;
-        padding: 24px;
-        text-align: center;
-        font-size: ${(props) => props.theme.ls};
-        font-weight: 500;
-    }
+const Container = styled.div`
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: ${(props) => props.theme.ls};
+    font-weight: 700;
+    height: 70px;
+    background-color: #002171;
 `;
 
 const Footer = () => {
-    return (
-        <Container>
-            <div>&copy;{new Date().getFullYear()} GongGus</div>
-        </Container>
-    );
+    return <Container>&copy;{new Date().getFullYear()} GongGus</Container>;
 };
 
 export default Footer;

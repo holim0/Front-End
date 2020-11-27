@@ -6,10 +6,10 @@ import Logo from "assets/GongGus_Logo_1.jpg";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-
     align-content: center;
-    height: 100vh;
-    margin: 0 auto;
+    flex: 1;
+    min-height: 100%;
+    margin: 20px auto;
     color: white;
     font-size: 40px;
     --def: ${(props) => props.theme.bgColor};
@@ -19,6 +19,8 @@ const Container = styled.div`
     *:after {
         box-sizing: border-box;
     }
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+    font-family: "Poppins", sans-serif;
 `;
 
 const Button = styled(Link)`
@@ -26,7 +28,6 @@ const Button = styled(Link)`
     text-decoration: none;
     text-align: center;
     vertical-align: middle;
-
     width: 1000px;
     color: var(--inv);
     letter-spacing: 1.1rem;
@@ -85,7 +86,6 @@ const Img = styled.img`
     width: 500px;
     border-radius: 100%;
     box-shadow: 10px 10px 20px black;
-
     margin: 0 auto;
     margin-top: 100px;
     margin-bottom: 50px;

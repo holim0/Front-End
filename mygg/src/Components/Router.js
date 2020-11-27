@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Header from "./Layouts/Header";
+import Footer from "Components/Layouts/Footer";
 import Home from "Routes/Home";
 import Mypage from "Routes/Mypage";
-import Footer from "./Layouts/Footer";
 import Necessity from "Routes/Category/Necessity";
 import Food from "Routes/Category/Food";
 import Cloth from "Routes/Category/Cloth";
@@ -39,7 +39,6 @@ const Router = () => {
                     <Route path="/searchpost" exact component={Search} />
                     <Redirect from="*" to="/" />
                 </Switch>
-                <Footer />
             </>
         </BrowserRouter>
     );
