@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const Container = styled.div`
     display: flex;
     justify-content: center;
+    height: 100vh;
     background-color: #2196f3;
 `;
 

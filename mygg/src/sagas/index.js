@@ -3,6 +3,7 @@ import authSaga from "./authSaga";
 import boardSaga from "./boardSaga";
 import searchSaga from "./searchSaga";
 import signSaga from "./signSaga";
+import boardWriteSaga from "./boardWriteSaga";
 
 export default function* rootSaga() {
     yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
         fork(boardSaga),
         fork(authSaga),
         fork(searchSaga),
+        fork(boardWriteSaga),
     ]);
 }

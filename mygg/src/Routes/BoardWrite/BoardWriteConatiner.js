@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import BoardWritePresenter from "./BoardWritePresenter";
 import * as actionPack from "modules/boardWrite";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
@@ -29,6 +28,7 @@ const BoardWriteContainer = () => {
     const handleCate = (e) => {
         dispatch(actionPack.setCategory(e.value));
     };
+
     // 마감일 처리
     const setDate = (e) => {
         dispatch(actionPack.setDeadline(e));
@@ -71,18 +71,21 @@ const BoardWriteContainer = () => {
             goodslink,
             deadline,
             limitNumberOfPeople,
+            history,
         };
+        dispatch(actionPack.boardRequeset(BoardData));
+
         // console.log(BoardData);
 
-        try {
-            const res = await axios.post("/makepostsubmit", BoardData);
-            console.log(res);
-            alert("저장 성공!");
-            history.push("/");
-        } catch (e) {
-            alert(`저장 실패!\n${e}`);
-            setLoading(false);
-        }
+        // try {
+        //     const res = await axios.post("/makepostsubmit", BoardData);
+        //     console.log(res);
+        //     alert("저장 성공!");
+        //     history.push("/");
+        // } catch (e) {
+        //     alert(`저장 실패! 다시 시도해주세요.\n${e}`);
+        //     setLoading(false);
+        // }
     };
 
     return (
