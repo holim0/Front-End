@@ -7,6 +7,7 @@ const initialState = {
     goodslink: "",
     deadDate: new Date(),
     limitNumberOfPeople: null,
+    history: null,
 };
 
 const boardWrite = createSlice({
@@ -31,6 +32,9 @@ const boardWrite = createSlice({
         setNumOfPeople: (state, action) => {
             state.limitNumberOfPeople = action.payload;
         },
+        boardRequeset: (state, action) => {
+            state = action.payload;
+        },
     },
 });
 
@@ -41,5 +45,7 @@ export const {
     setLink,
     setDeadline,
     setNumOfPeople,
+    boardRequeset,
 } = boardWrite.actions;
+
 export default boardWrite.reducer;

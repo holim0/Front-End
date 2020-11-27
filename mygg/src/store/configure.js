@@ -3,8 +3,14 @@ import { createLogger } from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "modules";
 import rootSaga from "sagas";
+import { createBrowserHistory } from "history";
 
-const sagaMiddleware = createSagaMiddleware();
+const customHistory = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware({
+    context: {
+        history: customHistory,
+    },
+});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const logger = createLogger();
