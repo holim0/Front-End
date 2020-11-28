@@ -5,17 +5,21 @@ import { useSelector } from "react-redux";
 
 const Container = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
     background-color: #2196f3;
 `;
 
 const HomeContainer = () => {
     const user = useSelector((state) => state.sign.isLogin);
     return (
-        <Container>
-            <HomePresenster isLogin={user} />
-        </Container>
+        <>
+            <Container>
+                <HomePresenster isLogin={user} />
+            </Container>
+        </>
     );
 };
 

@@ -14,6 +14,7 @@ const Container = styled.div`
 const CateContent = styled.div`
     max-width: 1060px;
     width: 100%;
+
     display: flex;
     margin: 0 auto;
 `;

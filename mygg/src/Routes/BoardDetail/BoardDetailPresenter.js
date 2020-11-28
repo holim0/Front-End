@@ -7,6 +7,7 @@ const Container = styled.div`
     width: 100%;
     max-width: 1060px;
     margin: 0 auto;
+    height: 100vh;
     padding: 24px;
 `;
 
@@ -195,7 +196,8 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     data-id={boardById.id}
-                    isParticipate={true}>
+                    isParticipate={true}
+                >
                     나가기
                 </ButtonBox>
             ) : (
@@ -203,7 +205,8 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     isParticipate={false}
-                    data-id={boardById.id}>
+                    data-id={boardById.id}
+                >
                     참여
                 </ButtonBox>
             )}

@@ -12,6 +12,7 @@
         "faker": "^5.1.0",
         "prop-types": "^15.7.2",
         "react": "^17.0.1",
+        "react-alert": "^7.0.2",
         "react-date-picker": "^8.0.3",
         "react-datepicker": "^3.3.0",
         "react-dates": "^21.8.0",
@@ -33,7 +34,7 @@
         "yarn": "^1.22.10"
     },
     "scripts": {
-        "start": "cross-env NODE_PATH=src react-scripts start",
+        "start": "BROWSER='google chrome' cross-env NODE_PATH=src react-scripts start",
         "build": "cross-env NODE_PATH=src react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

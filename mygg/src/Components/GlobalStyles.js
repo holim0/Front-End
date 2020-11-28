@@ -4,14 +4,19 @@ const GlobalStyled = createGlobalStyle`
     * {
     box-sizing: border-box;
     }
-
     body {
         height: 100%;
         width: 100%;
         margin: 0;
         margin-top: 60px;
         padding: 0;
-        font-size: ${(props) => props.theme.ms}
+        font-size: ${(props) => props.theme.ms};
+        
+    }
+
+    #root {
+        width: 100%;
+        min-height: 100vh;
     }
 
     /* input {

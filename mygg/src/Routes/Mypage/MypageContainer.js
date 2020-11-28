@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-
-import MypagePresenter from "./MypagePresenter";
+import React from "react";
 import { useSelector } from "react-redux";
+import MypagePresenter from "./MypagePresenter";
 
 const MypageContainer = () => {
     const name = useSelector((state) => state.auth.userData.name);

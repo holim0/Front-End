@@ -73,11 +73,17 @@ const BoardDetailContainer = () => {
                 content: comment,
                 createdDate: date,
             };
-            dispatch(updateComment(newComment));
-            // if (isLogin) {
-            // } else {
-            //     alert("로그인이 필요합니다");
-            // }
+
+            if (isLogin) {
+                if (comment !== "") {
+                    dispatch(updateComment(newComment));
+                } else {
+                    alert.show("내용을 입력해주세요!");
+                }
+            } else {
+                alert("로그인이 필요합니다");
+                return dispatch(signFormShowing());
+            }
             setComment("");
         },
         [comment, dispatch, date, nickName]
@@ -102,7 +108,8 @@ const BoardDetailContainer = () => {
             onClick={onClick}
             handleComment={handleComment}
             commentSubmit={commentSubmit}
-            userData={userData}></BoardDetailPresenter>
+            userData={userData}
+        ></BoardDetailPresenter>
     );
 };
 
