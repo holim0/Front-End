@@ -201,19 +201,20 @@ const auth = createSlice({
         getAuthSuccess(state, { payload }) {
             state.isAuthLoading = false;
             state.userData = {
-                id: payload.id,
-                name: payload.name,
-                userId: payload.userId,
-                nickname: payload.nickname,
-                schollName: payload.schollName,
-                participatePosts: payload.participatePosts,
-                ownPosts: payload.ownPosts,
-                bookmarkPosts: payload.bookmarkPosts,
+                id: payload.userData.id,
+                name: payload.userData.name,
+                userId: payload.userData.userId,
+                nickname: payload.userData.nickname,
+                schollName: payload.userData.schollName,
+                participatePosts: payload.userData.participatePosts,
+                ownPosts: payload.userData.ownPosts,
+                bookmarkPosts: payload.userData.bookmarkPosts,
             };
         },
         getAuthFailure(state, { payload }) {
             state.isAuthLoading = false;
             // state.userData = null;
+            state.token = "";
             state.error = payload;
         },
         editAuth(state, { payload }) {

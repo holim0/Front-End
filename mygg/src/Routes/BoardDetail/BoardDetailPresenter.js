@@ -186,8 +186,11 @@ const BoardDetailPresenter = ({
     comment,
     boardById,
     onClick,
+<<<<<<< HEAD
     isParticipate,
     curPageComment,
+=======
+>>>>>>> gongus/master
     onGoBack,
     page,
     handleComment,
@@ -222,7 +225,8 @@ const BoardDetailPresenter = ({
             <Content>
                 <div>{boardById.content}</div>
             </Content>
-            {userData.participatePosts.find((v) => v === boardById.id) ? (
+            {userData &&
+            userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
                     onClick={onClick}
