@@ -4,11 +4,11 @@ import styled from "styled-components";
 const Container = styled.div`
     padding: 20px 0;
     text-align: center;
-    color: white;
+    color: black;
     font-size: ${(props) => props.theme.ls};
     font-weight: 700;
     height: 70px;
-    background-color: #002171;
+    background-color: white;
 `;
 
 const Footer = () => {

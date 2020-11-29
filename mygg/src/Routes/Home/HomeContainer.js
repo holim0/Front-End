@@ -9,7 +9,7 @@ const Container = styled.div`
     justify-content: center;
     min-height: 100vh;
     width: 100%;
-    background-color: #2196f3;
+    background-color: #69c0ff;
 `;
 
 const HomeContainer = () => {

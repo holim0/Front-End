@@ -39,6 +39,7 @@ const Router = () => {
                     <Route path="/searchpost" exact component={Search} />
                     <Redirect from="*" to="/" />
                 </Switch>
+                <Footer />
             </>
         </BrowserRouter>
     );

@@ -85,7 +85,7 @@ const Img = styled.img`
     height: 500px;
     width: 500px;
     border-radius: 100%;
-    box-shadow: 10px 10px 20px black;
+    /* box-shadow: 10px 10px 20px black; */
     margin: 0 auto;
     margin-top: 100px;
     margin-bottom: 50px;

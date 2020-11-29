@@ -19,7 +19,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <GlobalStyled />
                 <Router />
-                <Footer />
+                {/* <Footer /> */}
             </ThemeProvider>
         </>
     );
