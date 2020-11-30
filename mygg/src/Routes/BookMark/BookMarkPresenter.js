@@ -7,14 +7,15 @@ const Container = styled.div`
     height: 100vh;
     width: 90%;
     margin: 30px auto;
-    border: 10px solid #388e3c;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: scroll;
     &::-webkit-scrollbar {
         display: none;
     }
+
     scroll-behavior: smooth;
     box-shadow: 7px 7px 7px 7px gray;
+    background-color: #f5f5f5;
 `;
 
 const Title = styled.div`

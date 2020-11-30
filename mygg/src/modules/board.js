@@ -7,7 +7,7 @@ const initialState = {
     error: null,
     boardAll: [],
     boardById: {
-        id: "",
+        id: "123",
         title: "",
         owner: "",
         category: "",
@@ -66,8 +66,21 @@ const board = createSlice({
             state.isLoading = false;
             state.error = payload;
         },
-        updateComment(state, { payload }) {
+        updateCommentRequest(state) {
+            state.isLoading = true;
+        },
+        updateCommentSuccess(state, { payload }) {
+            state.isLoading = false;
             state.boardById.comments.push(payload);
+        },
+        editComment(state, { payload }) {
+            state.boardById.comments[payload].isEdit = true;
+        },
+        editCommentDone(state, { payload }) {
+            state.boardById.comments[payload.idx].isEdit = false;
+        },
+        editCommentAndUpdate(state, { payload }) {
+            state.boardById.comments[payload.idx].content = payload.newC;
         },
     },
 });
@@ -79,7 +92,11 @@ export const {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
-    updateComment,
+    updateCommentRequest,
+    updateCommentSuccess,
+    editComment,
+    editCommentDone,
+    editCommentAndUpdate,
 } = board.actions;
 
 export default board.reducer;

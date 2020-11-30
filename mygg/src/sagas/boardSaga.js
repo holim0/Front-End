@@ -5,7 +5,9 @@ import {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
-    updateComment,
+    updateCommentRequest,
+    updateCommentSuccess,
+    editCommentDone,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
@@ -17,6 +19,26 @@ function getBoardId(id) {
 function getBoard(category) {
     return Axios.get(`/${category}`).then((res) => res.data);
     // 서버 요청. 전체 받아오기
+}
+
+// 댓글 포스트
+function postComment(postId, newComment) {
+    return Axios.post(`/post/${postId}/writecommentsubmit`, newComment);
+}
+
+// 댓글 수정 사항 포스트
+function postEditComment(postId, newComment) {
+    const commentId = newComment.id;
+    return Axios.post(
+        `/post/${postId}/updatecommentsubmit/${commentId}`,
+        newComment
+    );
+}
+
+// 댓글 삭제 사항 포스트
+function delCommentPost(postId, Comment) {
+    const commentId = Comment.id;
+    return Axios.post(`/post/${postId}/deletecomment/${commentId}`, Comment);
 }
 
 function* getBoardById(action) {
@@ -39,10 +61,26 @@ function* getBoardAll(action) {
     }
 }
 
-function* getComment(action) {
+function* UpdateComment(action) {
     try {
-        const comment = yield call(getBoardId.comments, action.payload);
-        yield put(updateComment(comment));
+        yield call(
+            postComment,
+            action.payload.postId,
+            action.payload.newComment
+        );
+        yield put(updateCommentSuccess(action.payload.newComment));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function* EditComment(action) {
+    try {
+        yield call(
+            postEditComment,
+            action.payload.postId,
+            action.payload.newComment
+        );
     } catch (err) {
         console.log(err);
     }
@@ -56,15 +94,20 @@ function* watchGetBoardAll() {
     yield takeLatest(getBoardAllRequest, getBoardAll);
 }
 
-function* watchComment() {
-    yield takeLatest(updateComment, getComment);
+function* watchUpdateComment() {
+    yield takeLatest(updateCommentRequest, UpdateComment);
+}
+
+function* watchEditComment() {
+    yield takeLatest(editCommentDone, EditComment);
 }
 
 function* boardSaga() {
     yield all([
         fork(watchGetBoardById),
         fork(watchGetBoardAll),
-        fork(watchComment),
+        fork(watchUpdateComment),
+        fork(watchEditComment),
     ]);
 }
 

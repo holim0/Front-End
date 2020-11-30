@@ -1,14 +1,20 @@
 import Progress from "Components/Progress/Progress";
 import React from "react";
-
 import styled from "styled-components";
+import Pagination from "@material-ui/lab/Pagination";
+import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
     width: 100%;
     max-width: 1060px;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
     padding: 24px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 const DeatailBox = styled.div`
@@ -74,6 +80,7 @@ const Participate = styled.div`
 
 const BoardComment = styled.div`
     width: 100%;
+
     display: flex;
     flex-direction: column;
 `;
@@ -110,19 +117,20 @@ const CommentWriting = styled.form`
     }
 `;
 
-const CommentBox = styled.div`
+const CommentBox = styled(Typography)`
     width: 100%;
-    border: 1px solid ${(props) => props.theme.border};
+    height: 100%;
+    /* border: 1px solid ${(props) => props.theme.border}; */
 `;
 
 const CommentBoxList = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid ${(props) => props.theme.border};
-
+    border: 1px solid ${(props) => props.theme.border};
+    border-bottom: none;
     &:last-child {
-        border-bottom: none;
+        border-bottom: 1px solid ${(props) => props.theme.border};
     }
 
     & > div {
@@ -158,13 +166,40 @@ const ButtonBox = styled.button`
     color: ${(props) => props.theme.white};
 `;
 
+const Btn = styled.button`
+    margin-right: 10px;
+    button-
+`;
+
+const CommentInput = styled.input`
+    height: 50px;
+    width: 70%;
+    border-radius: 10px;
+`;
+
+const Nobody = styled.div`
+    font-size: 25px;
+    border: none;
+`;
+
 const BoardDetailPresenter = ({
     comment,
     boardById,
     onClick,
+<<<<<<< HEAD
+    isParticipate,
+    curPageComment,
+=======
+>>>>>>> gongus/master
     onGoBack,
+    page,
     handleComment,
     commentSubmit,
+    handleCommentEdit,
+    handleCommentEditDone,
+    handleEditComment,
+    handleDelComment,
+    handleCommentPage,
     userData,
 }) => {
     return (
@@ -239,17 +274,61 @@ const BoardDetailPresenter = ({
                 </CommentWriting>
                 <CommentBox>
                     {boardById.comments.length > 0 ? (
-                        boardById.comments.map((cm) => (
-                            <CommentBoxList key={cm.createdDate}>
+                        curPageComment.map((cm, idx) => (
+                            <CommentBoxList key={idx}>
                                 <div>{cm.writer}</div>
-                                <div>{cm.content}</div>
+                                {cm.isEdit ? (
+                                    <CommentInput
+                                        value={cm.content}
+                                        onChange={(e) =>
+                                            handleEditComment(idx, e)
+                                        }
+                                    ></CommentInput>
+                                ) : (
+                                    <div>{cm.content}</div>
+                                )}
                                 <div>{cm.createdDate}</div>
+                                {cm.isEdit ? (
+                                    <Btn
+                                        onClick={handleCommentEditDone}
+                                        value={idx}
+                                    >
+                                        완료
+                                    </Btn>
+                                ) : (
+                                    <>
+                                        <Btn
+                                            onClick={handleCommentEdit}
+                                            value={idx}
+                                        >
+                                            수정
+                                        </Btn>
+                                        <Btn
+                                            onClick={handleDelComment}
+                                            value={idx}
+                                        >
+                                            삭제
+                                        </Btn>
+                                    </>
+                                )}
                             </CommentBoxList>
                         ))
                     ) : (
-                        <div>댓글이 현재 없어요</div>
+                        <Nobody>아직 댓글이 없습니다.</Nobody>
                     )}
                 </CommentBox>
+                <Pagination
+                    count={
+                        boardById.comments.length > 0
+                            ? Math.ceil(boardById.comments.length / 10)
+                            : 0
+                    }
+                    variant="outlined"
+                    shape="rounded"
+                    style={{ margin: "15px auto" }}
+                    page={page}
+                    onChange={handleCommentPage}
+                />
             </BoardComment>
         </Container>
     );

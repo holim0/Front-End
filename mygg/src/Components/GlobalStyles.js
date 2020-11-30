@@ -4,7 +4,7 @@ const GlobalStyled = createGlobalStyle`
     * {
     box-sizing: border-box;
     }
-    body {
+    body, html {
         height: 100%;
         width: 100%;
         margin: 0;
@@ -16,7 +16,7 @@ const GlobalStyled = createGlobalStyle`
 
     #root {
         width: 100%;
-        min-height: 100vh;
+        height: 100%;
     }
 
     /* input {
