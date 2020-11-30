@@ -48,8 +48,22 @@ const DetailOwner = styled.div`
 `;
 
 const GoodsLink = styled.div`
-    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-bottom: 6px;
+
+    a:hover {
+        text-decoration: underline;
+    }
+`;
+
+const BoardEditBtn = styled.button`
+    all: unset;
+    cursor: pointer;
+    background-color: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme.white};
+    padding: 6px 12px;
 `;
 
 const Content = styled.div`
@@ -79,7 +93,6 @@ const Participate = styled.div`
 
 const BoardComment = styled.div`
     width: 100%;
-
     display: flex;
     flex-direction: column;
 `;
@@ -203,6 +216,7 @@ const BoardDetailPresenter = ({
     handleDelComment,
     handleCommentPage,
     userData,
+    handleEditBoard,
 }) => {
     return (
         <Container>
@@ -223,6 +237,9 @@ const BoardDetailPresenter = ({
                 <a href={`${boardById.goodsLink}`} target="blank">
                     Link : {boardById.goodsLink}
                 </a>
+                <BoardEditBtn onClick={handleEditBoard} type="button">
+                    수정
+                </BoardEditBtn>
             </GoodsLink>
             <Content
                 dangerouslySetInnerHTML={{
@@ -249,12 +266,8 @@ const BoardDetailPresenter = ({
             )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
             <ParticipateUser>
-                현재 참여 중인 인원입니다!
-                {boardById.currentNumberOfPeople ? (
-                    <div>{boardById.currentNumberOfPeople}</div>
-                ) : (
-                    <div>아직 참여 인원이 없습니다.</div>
-                )}
+                현재 참여 중인 인원은 {boardById.currentNumberOfPeople}명
+                입니다!
             </ParticipateUser>
             <Participate>
                 <Progress

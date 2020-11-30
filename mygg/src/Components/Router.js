@@ -12,6 +12,7 @@ import Beauty from "Routes/Category/Beauty";
 import Etc from "Routes/Category/Etc";
 import BoardWrite from "Routes/BoardWrite";
 import BoardDetail from "Routes/BoardDetail";
+import BoardEdit from "Routes/BoardEdit";
 import BookMark from "Routes/BookMark";
 import Participate from "Routes/Participate";
 import MypageEdit from "Routes/MypageEdit";
@@ -34,6 +35,7 @@ const Router = () => {
                     <Route path="/etc" exact component={Etc} />
                     <Route path="/write" exact component={BoardWrite} />
                     <Route path="/detail/:id" exact component={BoardDetail} />
+                    <Route path="/edit/:id" exact component={BoardEdit} />
                     <Route path="/participate" exact component={Participate} />
                     <Route path="/bookmark" exact component={BookMark} />
                     <Route path="/searchpost" exact component={Search} />

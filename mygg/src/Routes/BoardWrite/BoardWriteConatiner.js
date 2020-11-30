@@ -24,6 +24,7 @@ const BoardWriteContainer = () => {
         deadDate,
         limitNumberOfPeople,
     } = useSelector((state) => state.boardWrite);
+
     // 카테고리 처리
     const handleCate = (e) => {
         dispatch(actionPack.setCategory(e.value));

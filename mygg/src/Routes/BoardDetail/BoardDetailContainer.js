@@ -181,6 +181,21 @@ const BoardDetailContainer = () => {
         dispatch(getBoardByIdRequest(id));
     }, [dispatch, id]);
 
+    // edit
+    const [isEdit, setIsEdit] = useState(false);
+    const handleEditBoard = useCallback((e) => {
+        setIsEdit((prev) => !prev);
+    }, []);
+
+    useEffect(
+        (e) => {
+            if (isEdit) {
+                history.push(`/edit/${id}`);
+            }
+        },
+        [isEdit, history, id]
+    );
+
     // 로딩 중에는 로더 호출.
     if (isLoading) {
         return <Loader />;
@@ -202,6 +217,7 @@ const BoardDetailContainer = () => {
                 handleEditComment={handleEditComment}
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
+                handleEditBoard={handleEditBoard}
                 userData={userData}></BoardDetailPresenter>
         </Container>
     );
