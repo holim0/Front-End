@@ -231,8 +231,7 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }
-                                    >
+                                        }>
                                         {list}
                                     </CateName>
                                 </li>
@@ -266,20 +265,13 @@ const CatePresenter = ({
                                         <BoardTitle>
                                             <div>{board.title}</div>
 
-                                            {/* <BoardParty>
-                                            {board.participateUsers
-                                                .slice(0, 5)
-                                                .map((user, index) => (
-                                                    <div key={index}>
-                                                        <img
-                                                            src={user.img}
-                                                            alt="user"
-                                                        />
-                                                    </div>
-                                                ))}
-                                            {board.participateUsers.length >
-                                                5 && <span>...</span>}
-                                        </BoardParty> */}
+                                            <BoardParty>
+                                                <div>
+                                                    {
+                                                        board.currentNumberOfPeople
+                                                    }
+                                                </div>
+                                            </BoardParty>
                                         </BoardTitle>
                                         <BoardInfo>
                                             <div>{board.deadline}</div>
@@ -289,14 +281,14 @@ const CatePresenter = ({
                                             <div>
                                                 {board.limitNumberOfPeople}
                                             </div>
-                                            {/* <Progress
-                                            participateUsers={
-                                                board.currentNumberOfPeople
-                                            }
-                                            limitNumberOfPeople={
-                                                board.limitNumberOfPeople
-                                            }
-                                        /> */}
+                                            <Progress
+                                                currentNumberOfPeople={
+                                                    board.currentNumberOfPeople
+                                                }
+                                                limitNumberOfPeople={
+                                                    board.limitNumberOfPeople
+                                                }
+                                            />
                                         </BoardInfo>
                                     </BoardBox>
                                 </Link>

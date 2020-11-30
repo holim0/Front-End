@@ -1,7 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import theme from "Components/Theme";
 import { Link } from "react-router-dom";
 
 const Box = styled.div`
@@ -83,8 +82,7 @@ const CancelModal = () => (
                             <Button
                                 onClick={() => {
                                     close();
-                                }}
-                            >
+                                }}>
                                 CLOSE
                             </Button>
                         </Box2>

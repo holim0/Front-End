@@ -168,7 +168,6 @@ const ButtonBox = styled.button`
 
 const Btn = styled.button`
     margin-right: 10px;
-    button-
 `;
 
 const CommentInput = styled.input`
@@ -186,11 +185,7 @@ const BoardDetailPresenter = ({
     comment,
     boardById,
     onClick,
-<<<<<<< HEAD
-    isParticipate,
     curPageComment,
-=======
->>>>>>> gongus/master
     onGoBack,
     page,
     handleComment,
@@ -231,8 +226,7 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     data-id={boardById.id}
-                    isParticipate={true}
-                >
+                    isParticipate={true}>
                     나가기
                 </ButtonBox>
             ) : (
@@ -240,8 +234,7 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={onClick}
                     isParticipate={false}
-                    data-id={boardById.id}
-                >
+                    data-id={boardById.id}>
                     참여
                 </ButtonBox>
             )}
@@ -255,10 +248,10 @@ const BoardDetailPresenter = ({
                 )}
             </ParticipateUser>
             <Participate>
-                {/* <Progress
-                    participateUsers={boardById.participateUsers}
+                <Progress
+                    currentNumberOfPeople={boardById.currentNumberOfPeople}
                     limitNumberOfPeople={boardById.limitNumberOfPeople}
-                /> */}
+                />
             </Participate>
             <BoardComment>
                 <CommentsList>
@@ -282,8 +275,7 @@ const BoardDetailPresenter = ({
                                         value={cm.content}
                                         onChange={(e) =>
                                             handleEditComment(idx, e)
-                                        }
-                                    ></CommentInput>
+                                        }></CommentInput>
                                 ) : (
                                     <div>{cm.content}</div>
                                 )}
@@ -291,22 +283,19 @@ const BoardDetailPresenter = ({
                                 {cm.isEdit ? (
                                     <Btn
                                         onClick={handleCommentEditDone}
-                                        value={idx}
-                                    >
+                                        value={idx}>
                                         완료
                                     </Btn>
                                 ) : (
                                     <>
                                         <Btn
                                             onClick={handleCommentEdit}
-                                            value={idx}
-                                        >
+                                            value={idx}>
                                             수정
                                         </Btn>
                                         <Btn
                                             onClick={handleDelComment}
-                                            value={idx}
-                                        >
+                                            value={idx}>
                                             삭제
                                         </Btn>
                                     </>
