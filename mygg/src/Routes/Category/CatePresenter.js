@@ -20,7 +20,7 @@ const CateContent = styled.div`
 `;
 
 const CateNav = styled.nav`
-    width: 100%;
+    flex: 1;
 
     h1 {
         padding: 12px;
@@ -52,6 +52,7 @@ const CateTitle = styled.h2`
 
 const BoardContainer = styled.div`
     margin: 0 auto;
+    flex: 2;
     svg {
         cursor: pointer;
         z-index: 5;

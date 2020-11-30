@@ -186,6 +186,7 @@ const AuthPresenter = ({
                         name="userId"
                         placeholder="이메일"
                         autoComplete="off"
+                        required
                     />
                     <Label htmlFor="userPassword">패스워드</Label>
                     <Input
@@ -194,6 +195,7 @@ const AuthPresenter = ({
                         name="userPassword"
                         placeholder="패스워드"
                         autoComplete="off"
+                        required
                     />
                     {signUp && (
                         <>
@@ -207,6 +209,7 @@ const AuthPresenter = ({
                                 name="verifyUserPassword"
                                 placeholder="패스워드확인"
                                 autoComplete="off"
+                                required
                             />
                             <Label htmlFor="name">이름</Label>
                             <Input
@@ -215,6 +218,7 @@ const AuthPresenter = ({
                                 name="name"
                                 placeholder="이름"
                                 autoComplete="off"
+                                required
                             />
                             <Label htmlFor="nickname">닉네임</Label>
                             <Input
@@ -223,6 +227,7 @@ const AuthPresenter = ({
                                 name="nickname"
                                 placeholder="닉네임"
                                 autoComplete="off"
+                                required
                             />
                             <Label htmlFor="schoolName">소속학교</Label>
                             <Input

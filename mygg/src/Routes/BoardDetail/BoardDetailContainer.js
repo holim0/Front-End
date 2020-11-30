@@ -71,7 +71,6 @@ const BoardDetailContainer = () => {
             idx: idx,
             newC: e.target.value,
         };
-        console.log(idx);
 
         dispatch(editCommentAndUpdate(data));
     };
@@ -81,14 +80,12 @@ const BoardDetailContainer = () => {
         e.preventDefault();
         const idx = e.target.value;
         dispatch(editComment(idx));
-        console.log(idx);
     };
 
     // 수정을 마치고 완료 버튼을 눌렀을 때
     const handleCommentEditDone = (e) => {
         e.preventDefault();
         const idx = e.target.value;
-        console.log(idx);
 
         const EditCommentData = {
             postId: boardById.id,
