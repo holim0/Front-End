@@ -189,7 +189,9 @@ const BoardWritePresenter = ({
     handleCate,
     title,
     handleTitle,
-    link,
+    goodsLink,
+    limitNumberOfPeople,
+    currentNumberOfPeople,
     handleLink,
     handlePeople,
     handleSubmit,
@@ -218,13 +220,17 @@ const BoardWritePresenter = ({
                     type="text"
                     placeholder="domain.tld"
                     className="form-field"
-                    value={link}
+                    value={goodsLink.split("//")[1]}
                     onChange={handleLink}></LinkInput>
             </FormGroup>
             <Subspan>마감일</Subspan>
             <DateContainer onChange={setDate} value={date} />
             <Subspan>인원 수</Subspan>
-            <Input type="number" onChange={handlePeople}></Input>
+            <Input
+                type="number"
+                onChange={handlePeople}
+                min={currentNumberOfPeople}
+                value={limitNumberOfPeople}></Input>
             <Box>
                 <Button onClick={handleSubmit}>SUBMIT</Button>
                 <Button as={Link} to="/">

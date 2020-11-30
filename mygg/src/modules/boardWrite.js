@@ -4,10 +4,15 @@ const initialState = {
     category: null,
     title: "",
     content: "",
-    goodslink: "",
+    goodsLink: "",
     deadDate: new Date(),
-    limitNumberOfPeople: null,
+    limitNumberOfPeople: 1,
+    currentNumberOfPeople: 1,
     history: null,
+    isEdit: false,
+    isEditLoading: false,
+    isEditDone: false,
+    err: null,
 };
 
 const boardWrite = createSlice({
@@ -24,7 +29,7 @@ const boardWrite = createSlice({
             state.content = action.payload;
         },
         setLink: (state, action) => {
-            state.goodslink = action.payload;
+            state.goodsLink = action.payload;
         },
         setDeadline: (state, action) => {
             state.deadDate = action.payload;
@@ -34,6 +39,44 @@ const boardWrite = createSlice({
         },
         boardRequeset: (state, action) => {
             state = action.payload;
+        },
+
+        // boardById의 값들을 가져옴
+        setEditBoard: (state, action) => {
+            const date = action.payload.deadline.split("-");
+            state.category = action.payload.category;
+            state.title = action.payload.title;
+            state.content = action.payload.content;
+            state.goodsLink = action.payload.goodsLink;
+            state.deadDate = new Date(date[0], date[1] - 1, date[2]);
+            state.currentNumberOfPeople = action.payload.currentNumberOfPeople;
+            state.limitNumberOfPeople = action.payload.limitNumberOfPeople;
+            state.isEdit = true;
+        },
+
+        // edit 요청을 위함
+        boardEditRequest: (state, action) => {
+            state.isEditLoading = true;
+        },
+        boardEditSuccess: (state, action) => {
+            state.isEditLoading = false;
+            state.isEditDone = true;
+        },
+        boardEditFaliure: (state, action) => {
+            state.isEditLoading = false;
+            state.err = action.payload;
+        },
+
+        // 새로운 글쓰기 시 값 초기화
+        writeBoard: (state) => {
+            state.category = null;
+            state.title = "";
+            state.content = "";
+            state.deadDate = new Date();
+            state.goodsLink = "";
+            state.currentNumberOfPeople = 1;
+            state.limitNumberOfPeople = 1;
+            state.isEdit = false;
         },
     },
 });
@@ -46,6 +89,11 @@ export const {
     setDeadline,
     setNumOfPeople,
     boardRequeset,
+    setEditBoard,
+    boardEditRequest,
+    boardEditSuccess,
+    boardEditFaliure,
+    writeBoard,
 } = boardWrite.actions;
 
 export default boardWrite.reducer;

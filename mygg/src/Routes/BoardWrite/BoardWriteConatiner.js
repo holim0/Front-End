@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import BoardWritePresenter from "./BoardWritePresenter";
 import * as actionPack from "modules/boardWrite";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -20,42 +20,64 @@ const BoardWriteContainer = () => {
         category,
         title,
         content,
-        goodslink,
+        goodsLink,
         deadDate,
+        currentNumberOfPeople,
         limitNumberOfPeople,
+        isEdit,
     } = useSelector((state) => state.boardWrite);
 
     // 카테고리 처리
-    const handleCate = (e) => {
-        dispatch(actionPack.setCategory(e.value));
-    };
+    const handleCate = useCallback(
+        (e) => {
+            dispatch(actionPack.setCategory(e.value));
+        },
+        [dispatch]
+    );
 
     // 마감일 처리
-    const setDate = (e) => {
-        dispatch(actionPack.setDeadline(e));
-    };
+    const setDate = useCallback(
+        (e) => {
+            dispatch(actionPack.setDeadline(e));
+        },
+        [dispatch]
+    );
+
     //제목 처리
 
-    const handleTitle = (e) => {
-        dispatch(actionPack.setTitle(e.target.value));
-    };
+    const handleTitle = useCallback(
+        (e) => {
+            dispatch(actionPack.setTitle(e.target.value));
+        },
+        [dispatch]
+    );
     // 본문 처리
-    const handleContent = (content, delta, source, editor) => {
-        dispatch(actionPack.setText(content));
-    };
+    const handleContent = useCallback(
+        (content, delta, source, editor) => {
+            dispatch(actionPack.setText(content));
+        },
+        [dispatch]
+    );
 
     // 링크 처리
-    const handleLink = (e) => {
-        dispatch(actionPack.setLink(e.target.value));
-    };
+    const handleLink = useCallback(
+        (e) => {
+            dispatch(actionPack.setLink(e.target.value));
+        },
+        [dispatch]
+    );
 
     // 인원 수 처리
 
-    const handlePeople = (e) => {
-        dispatch(actionPack.setNumOfPeople(e.target.value));
-    };
+    const handlePeople = useCallback(
+        (e) => {
+            dispatch(actionPack.setNumOfPeople(e.target.value));
+        },
+        [dispatch]
+    );
 
     // 제출 처리
+    const { id } = useParams(); // edit 시 board id 값 제출을 위함
 
     const handleSubmit = async () => {
         const deadline =
@@ -69,12 +91,16 @@ const BoardWriteContainer = () => {
             category,
             title,
             content,
-            goodslink,
+            goodsLink,
             deadline,
             limitNumberOfPeople,
             history,
         };
-        dispatch(actionPack.boardRequeset(BoardData));
+        if (isEdit) {
+            dispatch(actionPack.boardEditRequest({ ...BoardData, id }));
+        } else {
+            dispatch(actionPack.boardRequeset(BoardData));
+        }
 
         // console.log(BoardData);
 
@@ -89,6 +115,10 @@ const BoardWriteContainer = () => {
         // }
     };
 
+    useEffect(() => {
+        dispatch(actionPack.writeBoard());
+    }, []);
+
     return (
         <Container>
             <BoardWritePresenter
@@ -97,7 +127,9 @@ const BoardWriteContainer = () => {
                 handleCate={handleCate}
                 title={title}
                 handleTitle={handleTitle}
-                goodslink={goodslink}
+                limitNumberOfPeople={limitNumberOfPeople}
+                currentNumberOfPeople={currentNumberOfPeople}
+                goodsLink={goodsLink}
                 handleLink={handleLink}
                 handlePeople={handlePeople}
                 handleSubmit={handleSubmit}

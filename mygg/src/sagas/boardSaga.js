@@ -18,7 +18,7 @@ function getBoardId(id) {
         category: "cloth",
         title: "공구중",
         owner: "김창회",
-        deadline: "2020-22-22",
+        deadline: "2020-12-22",
         goodsLink: "https://www.github.com",
         content:
             "<p>dqwlkmdwqlmdlwqkmndwqlenuoi13q23123214f</p><br /> <h2>ㅎ2</h2>",
