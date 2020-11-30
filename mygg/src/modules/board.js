@@ -64,7 +64,7 @@ const board = createSlice({
         },
         getBoardAllFaliure(state, { payload }) {
             state.isLoading = false;
-            state.getBoardAll = true;
+            state.getBoardAll = false;
             state.error = payload;
         },
         updateCommentRequest(state) {

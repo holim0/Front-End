@@ -33,7 +33,7 @@ const sign = createSlice({
         },
         signInFailure(state, { payload }) {
             state.isLoading = false;
-            state.isLogin = false;
+            state.isLogin = true;
             state.error = payload;
         },
 

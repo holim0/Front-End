@@ -88,11 +88,20 @@ const BoardTitle = styled.div`
         text-overflow: ellipsis;
         white-space: nowrap;
         position: relative;
+        font-size: ${(props) => props.theme.ls};
 
         a:hover {
             text-decoration: underline;
         }
     }
+`;
+
+const BoardContent = styled.div`
+    margin-top: 10px;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 
 const BoardParty = styled.div`
@@ -103,34 +112,6 @@ const BoardParty = styled.div`
     left: 50%;
     transform: translateX(-50%);
     line-height: 34px;
-    & > div {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-left: 6px;
-
-        & > img {
-            border: 1px solid ${(props) => props.theme.lightenBlack};
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-    }
-    span {
-        margin-left: 5px;
-        line-height: 24px;
-        border: 1px solid ${(props) => props.theme.lightenBlack};
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: ${(props) => props.theme.ls};
-        cursor: pointer;
-        text-align: center;
-
-        &:hover {
-            background: ${(props) => props.theme.lightenBlack};
-        }
-    }
 `;
 
 const BoardInfo = styled.div`
@@ -265,13 +246,12 @@ const CatePresenter = ({
                                     <BoardBox>
                                         <BoardTitle>
                                             <div>{board.title}</div>
-
+                                            <BoardContent>
+                                                {board.content}
+                                            </BoardContent>
                                             <BoardParty>
-                                                <div>
-                                                    {
-                                                        board.currentNumberOfPeople
-                                                    }
-                                                </div>
+                                                현재 참가 :
+                                                {board.currentNumberOfPeople}명
                                             </BoardParty>
                                         </BoardTitle>
                                         <BoardInfo>
