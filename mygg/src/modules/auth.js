@@ -7,9 +7,9 @@ const initialState = {
     error: null,
     token: "",
     userData: {
-        id: "",
+        id: "1",
         name: "이희제",
-        userId: "",
+        userId: "dwqdwq@wqkdwq",
         userPassword: "",
         nickname: "성균관 선비",
         schollName: "",
@@ -256,7 +256,7 @@ const auth = createSlice({
         },
         addPartySuccess(state, { payload }) {
             state.isPartyLoading = false;
-            state.userData.participatePosts.push(payload);
+            state.userData.participatePosts.push(payload.boardId);
         },
         addPartyFailure(state, { payload }) {
             state.isPartyLoading = false;
@@ -270,7 +270,7 @@ const auth = createSlice({
         removePartySuccess(state, { payload }) {
             state.isPartyLoading = false;
             state.userData.participatePosts = state.userData.participatePosts.filter(
-                (f) => f !== payload
+                (f) => f !== payload.boardId
             );
         },
         removePartyFailure(state, { payload }) {

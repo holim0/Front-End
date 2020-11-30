@@ -182,10 +182,11 @@ const Nobody = styled.div`
 
 const BoardDetailPresenter = ({
     comment,
+    handleAddParty,
     boardById,
-    onClick,
     curPageComment,
-    onGoBack,
+    handleGoBack,
+    isParticipate,
     page,
     handleComment,
     commentSubmit,
@@ -201,7 +202,7 @@ const BoardDetailPresenter = ({
             <DeatailBox>
                 <DetailCategory>
                     {boardById.category}
-                    <div onClick={onGoBack}>목록으로</div>
+                    <div onClick={handleGoBack}>목록으로</div>
                 </DetailCategory>
                 <DetailTitle>
                     <div>{boardById.title}</div>
@@ -216,14 +217,15 @@ const BoardDetailPresenter = ({
                     Link : {boardById.goodsLink}
                 </a>
             </GoodsLink>
-            <Content>
-                <div>{boardById.content}</div>
-            </Content>
+            <Content
+                dangerouslySetInnerHTML={{
+                    __html: boardById.content,
+                }}></Content>
             {userData &&
             userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
-                    onClick={onClick}
+                    onClick={handleAddParty}
                     data-id={boardById.id}
                     isParticipate={true}>
                     나가기
@@ -231,7 +233,7 @@ const BoardDetailPresenter = ({
             ) : (
                 <ButtonBox
                     type="button"
-                    onClick={onClick}
+                    onClick={handleAddParty}
                     isParticipate={false}
                     data-id={boardById.id}>
                     참여

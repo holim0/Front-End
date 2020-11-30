@@ -13,7 +13,29 @@ import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
 
 function getBoardId(id) {
-    return Axios.get(`/post/${id}`).then((res) => res.data);
+    // return Axios.get(`/post/${id}`).then((res) => res.data);
+    const boardById = {
+        category: "cloth",
+        title: "공구중",
+        owner: "김창회",
+        deadline: "2020-22-22",
+        goodsLink: "www.github.com",
+        content:
+            "<p>dqwlkmdwqlmdlwqkmndwqlenuoi13q23123214f</p><br /> <h2>ㅎ2</h2>",
+        id: "123",
+        limitNumberOfPeople: 6,
+        currentNumberOfPeople: 1,
+
+        comments: [
+            {
+                writer: "이희제",
+                isEdit: false,
+                content: "dqwddw?",
+                createdDate: "202020-12-d",
+            },
+        ],
+    };
+    return boardById;
 }
 
 function getBoard(category) {

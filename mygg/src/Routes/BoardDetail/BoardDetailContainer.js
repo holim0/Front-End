@@ -46,6 +46,7 @@ const getCurComment = (TotalComment, curPage) => {
 
 const BoardDetailContainer = () => {
     const { isLoading, boardById } = useSelector((state) => state.board);
+
     const { userData } = useSelector((state) => state.auth);
     const { id } = useParams();
     const history = useHistory();
@@ -104,7 +105,7 @@ const BoardDetailContainer = () => {
     };
 
     // 목록으로 버튼 누를 때
-    const onGoBack = useCallback(
+    const handleGoBack = useCallback(
         (e) => {
             history.goBack();
         },
@@ -112,7 +113,7 @@ const BoardDetailContainer = () => {
     );
 
     // 참여 버튼 눌렀을 때
-    const onClick = useCallback(
+    const handleAddParty = useCallback(
         (e) => {
             if (!isLogin) {
                 alert("로그인 하셔야 가능합니다.");
@@ -122,11 +123,15 @@ const BoardDetailContainer = () => {
             if (!id) {
                 id = e.target.parentNode.dataset.id;
             }
+            const data = {
+                boardId: id,
+                userId: userData.userId,
+            };
 
             if (userData.participatePosts.find((v) => v === id)) {
-                dispatch(removePartyRequest(id));
+                dispatch(removePartyRequest(data));
             } else {
-                dispatch(addPartyRequest(id));
+                dispatch(addPartyRequest(data.boardId));
             }
         },
         [dispatch, isLogin, userData]
@@ -187,8 +192,8 @@ const BoardDetailContainer = () => {
                 comment={comment}
                 boardById={boardById}
                 curPageComment={getCurComment(boardById.comments, page)}
-                onGoBack={onGoBack}
-                onClick={onClick}
+                handleGoBack={handleGoBack}
+                handleAddParty={handleAddParty}
                 page={page}
                 handleComment={handleComment}
                 commentSubmit={commentSubmit}

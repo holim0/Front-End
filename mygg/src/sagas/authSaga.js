@@ -16,6 +16,7 @@ import {
     removePartySuccess,
     removePartyFailure,
 } from "modules/auth";
+import { addPartyUser, removePartyUser } from "modules/board";
 import { signInFailure, signInSuccess } from "modules/sign";
 import {
     all,
@@ -40,8 +41,8 @@ function removeBookMarkPost(id) {
     // 유저정보에 북마크 삭제
 }
 
-function addPartyPost(id) {
-    return Axios.post(`/post/${id}/participatepost`, id);
+function addPartyPost({ boardId, userId }) {
+    return Axios.post(`/post/${boardId}/participatepost`, userId);
 
     // 유저정보에 참가 추가
 }
@@ -86,8 +87,9 @@ function* removeBookMark(action) {
 
 function* addParty(action) {
     try {
-        yield call(addPartyPost, action.payload);
+        // yield call(addPartyPost, action.payload);
         yield put(addPartySuccess(action.payload));
+        yield put(addPartyUser());
     } catch (err) {
         console.log(err);
         yield put(addPartyFailure(err.message));
@@ -96,8 +98,9 @@ function* addParty(action) {
 
 function* removeParty(action) {
     try {
-        yield call(removePartyPost, action.payload);
+        // yield call(removePartyPost, action.payload);
         yield put(removePartySuccess(action.payload));
+        yield put(removePartyUser());
     } catch (err) {
         console.log(err);
         yield put(removePartyFailure(err.message));

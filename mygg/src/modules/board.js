@@ -7,7 +7,7 @@ const initialState = {
     error: null,
     boardAll: [],
     boardById: {
-        id: "123",
+        id: "1323",
         title: "",
         owner: "",
         category: "",
@@ -67,6 +67,14 @@ const board = createSlice({
             state.getBoardAll = false;
             state.error = payload;
         },
+
+        addPartyUser(state) {
+            state.boardById.currentNumberOfPeople += 1;
+        },
+        removePartyUser(state) {
+            state.boardById.currentNumberOfPeople -= 1;
+        },
+
         updateCommentRequest(state) {
             state.isLoading = true;
         },
@@ -93,6 +101,8 @@ export const {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
+    addPartyUser,
+    removePartyUser,
     updateCommentRequest,
     updateCommentSuccess,
     editComment,
