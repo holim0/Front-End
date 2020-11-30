@@ -256,7 +256,7 @@ const auth = createSlice({
         },
         addPartySuccess(state, { payload }) {
             state.isPartyLoading = false;
-            state.userData.participatePosts.push(payload.boardId);
+            state.userData.participatePosts.push(payload);
         },
         addPartyFailure(state, { payload }) {
             state.isPartyLoading = false;
@@ -270,7 +270,7 @@ const auth = createSlice({
         removePartySuccess(state, { payload }) {
             state.isPartyLoading = false;
             state.userData.participatePosts = state.userData.participatePosts.filter(
-                (f) => f !== payload.boardId
+                (f) => f !== payload
             );
         },
         removePartyFailure(state, { payload }) {

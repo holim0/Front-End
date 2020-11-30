@@ -25,7 +25,7 @@ function getBoardId(id) {
         id: "123",
         limitNumberOfPeople: 6,
         currentNumberOfPeople: 1,
-
+        finishCheck: false,
         comments: [
             {
                 writer: "이희제",

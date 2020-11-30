@@ -129,9 +129,9 @@ const BoardDetailContainer = () => {
             };
 
             if (userData.participatePosts.find((v) => v === id)) {
-                dispatch(removePartyRequest(data));
+                dispatch(removePartyRequest(data.boardId));
             } else {
-                dispatch(addPartyRequest(data.boardId));
+                dispatch(addPartyRequest(data));
             }
         },
         [dispatch, isLogin, userData]

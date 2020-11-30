@@ -17,6 +17,7 @@ const initialState = {
         deadline: "",
         limitNumberOfPeople: 0,
         currentNumberOfPeople: 0,
+        finishCheck: false,
         comments: [],
     },
 };
@@ -42,6 +43,7 @@ const board = createSlice({
                 createdDate: payload.createdDate,
                 goodsLink: payload.goodsLink,
                 deadline: payload.deadline,
+                finishCheck: payload.finishCheck,
                 limitNumberOfPeople: payload.limitNumberOfPeople,
                 currentNumberOfPeople: payload.currentNumberOfPeople,
                 comments: payload.comments,

@@ -1,6 +1,6 @@
 import Progress from "Components/Progress/Progress";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Pagination from "@material-ui/lab/Pagination";
 import Typography from "@material-ui/core/Typography";
 
@@ -163,6 +163,14 @@ const ButtonBox = styled.button`
     background-color: ${(props) =>
         props.isParticipate ? props.theme.red : props.theme.blue};
     color: ${(props) => props.theme.white};
+    ${(props) =>
+        props.finishCheck &&
+        css`
+            pointer-events: none;
+            background: ${(props) => props.theme.black};
+            color: ${(props) => props.theme.lightenBlack};
+            text-decoration: line-through;
+        `};
 `;
 
 const Btn = styled.button`
@@ -186,7 +194,6 @@ const BoardDetailPresenter = ({
     boardById,
     curPageComment,
     handleGoBack,
-    isParticipate,
     page,
     handleComment,
     commentSubmit,
@@ -235,8 +242,9 @@ const BoardDetailPresenter = ({
                     type="button"
                     onClick={handleAddParty}
                     isParticipate={false}
+                    finishCheck={boardById.finishCheck}
                     data-id={boardById.id}>
-                    참여
+                    {boardById.finishCheck ? "마감" : "참여"}
                 </ButtonBox>
             )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
