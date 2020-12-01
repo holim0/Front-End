@@ -186,11 +186,8 @@ const BoardDetailPresenter = ({
     comment,
     boardById,
     onClick,
-<<<<<<< HEAD
     isParticipate,
     curPageComment,
-=======
->>>>>>> gongus/master
     onGoBack,
     page,
     handleComment,
