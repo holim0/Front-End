@@ -1,9 +1,8 @@
 import Progress from "Components/Progress/Progress";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Pagination from "@material-ui/lab/Pagination";
 import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
     width: 100%;
@@ -49,8 +48,22 @@ const DetailOwner = styled.div`
 `;
 
 const GoodsLink = styled.div`
-    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-bottom: 6px;
+
+    a:hover {
+        text-decoration: underline;
+    }
+`;
+
+const BoardEditBtn = styled.button`
+    all: unset;
+    cursor: pointer;
+    background-color: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme.white};
+    padding: 6px 12px;
 `;
 
 const Content = styled.div`
@@ -80,7 +93,6 @@ const Participate = styled.div`
 
 const BoardComment = styled.div`
     width: 100%;
-
     display: flex;
     flex-direction: column;
 `;
@@ -164,11 +176,18 @@ const ButtonBox = styled.button`
     background-color: ${(props) =>
         props.isParticipate ? props.theme.red : props.theme.blue};
     color: ${(props) => props.theme.white};
+    ${(props) =>
+        props.finishCheck &&
+        css`
+            pointer-events: none;
+            background: ${(props) => props.theme.black};
+            color: ${(props) => props.theme.lightenBlack};
+            text-decoration: line-through;
+        `};
 `;
 
 const Btn = styled.button`
     margin-right: 10px;
-    button-
 `;
 
 const CommentInput = styled.input`
@@ -184,11 +203,10 @@ const Nobody = styled.div`
 
 const BoardDetailPresenter = ({
     comment,
+    handleAddParty,
     boardById,
-    onClick,
-    isParticipate,
     curPageComment,
-    onGoBack,
+    handleGoBack,
     page,
     handleComment,
     commentSubmit,
@@ -198,13 +216,14 @@ const BoardDetailPresenter = ({
     handleDelComment,
     handleCommentPage,
     userData,
+    handleEditBoard,
 }) => {
     return (
         <Container>
             <DeatailBox>
                 <DetailCategory>
                     {boardById.category}
-                    <div onClick={onGoBack}>목록으로</div>
+                    <div onClick={handleGoBack}>목록으로</div>
                 </DetailCategory>
                 <DetailTitle>
                     <div>{boardById.title}</div>
@@ -218,15 +237,20 @@ const BoardDetailPresenter = ({
                 <a href={`${boardById.goodsLink}`} target="blank">
                     Link : {boardById.goodsLink}
                 </a>
+                <BoardEditBtn onClick={handleEditBoard} type="button">
+                    수정
+                </BoardEditBtn>
             </GoodsLink>
-            <Content>
-                <div>{boardById.content}</div>
-            </Content>
+            <Content
+                dangerouslySetInnerHTML={{
+                    __html: boardById.content,
+                }}
+            ></Content>
             {userData &&
             userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
-                    onClick={onClick}
+                    onClick={handleAddParty}
                     data-id={boardById.id}
                     isParticipate={true}
                 >
@@ -235,27 +259,24 @@ const BoardDetailPresenter = ({
             ) : (
                 <ButtonBox
                     type="button"
-                    onClick={onClick}
+                    onClick={handleAddParty}
                     isParticipate={false}
+                    finishCheck={boardById.finishCheck}
                     data-id={boardById.id}
                 >
-                    참여
+                    {boardById.finishCheck ? "마감" : "참여"}
                 </ButtonBox>
             )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>
             <ParticipateUser>
-                현재 참여 중인 인원입니다!
-                {boardById.currentNumberOfPeople ? (
-                    <div>{boardById.currentNumberOfPeople}</div>
-                ) : (
-                    <div>아직 참여 인원이 없습니다.</div>
-                )}
+                현재 참여 중인 인원은 {boardById.currentNumberOfPeople}명
+                입니다!
             </ParticipateUser>
             <Participate>
-                {/* <Progress
-                    participateUsers={boardById.participateUsers}
+                <Progress
+                    currentNumberOfPeople={boardById.currentNumberOfPeople}
                     limitNumberOfPeople={boardById.limitNumberOfPeople}
-                /> */}
+                />
             </Participate>
             <BoardComment>
                 <CommentsList>

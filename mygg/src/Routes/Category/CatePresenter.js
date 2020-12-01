@@ -20,7 +20,7 @@ const CateContent = styled.div`
 `;
 
 const CateNav = styled.nav`
-    width: 100%;
+    flex: 1;
 
     h1 {
         padding: 12px;
@@ -52,6 +52,7 @@ const CateTitle = styled.h2`
 
 const BoardContainer = styled.div`
     margin: 0 auto;
+    flex: 2;
     svg {
         cursor: pointer;
         z-index: 5;
@@ -87,11 +88,20 @@ const BoardTitle = styled.div`
         text-overflow: ellipsis;
         white-space: nowrap;
         position: relative;
+        font-size: ${(props) => props.theme.ls};
 
         a:hover {
             text-decoration: underline;
         }
     }
+`;
+
+const BoardContent = styled.div`
+    margin-top: 10px;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 
 const BoardParty = styled.div`
@@ -102,34 +112,6 @@ const BoardParty = styled.div`
     left: 50%;
     transform: translateX(-50%);
     line-height: 34px;
-    & > div {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-left: 6px;
-
-        & > img {
-            border: 1px solid ${(props) => props.theme.lightenBlack};
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-    }
-    span {
-        margin-left: 5px;
-        line-height: 24px;
-        border: 1px solid ${(props) => props.theme.lightenBlack};
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: ${(props) => props.theme.ls};
-        cursor: pointer;
-        text-align: center;
-
-        &:hover {
-            background: ${(props) => props.theme.lightenBlack};
-        }
-    }
 `;
 
 const BoardInfo = styled.div`
@@ -231,8 +213,7 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }
-                                    >
+                                        }>
                                         {list}
                                     </CateName>
                                 </li>
@@ -265,21 +246,13 @@ const CatePresenter = ({
                                     <BoardBox>
                                         <BoardTitle>
                                             <div>{board.title}</div>
-
-                                            {/* <BoardParty>
-                                            {board.participateUsers
-                                                .slice(0, 5)
-                                                .map((user, index) => (
-                                                    <div key={index}>
-                                                        <img
-                                                            src={user.img}
-                                                            alt="user"
-                                                        />
-                                                    </div>
-                                                ))}
-                                            {board.participateUsers.length >
-                                                5 && <span>...</span>}
-                                        </BoardParty> */}
+                                            <BoardContent>
+                                                {board.content}
+                                            </BoardContent>
+                                            <BoardParty>
+                                                현재 참가 :
+                                                {board.currentNumberOfPeople}명
+                                            </BoardParty>
                                         </BoardTitle>
                                         <BoardInfo>
                                             <div>{board.deadline}</div>
@@ -289,14 +262,14 @@ const CatePresenter = ({
                                             <div>
                                                 {board.limitNumberOfPeople}
                                             </div>
-                                            {/* <Progress
-                                            participateUsers={
-                                                board.currentNumberOfPeople
-                                            }
-                                            limitNumberOfPeople={
-                                                board.limitNumberOfPeople
-                                            }
-                                        /> */}
+                                            <Progress
+                                                currentNumberOfPeople={
+                                                    board.currentNumberOfPeople
+                                                }
+                                                limitNumberOfPeople={
+                                                    board.limitNumberOfPeople
+                                                }
+                                            />
                                         </BoardInfo>
                                     </BoardBox>
                                 </Link>

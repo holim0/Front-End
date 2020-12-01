@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const WrapLoader = styled.div`
-    position: relative;
+    position: ${(props) => (props.fixed ? "fixed" : "relative")};
     min-height: calc(100vh - 60px);
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 550;
 `;
 
 const Container = styled.div`
@@ -144,13 +149,13 @@ const Container = styled.div`
     }
 `;
 
-export const Loader = () => {
+export const Loader = ({ fixed }) => {
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
     });
 
     return (
-        <WrapLoader>
+        <WrapLoader fixed={fixed}>
             <Container>
                 <div className="boxes">
                     <div className="box">

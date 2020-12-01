@@ -16,7 +16,6 @@ const CateContainer = ({ children, ...cateName }) => {
 
     // get board
     const { boardAll, getBoardAll } = useSelector((state) => state.board);
-    console.log(boardAll);
 
     // category
     const category = ["Necessity", "Food", "Cloth", "Goods", "Beauty", "Etc"];

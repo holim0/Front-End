@@ -7,9 +7,9 @@ const initialState = {
     error: null,
     token: "",
     userData: {
-        id: "",
+        id: "1",
         name: "이희제",
-        userId: "",
+        userId: "dwqdwq@wqkdwq",
         userPassword: "",
         nickname: "성균관 선비",
         schollName: "",
