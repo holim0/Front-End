@@ -8,6 +8,9 @@ import {
     updateCommentRequest,
     updateCommentSuccess,
     editCommentDone,
+    delCommentRequest,
+    delCommentSuccess,
+    delCommentFail,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
@@ -28,7 +31,15 @@ function getBoardId(id) {
         finishCheck: false,
         comments: [
             {
+                id: "",
                 writer: "이희제",
+                isEdit: false,
+                content: "dqwddw?",
+                createdDate: "202020-12-d",
+            },
+            {
+                id: "",
+                writer: "ㅎㅎ",
                 isEdit: false,
                 content: "dqwddw?",
                 createdDate: "202020-12-d",
@@ -108,6 +119,20 @@ function* EditComment(action) {
     }
 }
 
+function* DelComment(action) {
+    try {
+        yield call(
+            delCommentPost,
+            action.payload.postId,
+            action.payload.newComment
+        );
+        yield put(delCommentSuccess(action.payload.newComment));
+    } catch (err) {
+        console.log(err);
+        yield put(delCommentFail(err));
+    }
+}
+
 function* watchGetBoardById() {
     yield takeLatest(getBoardByIdRequest, getBoardById);
 }
@@ -124,12 +149,17 @@ function* watchEditComment() {
     yield takeLatest(editCommentDone, EditComment);
 }
 
+function* watchDelComment() {
+    yield takeLatest(delCommentRequest, DelComment);
+}
+
 function* boardSaga() {
     yield all([
         fork(watchGetBoardById),
         fork(watchGetBoardAll),
         fork(watchUpdateComment),
         fork(watchEditComment),
+        fork(watchDelComment),
     ]);
 }
 
