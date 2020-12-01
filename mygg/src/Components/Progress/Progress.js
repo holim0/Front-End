@@ -54,7 +54,7 @@ const Finished = styled.div`
     right: 0;
 `;
 
-const Progress = ({ participateUsers, limitNumberOfPeople }) => {
+const Progress = ({ currentNumberOfPeople, limitNumberOfPeople }) => {
     const checkPercent = (percent) => {
         if (percent > 90) {
             return "한자리 남았어요!";
@@ -79,21 +79,20 @@ const Progress = ({ participateUsers, limitNumberOfPeople }) => {
                 <ProgressBarWrap></ProgressBarWrap>
                 <ProgressGage
                     progress={Math.round(
-                        (participateUsers.length / limitNumberOfPeople) * 100
+                        (currentNumberOfPeople / limitNumberOfPeople) * 100
                     )}>
                     {/* 이곳 조건문은 후에 finishcheck가 되면 수정 */}
-                    {participateUsers.length === limitNumberOfPeople && (
+                    {currentNumberOfPeople === limitNumberOfPeople && (
                         <Finished>
                             <ImFire />
                         </Finished>
                     )}
                 </ProgressGage>
-                {participateUsers.length === limitNumberOfPeople || (
+                {currentNumberOfPeople === limitNumberOfPeople || (
                     <Progressing>
                         {checkPercent(
                             Math.round(
-                                (participateUsers.length /
-                                    limitNumberOfPeople) *
+                                (currentNumberOfPeople / limitNumberOfPeople) *
                                     100
                             )
                         )}

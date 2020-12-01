@@ -1,19 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import Select from "react-select";
-import theme from "Components/Theme";
 import DatePicker from "react-date-picker";
 import Editor from "./Editor";
 import { Link } from "react-router-dom";
-import CancelModal from "./CancelModal";
-import Loader from "Components/Loader";
 
 const Container = styled.div`
-    height: 100vh;
     width: 40%;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 50px;
 `;
 
 const Head = styled.div`
@@ -187,15 +183,15 @@ const category = [
     { value: "etc", label: "Etc" },
 ];
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 const BoardWritePresenter = ({
     date,
     setDate,
     handleCate,
     title,
     handleTitle,
-    link,
+    goodsLink,
+    limitNumberOfPeople,
+    currentNumberOfPeople,
     handleLink,
     handlePeople,
     handleSubmit,
@@ -212,8 +208,7 @@ const BoardWritePresenter = ({
                     type="text"
                     placeholder="제목을 입력해 주세요"
                     onChange={handleTitle}
-                    value={title}
-                ></Title>
+                    value={title}></Title>
             </Top>
             <Form>
                 <Editor content={content} handleContent={handleContent} />
@@ -225,14 +220,17 @@ const BoardWritePresenter = ({
                     type="text"
                     placeholder="domain.tld"
                     className="form-field"
-                    value={link}
-                    onChange={handleLink}
-                ></LinkInput>
+                    value={goodsLink.split("//")[1]}
+                    onChange={handleLink}></LinkInput>
             </FormGroup>
             <Subspan>마감일</Subspan>
             <DateContainer onChange={setDate} value={date} />
             <Subspan>인원 수</Subspan>
-            <Input type="number" onChange={handlePeople}></Input>
+            <Input
+                type="number"
+                onChange={handlePeople}
+                min={currentNumberOfPeople}
+                value={limitNumberOfPeople}></Input>
             <Box>
                 <Button onClick={handleSubmit}>SUBMIT</Button>
                 <Button as={Link} to="/">

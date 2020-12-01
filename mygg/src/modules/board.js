@@ -7,7 +7,7 @@ const initialState = {
     error: null,
     boardAll: [],
     boardById: {
-        id: "123",
+        id: "1323",
         title: "",
         owner: "",
         category: "",
@@ -17,6 +17,7 @@ const initialState = {
         deadline: "",
         limitNumberOfPeople: 0,
         currentNumberOfPeople: 0,
+        finishCheck: false,
         comments: [],
     },
 };
@@ -42,6 +43,7 @@ const board = createSlice({
                 createdDate: payload.createdDate,
                 goodsLink: payload.goodsLink,
                 deadline: payload.deadline,
+                finishCheck: payload.finishCheck,
                 limitNumberOfPeople: payload.limitNumberOfPeople,
                 currentNumberOfPeople: payload.currentNumberOfPeople,
                 comments: payload.comments,
@@ -64,8 +66,17 @@ const board = createSlice({
         },
         getBoardAllFaliure(state, { payload }) {
             state.isLoading = false;
+            state.getBoardAll = false;
             state.error = payload;
         },
+
+        addPartyUser(state) {
+            state.boardById.currentNumberOfPeople += 1;
+        },
+        removePartyUser(state) {
+            state.boardById.currentNumberOfPeople -= 1;
+        },
+
         updateCommentRequest(state) {
             state.isLoading = true;
         },
@@ -92,6 +103,8 @@ export const {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
+    addPartyUser,
+    removePartyUser,
     updateCommentRequest,
     updateCommentSuccess,
     editComment,

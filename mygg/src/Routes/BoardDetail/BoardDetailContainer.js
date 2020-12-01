@@ -5,7 +5,6 @@ import { addPartyRequest, removePartyRequest } from "modules/auth";
 import {
     getBoardByIdRequest,
     updateCommentRequest,
-    updateCommentSuccess,
     editComment,
     editCommentDone,
     editCommentAndUpdate,
@@ -47,6 +46,7 @@ const getCurComment = (TotalComment, curPage) => {
 
 const BoardDetailContainer = () => {
     const { isLoading, boardById } = useSelector((state) => state.board);
+
     const { userData } = useSelector((state) => state.auth);
     const { id } = useParams();
     const history = useHistory();
@@ -72,6 +72,7 @@ const BoardDetailContainer = () => {
             idx: idx,
             newC: e.target.value,
         };
+
         dispatch(editCommentAndUpdate(data));
     };
 
@@ -104,7 +105,7 @@ const BoardDetailContainer = () => {
     };
 
     // 목록으로 버튼 누를 때
-    const onGoBack = useCallback(
+    const handleGoBack = useCallback(
         (e) => {
             history.goBack();
         },
@@ -112,7 +113,7 @@ const BoardDetailContainer = () => {
     );
 
     // 참여 버튼 눌렀을 때
-    const onClick = useCallback(
+    const handleAddParty = useCallback(
         (e) => {
             if (!isLogin) {
                 alert("로그인 하셔야 가능합니다.");
@@ -122,11 +123,15 @@ const BoardDetailContainer = () => {
             if (!id) {
                 id = e.target.parentNode.dataset.id;
             }
+            const data = {
+                boardId: id,
+                userId: userData.userId,
+            };
 
             if (userData.participatePosts.find((v) => v === id)) {
-                dispatch(removePartyRequest(id));
+                dispatch(removePartyRequest(data.boardId));
             } else {
-                dispatch(addPartyRequest(id));
+                dispatch(addPartyRequest(data));
             }
         },
         [dispatch, isLogin, userData]
@@ -167,7 +172,7 @@ const BoardDetailContainer = () => {
             }
             setComment("");
         },
-        [comment, dispatch, date, nickName]
+        [comment, dispatch, date, nickName, isLogin, boardById]
     );
 
     // detail
@@ -175,6 +180,21 @@ const BoardDetailContainer = () => {
     useEffect(() => {
         dispatch(getBoardByIdRequest(id));
     }, [dispatch, id]);
+
+    // edit
+    const [isEdit, setIsEdit] = useState(false);
+    const handleEditBoard = useCallback((e) => {
+        setIsEdit((prev) => !prev);
+    }, []);
+
+    useEffect(
+        (e) => {
+            if (isEdit) {
+                history.push(`/edit/${id}`);
+            }
+        },
+        [isEdit, history, id]
+    );
 
     // 로딩 중에는 로더 호출.
     if (isLoading) {
@@ -187,8 +207,8 @@ const BoardDetailContainer = () => {
                 comment={comment}
                 boardById={boardById}
                 curPageComment={getCurComment(boardById.comments, page)}
-                onGoBack={onGoBack}
-                onClick={onClick}
+                handleGoBack={handleGoBack}
+                handleAddParty={handleAddParty}
                 page={page}
                 handleComment={handleComment}
                 commentSubmit={commentSubmit}
@@ -197,8 +217,8 @@ const BoardDetailContainer = () => {
                 handleEditComment={handleEditComment}
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
-                userData={userData}
-            ></BoardDetailPresenter>
+                handleEditBoard={handleEditBoard}
+                userData={userData}></BoardDetailPresenter>
         </Container>
     );
 };
