@@ -13,179 +13,9 @@ const initialState = {
         userPassword: "",
         nickname: "성균관 선비",
         schollName: "",
-        participatePosts: [
-            {
-                id: "123",
-                title: "제목입니다",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-        ],
+        participatePosts: [],
         ownPosts: [],
-        bookmarkPosts: [
-            {
-                id: "123",
-                title: "제목입니다",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-            {
-                id: "123",
-                title: "이희제",
-                deadline: "2020-12-25",
-                currentNumberOfPeople: 0,
-                limitNumberOfPeople: 0,
-            },
-        ],
+        bookmarkPosts: [],
     },
 };
 
@@ -216,10 +46,6 @@ const auth = createSlice({
             // state.userData = null;
             state.token = "";
             state.error = payload;
-        },
-        editAuth(state, { payload }) {
-            state.userData.name = payload.name;
-            state.userData.nickname = payload.nickname;
         },
 
         addBookMarkRequest(state) {
@@ -277,6 +103,19 @@ const auth = createSlice({
             state.isPartyLoading = false;
             state.error = payload;
         },
+        editAuthRequest(state) {
+            state.isAuthLoading = true;
+        },
+        editAuthSuccess(state, { payload }) {
+            state.isAuthLoading = false;
+            state.userData.name = payload.name;
+            state.userData.nickname = payload.nickname;
+        },
+
+        editAuthFail(state, { payload }) {
+            state.isAuthLoading = false;
+            state.error = payload;
+        },
     },
 });
 
@@ -284,7 +123,9 @@ export const {
     getAuthRequest,
     getAuthSuccess,
     getAuthFailure,
-    editAuth,
+    editAuthRequest,
+    editAuthSuccess,
+    editAuthFail,
     addBookMarkRequest,
     addBookMarkSuccess,
     addBookMarkFailure,
