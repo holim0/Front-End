@@ -16,37 +16,7 @@ import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
 
 function getBoardId(id) {
-    // return Axios.get(`/post/${id}`).then((res) => res.data);
-    const boardById = {
-        category: "cloth",
-        title: "공구중",
-        owner: "김창회",
-        deadline: "2020-12-22",
-        goodsLink: "https://www.github.com",
-        content:
-            "<p>dqwlkmdwqlmdlwqkmndwqlenuoi13q23123214f</p><br /> <h2>ㅎ2</h2>",
-        id: "123",
-        limitNumberOfPeople: 6,
-        currentNumberOfPeople: 1,
-        finishCheck: false,
-        comments: [
-            {
-                id: "",
-                writer: "이희제",
-                isEdit: false,
-                content: "dqwddw?",
-                createdDate: "202020-12-d",
-            },
-            {
-                id: "",
-                writer: "ㅎㅎ",
-                isEdit: false,
-                content: "dqwddw?",
-                createdDate: "202020-12-d",
-            },
-        ],
-    };
-    return boardById;
+    return Axios.get(`/post/${id}`).then((res) => res.data);
 }
 
 function getBoard(category) {
@@ -69,8 +39,7 @@ function postEditComment(postId, newComment) {
 }
 
 // 댓글 삭제 사항 delete
-function delCommentPost(postId, Comment) {
-    const commentId = Comment.id;
+function delCommentPost(postId, commentId) {
     return Axios.delete(`/post/${postId}/deletecomment/${commentId}`);
 }
 
@@ -99,7 +68,7 @@ function* UpdateComment(action) {
         yield call(
             postComment,
             action.payload.postId,
-            action.payload.newComment
+            action.payload.commentId
         );
         yield put(updateCommentSuccess(action.payload.newComment));
     } catch (err) {

@@ -15,6 +15,9 @@ import {
     removePartyRequest,
     removePartySuccess,
     removePartyFailure,
+    editAuthRequest,
+    editAuthSuccess,
+    editAuthFail,
 } from "modules/auth";
 import { addPartyUser, removePartyUser } from "modules/board";
 import { signInFailure, signInSuccess } from "modules/sign";
@@ -50,6 +53,11 @@ function addPartyPost({ boardId, userId }) {
 function removePartyPost(id) {
     return Axios.delete(`/post/${id}/withdrawpost`);
     // 유저정보에 참가 삭제
+}
+
+// 유저 정보 변경 api
+function editAuthPut(id, modifiedAuth) {
+    return Axios.put(`/mypage/${id}/modify`, modifiedAuth);
 }
 
 function* getAuth() {
@@ -107,6 +115,16 @@ function* removeParty(action) {
     }
 }
 
+function* EditAuth(action) {
+    try {
+        yield call(editAuthPut, action.payload);
+        yield put(editAuthSuccess(action.payload));
+    } catch (e) {
+        console.log(e);
+        yield put(editAuthFail(e));
+    }
+}
+
 function* watchAuth() {
     yield takeEvery(getAuthRequest, getAuth);
 }
@@ -127,6 +145,10 @@ function* watchRemoveParty() {
     yield takeLatest(removePartyRequest, removeParty);
 }
 
+function* watchEditAuth() {
+    yield takeLatest(editAuthRequest, EditAuth);
+}
+
 function* authSaga() {
     yield all([
         fork(watchAuth),
@@ -134,6 +156,7 @@ function* authSaga() {
         fork(watchRemoveBookMark),
         fork(watchAddParty),
         fork(watchRemoveParty),
+        fork(watchEditAuth),
     ]);
 }
 
