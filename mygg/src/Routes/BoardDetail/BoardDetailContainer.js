@@ -32,6 +32,7 @@ function getToday() {
 // 페이지 별 댓글 수 조회.
 const getCurComment = (TotalComment, curPage) => {
     const CurComment = [];
+    console.log(TotalComment);
     if (TotalComment.length <= 10) {
         return TotalComment;
     }
@@ -39,7 +40,6 @@ const getCurComment = (TotalComment, curPage) => {
         if (TotalComment[i] === undefined) break;
         CurComment.push(TotalComment[i]);
     }
-
     return CurComment;
 };
 
@@ -180,7 +180,7 @@ const BoardDetailContainer = () => {
         dispatch(getBoardByIdRequest(id));
     }, [dispatch, id]);
 
-    // edit
+    // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
     const handleEditBoard = useCallback((e) => {
         setIsEdit((prev) => !prev);

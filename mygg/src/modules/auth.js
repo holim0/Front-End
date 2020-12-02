@@ -205,7 +205,7 @@ const auth = createSlice({
                 name: payload.userData.name,
                 userId: payload.userData.userId,
                 nickname: payload.userData.nickname,
-                schollName: payload.userData.schollName,
+                schoolName: payload.userData.schoolName,
                 participatePosts: payload.userData.participatePosts,
                 ownPosts: payload.userData.ownPosts,
                 bookmarkPosts: payload.userData.bookmarkPosts,

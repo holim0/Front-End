@@ -87,7 +87,7 @@ function* removeBookMark(action) {
 
 function* addParty(action) {
     try {
-        // yield call(addPartyPost, action.payload);
+        yield call(addPartyPost, action.payload);
         yield put(addPartySuccess(action.payload.boardId));
         yield put(addPartyUser());
     } catch (err) {
@@ -98,7 +98,7 @@ function* addParty(action) {
 
 function* removeParty(action) {
     try {
-        // yield call(removePartyPost, action.payload);
+        yield call(removePartyPost, action.payload);
         yield put(removePartySuccess(action.payload));
         yield put(removePartyUser());
     } catch (err) {

@@ -224,7 +224,7 @@ const BoardDetailPresenter = ({
                     <div>{boardById.title}</div>
                 </DetailTitle>
                 <DetailOwner>
-                    <div>{boardById.owner}</div>
+                    <div>{boardById.owner.nickname}</div>
                     <div>{boardById.deadline}</div>
                 </DetailOwner>
             </DeatailBox>
