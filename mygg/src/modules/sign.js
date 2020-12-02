@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isLogin: false,
-    isLoginFailure: false,
     isLoading: false,
     error: "",
 };
@@ -26,7 +25,6 @@ const sign = createSlice({
         signInRequest(state) {
             state.isLoading = true;
             state.isLogin = false;
-            state.isLoginFailure = false;
             state.error = null;
         },
         signInSuccess(state) {
@@ -35,8 +33,7 @@ const sign = createSlice({
         },
         signInFailure(state, { payload }) {
             state.isLoading = false;
-            state.isLogin = true;
-            state.isLoginFailure = true;
+            state.isLogin = false;
             state.error = payload;
         },
 

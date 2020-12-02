@@ -8,12 +8,7 @@ const Container = styled.div`
     width: 100%;
     max-width: 1060px;
     margin: 0 auto;
-    height: 100%;
     padding: 24px;
-    overflow: auto;
-    &::-webkit-scrollbar {
-        display: none;
-    }
 `;
 
 const DeatailBox = styled.div`

@@ -1,7 +1,6 @@
 import { useFormInput, useSubmit } from "hooks";
 import { signInRequest, signUpRequest } from "modules/sign";
 import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import AuthPresenter from "./AuthPresenter";
 
 const AuthContainer = ({ onSignModal }) => {
@@ -15,10 +14,10 @@ const AuthContainer = ({ onSignModal }) => {
     // user SignUp & SignIn
 
     const [err, setErr] = useState("");
-    const { form, onChange } = useFormInput({});
+    const [form, onChange] = useFormInput({});
 
-    const { onUserSignIn } = useSubmit(signInRequest, form);
-    const { onUserSignUp } = useSubmit(signUpRequest, form);
+    const [onUserSignIn] = useSubmit(signInRequest, form);
+    const [onUserSignUp] = useSubmit(signUpRequest, form);
 
     useEffect(() => {
         if (form) {
@@ -30,13 +29,6 @@ const AuthContainer = ({ onSignModal }) => {
             }
         }
     }, [form]);
-
-    // sign in error
-    const { isLoginFailure } = useSelector((state) => state.sign);
-
-    if (isLoginFailure) {
-        alert("로그인 실패");
-    }
 
     return (
         <AuthPresenter
