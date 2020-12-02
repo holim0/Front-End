@@ -45,7 +45,9 @@ function removeBookMarkPost(id) {
 }
 
 function addPartyPost({ boardId, userId }) {
-    return Axios.post(`/post/${boardId}/participatepost`, userId);
+    return Axios.post(`/post/${boardId}/participatepost`, userId).then(
+        (res) => res.data
+    );
 
     // 유저정보에 참가 추가
 }
@@ -95,8 +97,8 @@ function* removeBookMark(action) {
 
 function* addParty(action) {
     try {
-        // yield call(addPartyPost, action.payload);
-        yield put(addPartySuccess(action.payload.boardId));
+        const boardById = yield call(addPartyPost, action.payload);
+        yield put(addPartySuccess(boardById));
         yield put(addPartyUser());
     } catch (err) {
         console.log(err);
@@ -106,7 +108,7 @@ function* addParty(action) {
 
 function* removeParty(action) {
     try {
-        // yield call(removePartyPost, action.payload);
+        yield call(removePartyPost, action.payload);
         yield put(removePartySuccess(action.payload));
         yield put(removePartyUser());
     } catch (err) {

@@ -8,9 +8,15 @@ const initialState = {
     error: null,
     boardAll: [],
     boardById: {
-        id: "1323",
+        id: "",
         title: "",
-        owner: "",
+        owner: {
+            id: "",
+            nickname: "",
+            name: "",
+            userId: "",
+            schoolname: "",
+        },
         category: "",
         content: "",
         createdDate: "",

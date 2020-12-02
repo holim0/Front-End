@@ -7,11 +7,11 @@ const initialState = {
     error: null,
     token: "",
     userData: {
-        id: "1",
-        name: "이희제",
-        userId: "dwqdwq@wqkdwq",
+        id: "",
+        name: "",
+        userId: "",
         userPassword: "",
-        nickname: "성균관 선비",
+        nickname: "",
         schollName: "",
         participatePosts: [],
         ownPosts: [],
@@ -35,7 +35,7 @@ const auth = createSlice({
                 name: payload.userData.name,
                 userId: payload.userData.userId,
                 nickname: payload.userData.nickname,
-                schollName: payload.userData.schollName,
+                schoolName: payload.userData.schoolName,
                 participatePosts: payload.userData.participatePosts,
                 ownPosts: payload.userData.ownPosts,
                 bookmarkPosts: payload.userData.bookmarkPosts,
@@ -96,7 +96,7 @@ const auth = createSlice({
         removePartySuccess(state, { payload }) {
             state.isPartyLoading = false;
             state.userData.participatePosts = state.userData.participatePosts.filter(
-                (f) => f !== payload
+                (f) => f.id !== payload
             );
         },
         removePartyFailure(state, { payload }) {

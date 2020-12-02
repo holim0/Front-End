@@ -33,6 +33,7 @@ function getToday() {
 // 페이지 별 댓글 수 조회.
 const getCurComment = (TotalComment, curPage) => {
     const CurComment = [];
+    console.log(TotalComment);
     if (TotalComment.length <= 10) {
         return TotalComment;
     }
@@ -40,7 +41,6 @@ const getCurComment = (TotalComment, curPage) => {
         if (TotalComment[i] === undefined) break;
         CurComment.push(TotalComment[i]);
     }
-
     return CurComment;
 };
 // 댓글 삭제 함수
@@ -58,7 +58,6 @@ const BoardDetailContainer = () => {
         (state) => state.board.isCommentEditLoading
     );
 
-    console.log(isCommentEditLoading);
     const { userData } = useSelector((state) => state.auth);
     const { id } = useParams();
     const history = useHistory();
@@ -176,8 +175,6 @@ const BoardDetailContainer = () => {
                 },
             };
 
-            console.log(CommentData);
-
             if (isLogin) {
                 if (comment !== "") {
                     dispatch(updateCommentRequest(CommentData));
@@ -199,7 +196,7 @@ const BoardDetailContainer = () => {
         dispatch(getBoardByIdRequest(id));
     }, [dispatch, id]);
 
-    // edit
+    // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
     const handleEditBoard = useCallback((e) => {
         setIsEdit((prev) => !prev);
@@ -237,8 +234,7 @@ const BoardDetailContainer = () => {
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
-                userData={userData}
-            ></BoardDetailPresenter>
+                userData={userData}></BoardDetailPresenter>
         </Container>
     );
 };
