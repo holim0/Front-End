@@ -8,6 +8,7 @@ import {
     editComment,
     editCommentDone,
     editCommentAndUpdate,
+    delCommentRequest,
 } from "modules/board";
 import { signFormShowing } from "modules/header";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,10 +43,22 @@ const getCurComment = (TotalComment, curPage) => {
     }
     return CurComment;
 };
+// 댓글 삭제 함수
+const DelComment = (TotalComment, target) => {
+    const newComment = TotalComment.filter((comment, idx) => {
+        return idx !== Number(target);
+    });
+    return newComment;
+};
 
 const BoardDetailContainer = () => {
     const { isLoading, boardById } = useSelector((state) => state.board);
 
+    const isCommentEditLoading = useSelector(
+        (state) => state.board.isCommentEditLoading
+    );
+
+    console.log(isCommentEditLoading);
     const { userData } = useSelector((state) => state.auth);
     const { id } = useParams();
     const history = useHistory();
@@ -100,7 +113,13 @@ const BoardDetailContainer = () => {
     const handleDelComment = (e) => {
         e.preventDefault();
         const idx = e.target.value;
-        console.log(idx);
+
+        const NewCommentData = {
+            postId: boardById.id,
+            commentId: boardById.comments[idx].id,
+            newComment: DelComment(boardById.comments, idx),
+        };
+        dispatch(delCommentRequest(NewCommentData));
     };
 
     // 목록으로 버튼 누를 때
@@ -159,7 +178,7 @@ const BoardDetailContainer = () => {
 
             console.log(CommentData);
 
-            if (!isLogin) {
+            if (isLogin) {
                 if (comment !== "") {
                     dispatch(updateCommentRequest(CommentData));
                 } else {
@@ -202,6 +221,7 @@ const BoardDetailContainer = () => {
 
     return (
         <Container>
+            {isCommentEditLoading ? <Loader fixed={true} /> : null}
             <BoardDetailPresenter
                 comment={comment}
                 boardById={boardById}
@@ -217,7 +237,8 @@ const BoardDetailContainer = () => {
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
-                userData={userData}></BoardDetailPresenter>
+                userData={userData}
+            ></BoardDetailPresenter>
         </Container>
     );
 };

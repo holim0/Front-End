@@ -1,18 +1,19 @@
 import React, { useState, useCallback } from "react";
 import MypageEditPresenter from "./MypageEditPresenter";
 import { useSelector, useDispatch } from "react-redux";
-import { editAuth } from "modules/auth";
+import { editAuth, editAuthSuccess, editAuthRequest } from "modules/auth";
 import { useHistory } from "react-router-dom";
 
 const MypageEditContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     //초기값 설정.
+    const userId = useSelector((state) => state.auth.userData.id);
     const name = useSelector((state) => state.auth.userData.name);
     const username = useSelector((state) => state.auth.userData.nickname);
 
-    const [curname, setCurname] = useState(name);
-    const [curusername, setCurusername] = useState(username);
+    const [curname, setCurname] = useState(name); // 이름
+    const [curusername, setCurusername] = useState(username); // 닉네임
 
     const handleName = useCallback(
         (e) => {
@@ -33,10 +34,11 @@ const MypageEditContainer = () => {
 
             if (curname !== "" && curusername !== "") {
                 const editData = {
+                    id: userId,
                     name: curname,
                     nickname: curusername,
                 };
-                dispatch(editAuth(editData));
+                dispatch(editAuthRequest(editData));
                 alert("수정 완료!");
                 history.goBack();
             } else {

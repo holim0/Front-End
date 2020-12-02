@@ -239,14 +239,16 @@ const BoardDetailPresenter = ({
             <Content
                 dangerouslySetInnerHTML={{
                     __html: boardById.content,
-                }}></Content>
+                }}
+            ></Content>
             {userData &&
             userData.participatePosts.find((v) => v === boardById.id) ? (
                 <ButtonBox
                     type="button"
                     onClick={handleAddParty}
                     data-id={boardById.id}
-                    isParticipate={true}>
+                    isParticipate={true}
+                >
                     나가기
                 </ButtonBox>
             ) : (
@@ -255,7 +257,8 @@ const BoardDetailPresenter = ({
                     onClick={handleAddParty}
                     isParticipate={false}
                     finishCheck={boardById.finishCheck}
-                    data-id={boardById.id}>
+                    data-id={boardById.id}
+                >
                     {boardById.finishCheck ? "마감" : "참여"}
                 </ButtonBox>
             )}
@@ -292,7 +295,8 @@ const BoardDetailPresenter = ({
                                         value={cm.content}
                                         onChange={(e) =>
                                             handleEditComment(idx, e)
-                                        }></CommentInput>
+                                        }
+                                    ></CommentInput>
                                 ) : (
                                     <div>{cm.content}</div>
                                 )}
@@ -300,19 +304,22 @@ const BoardDetailPresenter = ({
                                 {cm.isEdit ? (
                                     <Btn
                                         onClick={handleCommentEditDone}
-                                        value={idx}>
+                                        value={idx}
+                                    >
                                         완료
                                     </Btn>
                                 ) : (
                                     <>
                                         <Btn
                                             onClick={handleCommentEdit}
-                                            value={idx}>
+                                            value={idx}
+                                        >
                                             수정
                                         </Btn>
                                         <Btn
                                             onClick={handleDelComment}
-                                            value={idx}>
+                                            value={idx}
+                                        >
                                             삭제
                                         </Btn>
                                     </>

@@ -8,6 +8,9 @@ import {
     updateCommentRequest,
     updateCommentSuccess,
     editCommentDone,
+    delCommentRequest,
+    delCommentSuccess,
+    delCommentFail,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
@@ -26,19 +29,18 @@ function postComment(postId, newComment) {
     return Axios.post(`/post/${postId}/writecommentsubmit`, newComment);
 }
 
-// 댓글 수정 사항 포스트
+// 댓글 수정 사항 put
 function postEditComment(postId, newComment) {
     const commentId = newComment.id;
-    return Axios.post(
+    return Axios.put(
         `/post/${postId}/updatecommentsubmit/${commentId}`,
         newComment
     );
 }
 
-// 댓글 삭제 사항 포스트
-function delCommentPost(postId, Comment) {
-    const commentId = Comment.id;
-    return Axios.post(`/post/${postId}/deletecomment/${commentId}`, Comment);
+// 댓글 삭제 사항 delete
+function delCommentPost(postId, commentId) {
+    return Axios.delete(`/post/${postId}/deletecomment/${commentId}`);
 }
 
 function* getBoardById(action) {
@@ -66,7 +68,7 @@ function* UpdateComment(action) {
         yield call(
             postComment,
             action.payload.postId,
-            action.payload.newComment
+            action.payload.commentId
         );
         yield put(updateCommentSuccess(action.payload.newComment));
     } catch (err) {
@@ -86,6 +88,20 @@ function* EditComment(action) {
     }
 }
 
+function* DelComment(action) {
+    try {
+        yield call(
+            delCommentPost,
+            action.payload.postId,
+            action.payload.newComment
+        );
+        yield put(delCommentSuccess(action.payload.newComment));
+    } catch (err) {
+        console.log(err);
+        yield put(delCommentFail(err));
+    }
+}
+
 function* watchGetBoardById() {
     yield takeLatest(getBoardByIdRequest, getBoardById);
 }
@@ -102,12 +118,17 @@ function* watchEditComment() {
     yield takeLatest(editCommentDone, EditComment);
 }
 
+function* watchDelComment() {
+    yield takeLatest(delCommentRequest, DelComment);
+}
+
 function* boardSaga() {
     yield all([
         fork(watchGetBoardById),
         fork(watchGetBoardAll),
         fork(watchUpdateComment),
         fork(watchEditComment),
+        fork(watchDelComment),
     ]);
 }
 

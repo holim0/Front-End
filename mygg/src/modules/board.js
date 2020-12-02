@@ -3,6 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initialState = {
     getBoardById: false,
     isLoading: false,
+    isCommentEditLoading: false,
     getBoardAll: false,
     error: null,
     boardAll: [],
@@ -78,10 +79,10 @@ const board = createSlice({
         },
 
         updateCommentRequest(state) {
-            state.isLoading = true;
+            state.isCommentEditLoading = true;
         },
         updateCommentSuccess(state, { payload }) {
-            state.isLoading = false;
+            state.isCommentEditLoading = false;
             state.boardById.comments.push(payload);
         },
         editComment(state, { payload }) {
@@ -92,6 +93,20 @@ const board = createSlice({
         },
         editCommentAndUpdate(state, { payload }) {
             state.boardById.comments[payload.idx].content = payload.newC;
+        },
+
+        delCommentRequest(state) {
+            state.isCommentEditLoading = true;
+        },
+
+        delCommentSuccess(state, { payload }) {
+            state.isCommentEditLoading = false;
+            console.log(payload);
+            state.boardById.comments = payload;
+        },
+        delCommentFail(state, { payload }) {
+            state.isCommentEditLoading = false;
+            state.error = payload;
         },
     },
 });
@@ -110,6 +125,9 @@ export const {
     editComment,
     editCommentDone,
     editCommentAndUpdate,
+    delCommentRequest,
+    delCommentSuccess,
+    delCommentFail,
 } = board.actions;
 
 export default board.reducer;
