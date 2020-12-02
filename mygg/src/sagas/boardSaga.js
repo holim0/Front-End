@@ -59,19 +59,19 @@ function postComment(postId, newComment) {
     return Axios.post(`/post/${postId}/writecommentsubmit`, newComment);
 }
 
-// 댓글 수정 사항 포스트
+// 댓글 수정 사항 put
 function postEditComment(postId, newComment) {
     const commentId = newComment.id;
-    return Axios.post(
+    return Axios.put(
         `/post/${postId}/updatecommentsubmit/${commentId}`,
         newComment
     );
 }
 
-// 댓글 삭제 사항 포스트
+// 댓글 삭제 사항 delete
 function delCommentPost(postId, Comment) {
     const commentId = Comment.id;
-    return Axios.post(`/post/${postId}/deletecomment/${commentId}`, Comment);
+    return Axios.delete(`/post/${postId}/deletecomment/${commentId}`);
 }
 
 function* getBoardById(action) {
