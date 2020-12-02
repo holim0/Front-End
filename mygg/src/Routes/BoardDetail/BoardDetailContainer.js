@@ -17,7 +17,6 @@ import BoardDetailPresenter from "./BoardDetailPresenter";
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
 `;
 
 // 날짜 포맷 변경 함수

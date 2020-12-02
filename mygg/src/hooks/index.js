@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const useFormInput = (initialValue) => {
     const [form, setForm] = useState(initialValue);
@@ -11,7 +11,7 @@ export const useFormInput = (initialValue) => {
         [form]
     );
 
-    return { form, onChange };
+    return [form, onChange];
 };
 
 export const useInput = (initialValue) => {
@@ -38,5 +38,5 @@ export const useSubmit = (dispatchName, value) => {
         [value, dispatch, dispatchName]
     );
 
-    return { onSubmit };
+    return [onSubmit];
 };
