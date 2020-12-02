@@ -58,7 +58,6 @@ const BoardDetailContainer = () => {
         (state) => state.board.isCommentEditLoading
     );
 
-    console.log(isCommentEditLoading);
     const { userData } = useSelector((state) => state.auth);
     const { id } = useParams();
     const history = useHistory();
@@ -176,8 +175,6 @@ const BoardDetailContainer = () => {
                 },
             };
 
-            console.log(CommentData);
-
             if (isLogin) {
                 if (comment !== "") {
                     dispatch(updateCommentRequest(CommentData));
@@ -237,8 +234,7 @@ const BoardDetailContainer = () => {
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
-                userData={userData}
-            ></BoardDetailPresenter>
+                userData={userData}></BoardDetailPresenter>
         </Container>
     );
 };

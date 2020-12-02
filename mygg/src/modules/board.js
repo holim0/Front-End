@@ -10,7 +10,13 @@ const initialState = {
     boardById: {
         id: "",
         title: "",
-        owner: {},
+        owner: {
+            id: "",
+            nickname: "",
+            name: "",
+            userId: "",
+            schoolname: "",
+        },
         category: "",
         content: "",
         createdDate: "",
