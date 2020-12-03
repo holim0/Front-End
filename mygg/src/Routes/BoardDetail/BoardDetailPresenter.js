@@ -59,6 +59,16 @@ const BoardEditBtn = styled.button`
     background-color: ${(props) => props.theme.blue};
     color: ${(props) => props.theme.white};
     padding: 6px 12px;
+    margin-right: 5px;
+`;
+
+const BoardDelBtn = styled.button`
+    all: unset;
+    cursor: pointer;
+    background-color: ${(props) => props.theme.blue};
+    color: ${(props) => props.theme.white};
+    margin-right: 5px;
+    padding: 6px 12px;
 `;
 
 const Content = styled.div`
@@ -208,10 +218,11 @@ const BoardDetailPresenter = ({
     handleCommentEdit,
     handleCommentEditDone,
     handleEditComment,
-    handleDelComment,
     handleCommentPage,
     userData,
     handleEditBoard,
+    handleDelComment,
+    handleDelBoard,
 }) => {
     return (
         <Container>
@@ -232,9 +243,14 @@ const BoardDetailPresenter = ({
                 <a href={`${boardById.goodsLink}`} target="blank">
                     Link : {boardById.goodsLink}
                 </a>
-                <BoardEditBtn onClick={handleEditBoard} type="button">
-                    수정
-                </BoardEditBtn>
+                <div>
+                    <BoardEditBtn onClick={handleEditBoard} type="button">
+                        수정
+                    </BoardEditBtn>
+                    <BoardDelBtn onClick={handleDelBoard} type="button">
+                        삭제
+                    </BoardDelBtn>
+                </div>
             </GoodsLink>
             <Content
                 dangerouslySetInnerHTML={{

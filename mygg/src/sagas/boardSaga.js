@@ -11,6 +11,9 @@ import {
     delCommentRequest,
     delCommentSuccess,
     delCommentFail,
+    delBoardRequest,
+    delBoardSuccess,
+    delBoardFailure,
 } from "modules/board";
 import { fork, all, takeLatest, put, call } from "redux-saga/effects";
 import Axios from "axios";
@@ -22,6 +25,10 @@ function getBoardId(id) {
 function getBoard(category) {
     return Axios.get(`/${category}`).then((res) => res.data);
     // 서버 요청. 전체 받아오기
+}
+
+function delBoardReq(id) {
+    // return Axios.delete(`${id}`);
 }
 
 // 댓글 포스트
@@ -60,6 +67,16 @@ function* getBoardAll(action) {
     } catch (err) {
         console.log(err);
         yield put(getBoardAllFaliure(err.message));
+    }
+}
+
+function* delBoard(action) {
+    try {
+        yield call(delBoardReq, action.payload);
+        yield put(delBoardSuccess());
+    } catch (err) {
+        console.log(err);
+        yield put(delBoardFailure(err.message));
     }
 }
 
@@ -110,6 +127,10 @@ function* watchGetBoardAll() {
     yield takeLatest(getBoardAllRequest, getBoardAll);
 }
 
+function* watchDelBoard() {
+    yield takeLatest(delBoardRequest, delBoard);
+}
+
 function* watchUpdateComment() {
     yield takeLatest(updateCommentRequest, UpdateComment);
 }
@@ -129,6 +150,7 @@ function* boardSaga() {
         fork(watchUpdateComment),
         fork(watchEditComment),
         fork(watchDelComment),
+        fork(watchDelBoard),
     ]);
 }
 

@@ -9,6 +9,7 @@ import {
     editCommentDone,
     editCommentAndUpdate,
     delCommentRequest,
+    delBoardRequest,
 } from "modules/board";
 import { signFormShowing } from "modules/header";
 import { useDispatch, useSelector } from "react-redux";
@@ -198,9 +199,17 @@ const BoardDetailContainer = () => {
 
     // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
-    const handleEditBoard = useCallback((e) => {
+    const handleEditBoard = useCallback(() => {
         setIsEdit((prev) => !prev);
     }, []);
+
+    // 게시글 del
+    const { isDelete } = useSelector((state) => state.board);
+    const handleDelBoard = useCallback(() => {
+        if (window.confirm("삭제하시겠습니까?")) {
+            dispatch(delBoardRequest(id));
+        }
+    }, [dispatch, id]);
 
     useEffect(
         (e) => {
@@ -209,6 +218,15 @@ const BoardDetailContainer = () => {
             }
         },
         [isEdit, history, id]
+    );
+
+    useEffect(
+        (e) => {
+            if (isDelete) {
+                history.push("/");
+            }
+        },
+        [isDelete, history]
     );
 
     // 로딩 중에는 로더 호출.
@@ -234,6 +252,7 @@ const BoardDetailContainer = () => {
                 handleDelComment={handleDelComment}
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
+                handleDelBoard={handleDelBoard}
                 userData={userData}></BoardDetailPresenter>
         </Container>
     );
