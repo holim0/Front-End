@@ -36,7 +36,9 @@ const CateContainer = ({ children, ...cateName }) => {
                 id = e.target.parentNode.dataset.id;
             }
 
-            if (userData.bookmarkPosts.find((v) => v === id)) {
+            if (
+                userData.bookmarkPosts.find((v) => parseInt(v) === parseInt(id))
+            ) {
                 dispatch(removeBookMarkRequest(id));
             } else {
                 dispatch(addBookMarkRequest(id));

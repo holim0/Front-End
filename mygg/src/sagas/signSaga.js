@@ -32,7 +32,7 @@ function* signUp(action) {
         yield put(signUpSuccess());
         yield put(signInSuccess());
         yield put(getAuthSuccess(getUser));
-        yield put(signFormShowing());
+        yield put(signFormShowing(false));
     } catch (err) {
         console.log(err);
         yield put(signUpFailure(err.message));
@@ -44,7 +44,7 @@ function* signIn(action) {
         const getUser = yield call(signInPost, action.payload);
         yield put(signInSuccess());
         yield put(getAuthSuccess(getUser));
-        yield put(signFormShowing());
+        yield put(signFormShowing(false));
     } catch (err) {
         console.log(err);
         yield put(signInFailure(err.message));

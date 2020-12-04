@@ -257,7 +257,9 @@ const BoardDetailPresenter = ({
                     __html: boardById.content,
                 }}></Content>
             {userData &&
-            userData.participatePosts.find((v) => v.id === boardById.id) ? (
+            userData.participatePosts.find(
+                (v) => parseInt(v.id) === boardById.id
+            ) ? (
                 <ButtonBox
                     type="button"
                     onClick={handleAddParty}

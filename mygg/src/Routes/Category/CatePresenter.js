@@ -228,7 +228,7 @@ const CatePresenter = ({
                             <div key={board.id}>
                                 {userData &&
                                 userData.bookmarkPosts.find(
-                                    (v) => v === board.id
+                                    (v) => parseInt(v) === board.id
                                 ) ? (
                                     <BsStarFill
                                         data-id={board.id}

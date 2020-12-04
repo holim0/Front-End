@@ -12,8 +12,8 @@ const header = createSlice({
     name: "header",
     initialState,
     reducers: {
-        signFormShowing(state) {
-            state.isSign = !state.isSign;
+        signFormShowing(state, { payload }) {
+            state.isSign = payload ? payload : !state.isSign;
         },
         searchRequest(state) {
             state.isSearchLoading = true;
