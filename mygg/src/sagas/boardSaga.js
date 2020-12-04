@@ -85,7 +85,7 @@ function* UpdateComment(action) {
         yield call(
             postComment,
             action.payload.postId,
-            action.payload.commentId
+            action.payload.newComment
         );
         yield put(updateCommentSuccess(action.payload.newComment));
     } catch (err) {
@@ -110,7 +110,7 @@ function* DelComment(action) {
         yield call(
             delCommentPost,
             action.payload.postId,
-            action.payload.newComment
+            action.payload.commentId
         );
         yield put(delCommentSuccess(action.payload.newComment));
     } catch (err) {
