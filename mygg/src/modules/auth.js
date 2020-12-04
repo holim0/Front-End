@@ -12,7 +12,7 @@ const initialState = {
         userId: "",
         userPassword: "",
         nickname: "",
-        schollName: "",
+        schoolName: "",
         participatePosts: [],
         ownPosts: [],
         bookmarkPosts: [],

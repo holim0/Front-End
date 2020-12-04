@@ -142,11 +142,15 @@ const BoardDetailContainer = () => {
                 id = e.target.parentNode.dataset.id;
             }
             const data = {
-                boardId: id,
+                boardId: parseInt(id),
                 userId: userData.userId,
             };
 
-            if (userData.participatePosts.find((v) => v === id)) {
+            if (
+                userData.participatePosts.find(
+                    (v) => parseInt(v) === parseInt(id)
+                )
+            ) {
                 dispatch(removePartyRequest(data.boardId));
             } else {
                 dispatch(addPartyRequest(data));

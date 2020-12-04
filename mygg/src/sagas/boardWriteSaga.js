@@ -20,8 +20,8 @@ function postBoard(data) {
     return axios.post("/makepostsubmit", data);
 }
 
-function postBoardEdit(data) {
-    // return axios.post(`/post/${data.id}/update`, data);
+function postBoardEdit(id, data) {
+    return axios.put(`/updatepostsubmit/${id}`, data);
 }
 
 function* boardWrite(action) {
@@ -38,9 +38,10 @@ function* boardWrite(action) {
 }
 
 function* boardEdit(action) {
-    console.log(action.payload);
+    const { history, id, ...data } = action.payload;
+    console.log(data);
     try {
-        // yield call(postBoardEdit, action.payload);
+        yield call(postBoardEdit, id, data);
         yield delay(2000);
         yield put(boardEditSuccess());
     } catch (err) {
