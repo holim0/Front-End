@@ -34,7 +34,6 @@ const MypageEditContainer = () => {
 
             if (curname !== "" && curusername !== "") {
                 const editData = {
-                    id: userId,
                     name: curname,
                     nickname: curusername,
                 };

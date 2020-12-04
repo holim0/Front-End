@@ -52,14 +52,14 @@ function addPartyPost({ boardId, userId }) {
     // 유저정보에 참가 추가
 }
 
-function removePartyPost(id) {
-    return Axios.delete(`/post/${id}/withdrawpost`);
+function removePartyPost(postId) {
+    return Axios.delete(`/post/${postId}/withdrawpost`);
     // 유저정보에 참가 삭제
 }
 
 // 유저 정보 변경 api
-function editAuthPut(id, modifiedAuth) {
-    return Axios.put(`/mypage/${id}/modify`, modifiedAuth);
+function editAuthPut(modifiedAuth) {
+    return Axios.put(`/mypage/modify`, modifiedAuth);
 }
 
 function* getAuth() {

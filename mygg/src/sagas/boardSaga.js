@@ -27,8 +27,8 @@ function getBoard(category) {
     // 서버 요청. 전체 받아오기
 }
 
-function delBoardReq(id) {
-    // return Axios.delete(`${id}`);
+function delBoardReq(postId) {
+    return Axios.delete(`/post/${postId}/withdrawpost`);
 }
 
 // 댓글 포스트
