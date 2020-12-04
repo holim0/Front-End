@@ -3,6 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initialState = {
     getBoardById: false,
     isLoading: false,
+    isDelete: false,
     isCommentEditLoading: false,
     getBoardAll: false,
     error: null,
@@ -77,6 +78,18 @@ const board = createSlice({
             state.error = payload;
         },
 
+        delBoardRequest(state) {
+            state.isDelete = false;
+            state.error = null;
+        },
+        delBoardSuccess(state) {
+            state.isDelete = true;
+        },
+        delBoardFailure(state, { payload }) {
+            state.isDelete = false;
+            state.error = payload;
+        },
+
         addPartyUser(state) {
             state.boardById.currentNumberOfPeople += 1;
         },
@@ -124,6 +137,9 @@ export const {
     getBoardAllRequest,
     getBoardAllSuccess,
     getBoardAllFaliure,
+    delBoardRequest,
+    delBoardSuccess,
+    delBoardFailure,
     addPartyUser,
     removePartyUser,
     updateCommentRequest,
