@@ -258,7 +258,7 @@ const BoardDetailPresenter = ({
                 }}></Content>
             {userData &&
             userData.participatePosts.find(
-                (v) => parseInt(v.id) === boardById.id
+                (v) => parseInt(v.id) === parseInt(boardById.id)
             ) ? (
                 <ButtonBox
                     type="button"

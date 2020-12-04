@@ -36,6 +36,7 @@ function* signUp(action) {
     } catch (err) {
         console.log(err);
         yield put(signUpFailure(err.message));
+        yield put(signFormShowing(false));
     }
 }
 
@@ -48,6 +49,7 @@ function* signIn(action) {
     } catch (err) {
         console.log(err);
         yield put(signInFailure(err.message));
+        yield put(signFormShowing(false));
     }
 }
 

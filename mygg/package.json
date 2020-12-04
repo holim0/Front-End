@@ -62,5 +62,6 @@
     },
     "devDependencies": {
         "cross-env": "^7.0.2"
-    }
+    },
+    "proxy": "http://localhost:8080/"
 }
