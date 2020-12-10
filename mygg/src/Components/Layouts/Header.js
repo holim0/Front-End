@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styled from "styled-components";
 import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -8,6 +8,12 @@ import { signOutRequest } from "modules/sign";
 import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link, useHistory } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Container = styled.div`
     position: fixed;
@@ -154,6 +160,17 @@ const Header = () => {
 
     // signin/signup modal on & off
     const { isSign } = useSelector((state) => state.header);
+    const isLogin = useSelector((state) => state.sign.isLogin);
+
+    const [open, setOpen] = useState(false);
+    const [isLogout, setLogOut] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpen(false);
+    };
 
     const onSignModal = useCallback(() => {
         dispatch(signFormShowing());
@@ -180,12 +197,38 @@ const Header = () => {
     const user = useSelector((state) => state.sign.isLogin);
 
     const onLogOut = useCallback(() => {
+        setOpen(true);
+        setLogOut(true);
         dispatch(signOutRequest());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (isLogin) {
+            setOpen(true);
+        }
+    }, [isLogin]);
 
     return (
         <>
             <Container>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                    }}
+                    open={open}
+                    autoHideDuration={2000}
+                    onClose={handleClose}
+                >
+                    <div>
+                        {isLogin && (
+                            <Alert severity="success">로그인 성공</Alert>
+                        )}
+                        {isLogout && (
+                            <Alert severity="info">로그아웃 됨!</Alert>
+                        )}
+                    </div>
+                </Snackbar>
                 <HeaderContainer>
                     <Logo>
                         <Link to="/">GongGus</Link>

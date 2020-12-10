@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FaFacebookF } from "react-icons/fa";
+import { Spin } from "antd";
+import "antd/dist/antd.css";
 
 const Container = styled.div`
     position: fixed;
@@ -9,6 +11,16 @@ const Container = styled.div`
     height: 100vh;
     overflow: hidden;
     z-index: 500;
+`;
+const Loader = styled(Spin)`
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: 120px;
+    z-index: 1000;
 `;
 
 const ModalBackground = styled.div`
@@ -170,6 +182,8 @@ const AuthPresenter = ({
     onChangeSignUp,
     onChangeSignIn,
     err,
+    isLoading,
+    setOpen,
 }) => {
     return (
         <Container>
@@ -178,7 +192,8 @@ const AuthPresenter = ({
                 <SignTitle>{!signUp ? "로그인" : "회원가입"}</SignTitle>
                 <SignForm
                     onChange={!signUp ? onChangeSignIn : onChangeSignUp}
-                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}>
+                    onSubmit={!signUp ? onUserSignIn : onUserSignUp}
+                >
                     <Label htmlFor="userId">이메일</Label>
                     <Input
                         type="email"
@@ -197,6 +212,9 @@ const AuthPresenter = ({
                         autoComplete="off"
                         required
                     />
+                    {isLoading ? (
+                        <Loader tip="Loading..." size="large"></Loader>
+                    ) : null}
                     {signUp && (
                         <>
                             <Label htmlFor="verifyUserPassword">
@@ -243,8 +261,7 @@ const AuthPresenter = ({
                             </Check>
                         </>
                     )}
-
-                    <Button type="submit">
+                    <Button type="submit" onClick={setOpen}>
                         {!signUp ? "로그인" : "회원가입"}
                     </Button>
                     <SocialButton>
