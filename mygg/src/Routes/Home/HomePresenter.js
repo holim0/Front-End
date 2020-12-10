@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "assets/GongGus_Logo_1.jpg";
+import { Spin } from "antd";
+import "antd/dist/antd.css";
 
 const Container = styled.div`
     display: flex;
@@ -21,6 +23,16 @@ const Container = styled.div`
     }
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
     font-family: "Poppins", sans-serif;
+`;
+const Loader = styled(Spin)`
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: 120px;
+    z-index: 1000;
 `;
 
 const Button = styled(Link)`
@@ -91,10 +103,13 @@ const Img = styled.img`
     margin-bottom: 50px;
 `;
 
-const HomePresenter = ({ isLogin }) => {
+const HomePresenter = ({ isLogin, isLoading }) => {
     return (
         <>
             <Container>
+                {isLoading ? (
+                    <Loader tip="Loading..." size="large"></Loader>
+                ) : null}
                 <Img src={Logo}></Img>
                 <Button to="/necessity">NECESSITY</Button>
                 <Button to="/food">FOOD</Button>
