@@ -34,7 +34,6 @@ function getToday() {
 // 페이지 별 댓글 수 조회.
 const getCurComment = (TotalComment, curPage) => {
     const CurComment = [];
-    console.log(TotalComment);
     if (TotalComment.length <= 10) {
         return TotalComment;
     }
@@ -66,9 +65,6 @@ const BoardDetailContainer = () => {
     const [comment, setComment] = useState("");
     const [date, setDate] = useState(getToday());
     const [page, setPage] = useState(1);
-
-    // 댓글 작성시 닉네임 형태로 보여주기 위해 가져옴.
-    const nickName = useSelector((state) => state.auth.userData.nickname);
 
     // 로그인이 안돼 있으면 댓글 방지.
     const isLogin = useSelector((state) => state.sign.isLogin);
@@ -146,19 +142,19 @@ const BoardDetailContainer = () => {
                 userId: userData.userId,
             };
 
-            if (userData.participatePosts.find((v) => v === parseInt(id))) {
-                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+            if (userData.participatePosts.some((v) => v === parseInt(id))) {
+                if (userData.id === boardById.owner.id) {
                     return alert("생성자는 나갈 수 없습니다.");
                 }
                 dispatch(removePartyRequest(data.boardId));
             } else {
-                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+                if (userData.id === boardById.owner.id) {
                     return alert("생성자는 이미 참여 되어있습니다.");
                 }
                 dispatch(addPartyRequest(data));
             }
         },
-        [dispatch, isLogin, userData]
+        [dispatch, isLogin, userData, boardById]
     );
 
     // 댓글 인풋 관리
@@ -175,7 +171,7 @@ const BoardDetailContainer = () => {
                 postId: boardById.id,
                 newComment: {
                     id: "",
-                    writer: nickName,
+                    writer: userData.userId,
                     content: comment,
                     createdDate: date,
                     isEdit: false,
@@ -194,7 +190,7 @@ const BoardDetailContainer = () => {
             }
             setComment("");
         },
-        [comment, dispatch, date, nickName, isLogin, boardById]
+        [comment, dispatch, date, userData, isLogin, boardById]
     );
 
     // detail

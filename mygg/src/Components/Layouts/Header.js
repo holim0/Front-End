@@ -217,8 +217,7 @@ const Header = () => {
                     }}
                     open={open}
                     autoHideDuration={2000}
-                    onClose={handleClose}
-                >
+                    onClose={handleClose}>
                     <div>
                         {isLogin && (
                             <Alert severity="success">로그인 성공</Alert>

@@ -28,12 +28,14 @@ function getBoard(category) {
 }
 
 function delBoardReq(postId) {
-    return Axios.delete(`/post/${postId}/withdrawpost`);
+    return Axios.delete(`/post/${postId}/deletepost`);
 }
 
 // 댓글 포스트
 function postComment(postId, newComment) {
-    return Axios.post(`/post/${postId}/writecommentsubmit`, newComment);
+    return Axios.post(`/post/${postId}/writecommentsubmit`, newComment).then(
+        (res) => res.data
+    );
 }
 
 // 댓글 수정 사항 put
@@ -82,12 +84,12 @@ function* delBoard(action) {
 
 function* UpdateComment(action) {
     try {
-        yield call(
+        const newComment = yield call(
             postComment,
             action.payload.postId,
             action.payload.newComment
         );
-        yield put(updateCommentSuccess(action.payload.newComment));
+        yield put(updateCommentSuccess(newComment));
     } catch (err) {
         console.log(err);
     }

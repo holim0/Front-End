@@ -65,7 +65,6 @@ function editAuthPut(modifiedAuth) {
 function* getAuth() {
     try {
         const res = yield call(getAuthByToken);
-        console.log(res);
         yield put(getAuthSuccess(res));
         yield put(signInSuccess());
     } catch (err) {
