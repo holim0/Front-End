@@ -5,7 +5,6 @@ import theme from "Components/Theme";
 import { ThemeProvider } from "styled-components";
 import { getAuthRequest } from "modules/auth";
 import { useDispatch } from "react-redux";
-import Footer from "Components/Layouts/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -19,7 +18,6 @@ function App() {
             <ThemeProvider theme={theme}>
                 <GlobalStyled />
                 <Router />
-                {/* <Footer /> */}
             </ThemeProvider>
         </>
     );

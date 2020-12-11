@@ -91,7 +91,7 @@ const Img = styled.img`
     margin-bottom: 50px;
 `;
 
-const HomePresenter = ({ isLogin }) => {
+const HomePresenter = ({ isLogin, isLoading }) => {
     return (
         <>
             <Container>

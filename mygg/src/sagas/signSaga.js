@@ -46,7 +46,7 @@ function* signIn(action) {
         yield put(getAuthSuccess(getUser));
         yield put(signFormShowing(false));
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         yield put(signInFailure(err.message));
     }
 }

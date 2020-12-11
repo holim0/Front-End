@@ -13,11 +13,12 @@ const Container = styled.div`
 `;
 
 const HomeContainer = () => {
-    const user = useSelector((state) => state.sign.isLogin);
+    const { isLogin, isLoading } = useSelector((state) => state.sign);
+
     return (
         <>
             <Container>
-                <HomePresenster isLogin={user} />
+                <HomePresenster isLogin={isLogin} isLoading={isLoading} />
             </Container>
         </>
     );

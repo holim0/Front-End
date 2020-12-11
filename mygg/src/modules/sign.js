@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isLogin: false,
     isLoading: false,
-    error: "",
+    fail: false,
+    error: null,
 };
 
 const sign = createSlice({
@@ -34,6 +35,7 @@ const sign = createSlice({
         signInFailure(state, { payload }) {
             state.isLoading = false;
             state.isLogin = false;
+            state.fail = true;
             state.error = payload;
         },
 
