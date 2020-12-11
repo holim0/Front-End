@@ -8,6 +8,9 @@ import {
     signInRequest,
     signInSuccess,
     signInFailure,
+    LoginDoneSuccess,
+    LogOutSuccess,
+    isFailSuccess,
 } from "modules/sign";
 import { signFormShowing } from "modules/header";
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
@@ -43,11 +46,13 @@ function* signIn(action) {
     try {
         const getUser = yield call(signInPost, action.payload);
         yield put(signInSuccess());
+        yield put(LoginDoneSuccess());
         yield put(getAuthSuccess(getUser));
         yield put(signFormShowing(false));
     } catch (err) {
         console.log(err.message);
         yield put(signInFailure(err.message));
+        yield put(isFailSuccess());
     }
 }
 
@@ -55,6 +60,7 @@ function* signOut() {
     try {
         yield call(signOutPost);
         yield put(signOutSuccess());
+        yield put(LogOutSuccess());
         yield put(getAuthFailure());
     } catch (err) {
         console.log(err);
