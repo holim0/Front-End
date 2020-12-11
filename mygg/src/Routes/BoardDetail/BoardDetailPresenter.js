@@ -243,14 +243,18 @@ const BoardDetailPresenter = ({
                 <a href={`${boardById.goodsLink}`} target="blank">
                     Link : {boardById.goodsLink}
                 </a>
-                <div>
-                    <BoardEditBtn onClick={handleEditBoard} type="button">
-                        수정
-                    </BoardEditBtn>
-                    <BoardDelBtn onClick={handleDelBoard} type="button">
-                        삭제
-                    </BoardDelBtn>
-                </div>
+                {userData.ownPosts.find(
+                    (v) => v === parseInt(boardById.id)
+                ) && (
+                    <div>
+                        <BoardEditBtn onClick={handleEditBoard} type="button">
+                            수정
+                        </BoardEditBtn>
+                        <BoardDelBtn onClick={handleDelBoard} type="button">
+                            삭제
+                        </BoardDelBtn>
+                    </div>
+                )}
             </GoodsLink>
             <Content
                 dangerouslySetInnerHTML={{
@@ -258,7 +262,7 @@ const BoardDetailPresenter = ({
                 }}></Content>
             {userData &&
             userData.participatePosts.find(
-                (v) => parseInt(v.id) === parseInt(boardById.id)
+                (v) => v === parseInt(boardById.id)
             ) ? (
                 <ButtonBox
                     type="button"

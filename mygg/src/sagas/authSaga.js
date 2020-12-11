@@ -97,8 +97,8 @@ function* removeBookMark(action) {
 
 function* addParty(action) {
     try {
-        const boardById = yield call(addPartyPost, action.payload);
-        yield put(addPartySuccess(boardById));
+        yield call(addPartyPost, action.payload);
+        yield put(addPartySuccess(action.payload.boardId));
         yield put(addPartyUser());
     } catch (err) {
         console.log(err);

@@ -26,20 +26,15 @@ function postBoardEdit(id, data) {
 
 function* boardWrite(action) {
     const { history, ...data } = action.payload;
-    console.log(data);
     try {
         yield call(postBoard, data);
-        alert("저장 성공!");
-    } catch (e) {
-        alert("저장 실패!");
-    }
+    } catch (e) {}
 
     history.push("/");
 }
 
 function* boardEdit(action) {
     const { history, id, ...data } = action.payload;
-    console.log(data);
     try {
         yield call(postBoardEdit, id, data);
         yield delay(2000);

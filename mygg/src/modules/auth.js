@@ -36,8 +36,10 @@ const auth = createSlice({
                 userId: payload.userData.userId,
                 nickname: payload.userData.nickname,
                 schoolName: payload.userData.schoolName,
-                participatePosts: payload.userData.participatePosts,
-                ownPosts: payload.userData.ownPosts,
+                participatePosts: state.participatePosts.push(6),
+                ownPosts: state.ownPosts.push(6),
+                // participatePosts: payload.userData.participatePosts,
+                // ownPosts: payload.userData.ownPosts,
                 bookmarkPosts: payload.userData.bookmarkPosts,
             };
         },
@@ -82,7 +84,7 @@ const auth = createSlice({
         },
         addPartySuccess(state, { payload }) {
             state.isPartyLoading = false;
-            state.userData.participatePosts.push(payload);
+            state.userData.participatePosts.push(parseInt(payload));
         },
         addPartyFailure(state, { payload }) {
             state.isPartyLoading = false;
@@ -96,7 +98,7 @@ const auth = createSlice({
         removePartySuccess(state, { payload }) {
             state.isPartyLoading = false;
             state.userData.participatePosts = state.userData.participatePosts.filter(
-                (f) => f.id !== payload
+                (f) => parseInt(f) !== parseInt(payload)
             );
         },
         removePartyFailure(state, { payload }) {

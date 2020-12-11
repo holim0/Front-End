@@ -38,6 +38,7 @@ const board = createSlice({
             state.isLoading = true;
             state.getBoardById = false;
             state.error = null;
+            state.isDelete = false;
         },
         getBoardByIdSuccess(state, { payload }) {
             state.isLoading = false;
@@ -65,6 +66,7 @@ const board = createSlice({
         getBoardAllRequest(state) {
             state.isLoading = true;
             state.error = null;
+            state.isDelete = false;
             state.getBoardAll = false;
         },
         getBoardAllSuccess(state, { payload }) {

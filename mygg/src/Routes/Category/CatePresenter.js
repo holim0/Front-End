@@ -226,7 +226,10 @@ const CatePresenter = ({
                     {boardAll.length > 0 &&
                         boardAll.map((board) => (
                             <div key={board.id}>
-                                {userData &&
+                                {!userData.ownPosts.find(
+                                    (v) => v === parseInt(board.id)
+                                ) &&
+                                userData &&
                                 userData.bookmarkPosts.find(
                                     (v) => parseInt(v) === board.id
                                 ) ? (
