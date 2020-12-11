@@ -160,11 +160,11 @@ const Header = () => {
 
     // signin/signup modal on & off
     const { isSign } = useSelector((state) => state.header);
-    const isLogin = useSelector((state) => state.sign.isLogin);
+    const { isLogin, isLogOut } = useSelector((state) => state.sign);
 
     const [open, setOpen] = useState(false);
-    const [isLogout, setLogOut] = useState(false);
 
+    /// 로그인 알람창
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
@@ -198,7 +198,6 @@ const Header = () => {
 
     const onLogOut = useCallback(() => {
         setOpen(true);
-        setLogOut(true);
         dispatch(signOutRequest());
     }, [dispatch]);
 
@@ -224,14 +223,14 @@ const Header = () => {
                         {isLogin && (
                             <Alert severity="success">로그인 성공</Alert>
                         )}
-                        {isLogout && (
+                        {isLogOut && (
                             <Alert severity="info">로그아웃 됨!</Alert>
                         )}
                     </div>
                 </Snackbar>
                 <HeaderContainer>
                     <Logo>
-                        <Link to="/">GongGus</Link>
+                        q<Link to="/">GongGus</Link>
                     </Logo>
                     <SearchBar showReset={text} onSubmit={onSearch}>
                         <button type="reset" onClick={onReset}>
