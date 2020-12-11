@@ -5,6 +5,7 @@ const initialState = {
     isLoading: false,
     fail: false,
     error: null,
+    isLogOut: false,
 };
 
 const sign = createSlice({
@@ -25,6 +26,7 @@ const sign = createSlice({
 
         signInRequest(state) {
             state.isLoading = true;
+            state.isLogOut = false;
             state.isLogin = false;
             state.error = null;
         },
@@ -42,10 +44,12 @@ const sign = createSlice({
         signOutRequest(state) {
             state.isLoading = true;
             state.error = null;
+            state.isLogOut = false;
         },
         signOutSuccess(state) {
             state.isLogin = false;
             state.isLoading = false;
+            state.isLogOut = true;
         },
         signOutFailure(state, { payload }) {
             state.isLoading = false;
