@@ -235,7 +235,7 @@ const BoardDetailPresenter = ({
                     <div>{boardById.title}</div>
                 </DetailTitle>
                 <DetailOwner>
-                    <div>{boardById.owner.nickname}</div>
+                    <div>{boardById.owner.userId}</div>
                     <div>{boardById.deadline}</div>
                 </DetailOwner>
             </DeatailBox>
@@ -243,9 +243,7 @@ const BoardDetailPresenter = ({
                 <a href={`${boardById.goodsLink}`} target="blank">
                     Link : {boardById.goodsLink}
                 </a>
-                {userData.ownPosts.find(
-                    (v) => v === parseInt(boardById.id)
-                ) && (
+                {userData.id === boardById.owner.id && (
                     <div>
                         <BoardEditBtn onClick={handleEditBoard} type="button">
                             수정
@@ -260,25 +258,34 @@ const BoardDetailPresenter = ({
                 dangerouslySetInnerHTML={{
                     __html: boardById.content,
                 }}></Content>
-            {userData &&
-            userData.participatePosts.find(
-                (v) => v === parseInt(boardById.id)
-            ) ? (
-                <ButtonBox
-                    type="button"
-                    onClick={handleAddParty}
-                    data-id={boardById.id}
-                    isParticipate={true}>
-                    나가기
-                </ButtonBox>
+            {!boardById.finishCheck ? (
+                userData &&
+                userData.participatePosts.some(
+                    (v) => v === parseInt(boardById.id)
+                ) ? (
+                    <ButtonBox
+                        type="button"
+                        onClick={handleAddParty}
+                        data-id={boardById.id}
+                        isParticipate={true}>
+                        나가기
+                    </ButtonBox>
+                ) : (
+                    <ButtonBox
+                        type="button"
+                        onClick={handleAddParty}
+                        isParticipate={false}
+                        data-id={boardById.id}>
+                        참여
+                    </ButtonBox>
+                )
             ) : (
                 <ButtonBox
                     type="button"
-                    onClick={handleAddParty}
                     isParticipate={false}
                     finishCheck={boardById.finishCheck}
                     data-id={boardById.id}>
-                    {boardById.finishCheck ? "마감" : "참여"}
+                    마감
                 </ButtonBox>
             )}
             <LimitUser>Limit : {boardById.limitNumberOfPeople}</LimitUser>

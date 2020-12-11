@@ -214,8 +214,7 @@ const Header = () => {
                     }}
                     open={Noti.alertOpen}
                     autoHideDuration={2000}
-                    onClose={handleClose}
-                >
+                    onClose={handleClose}>
                     <div>
                         {Noti.LoginDone && (
                             <Alert severity="success">로그인 성공</Alert>
