@@ -4,7 +4,7 @@ import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { signOutRequest } from "modules/sign";
+import { signOutRequest, alertClose } from "modules/sign";
 import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link, useHistory } from "react-router-dom";
@@ -160,16 +160,18 @@ const Header = () => {
 
     // signin/signup modal on & off
     const { isSign } = useSelector((state) => state.header);
-    const { isLogin, isLogOut } = useSelector((state) => state.sign);
+    // 알림창 상태 관리
+    const Noti = useSelector((state) => state.sign.Noti);
+    // 알림창 열림 여부 판단.
 
-    const [open, setOpen] = useState(false);
+    console.log(Noti.isFail);
 
     /// 로그인 알람창
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
         }
-        setOpen(false);
+        dispatch(alertClose());
     };
 
     const onSignModal = useCallback(() => {
@@ -197,15 +199,10 @@ const Header = () => {
     const user = useSelector((state) => state.sign.isLogin);
 
     const onLogOut = useCallback(() => {
-        setOpen(true);
         dispatch(signOutRequest());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (isLogin) {
-            setOpen(true);
-        }
-    }, [isLogin]);
+    useEffect(() => {}, []);
 
     return (
         <>
@@ -215,21 +212,24 @@ const Header = () => {
                         vertical: "top",
                         horizontal: "center",
                     }}
-                    open={open}
+                    open={Noti.alertOpen}
                     autoHideDuration={2000}
                     onClose={handleClose}>
                     <div>
-                        {isLogin && (
+                        {Noti.LoginDone && (
                             <Alert severity="success">로그인 성공</Alert>
                         )}
-                        {isLogOut && (
+                        {Noti.isLogOut && (
                             <Alert severity="info">로그아웃 됨!</Alert>
+                        )}
+                        {Noti.isFail && (
+                            <Alert severity="error">로그인 실패</Alert>
                         )}
                     </div>
                 </Snackbar>
                 <HeaderContainer>
                     <Logo>
-                        q<Link to="/">GongGus</Link>
+                        <Link to="/">GongGus</Link>
                     </Logo>
                     <SearchBar showReset={text} onSubmit={onSearch}>
                         <button type="reset" onClick={onReset}>
