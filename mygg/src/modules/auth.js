@@ -82,7 +82,7 @@ const auth = createSlice({
         },
         addPartySuccess(state, { payload }) {
             state.isPartyLoading = false;
-            state.userData.participatePosts.push(payload);
+            state.userData.participatePosts.push(parseInt(payload));
         },
         addPartyFailure(state, { payload }) {
             state.isPartyLoading = false;
@@ -96,7 +96,7 @@ const auth = createSlice({
         removePartySuccess(state, { payload }) {
             state.isPartyLoading = false;
             state.userData.participatePosts = state.userData.participatePosts.filter(
-                (f) => f.id !== payload
+                (f) => parseInt(f) !== parseInt(payload)
             );
         },
         removePartyFailure(state, { payload }) {

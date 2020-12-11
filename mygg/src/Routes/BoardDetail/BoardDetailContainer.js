@@ -146,13 +146,15 @@ const BoardDetailContainer = () => {
                 userId: userData.userId,
             };
 
-            if (
-                userData.participatePosts.find(
-                    (v) => parseInt(v) === parseInt(id)
-                )
-            ) {
+            if (userData.participatePosts.find((v) => v === parseInt(id))) {
+                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+                    return alert("생성자는 나갈 수 없습니다.");
+                }
                 dispatch(removePartyRequest(data.boardId));
             } else {
+                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+                    return alert("생성자는 이미 참여 되어있습니다.");
+                }
                 dispatch(addPartyRequest(data));
             }
         },
@@ -198,7 +200,7 @@ const BoardDetailContainer = () => {
     // detail
 
     useEffect(() => {
-        dispatch(getBoardByIdRequest(id));
+        dispatch(getBoardByIdRequest(parseInt(id)));
     }, [dispatch, id]);
 
     // 게시글 edit

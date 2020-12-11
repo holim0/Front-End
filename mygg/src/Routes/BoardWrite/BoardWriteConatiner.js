@@ -101,18 +101,6 @@ const BoardWriteContainer = () => {
         } else {
             dispatch(actionPack.boardRequeset(BoardData));
         }
-
-        // console.log(BoardData);
-
-        // try {
-        //     const res = await axios.post("/makepostsubmit", BoardData);
-        //     console.log(res);
-        //     alert("저장 성공!");
-        //     history.push("/");
-        // } catch (e) {
-        //     alert(`저장 실패! 다시 시도해주세요.\n${e}`);
-        //     setLoading(false);
-        // }
     };
 
     useEffect(() => {
