@@ -36,10 +36,8 @@ const auth = createSlice({
                 userId: payload.userData.userId,
                 nickname: payload.userData.nickname,
                 schoolName: payload.userData.schoolName,
-                participatePosts: state.participatePosts.push(6),
-                ownPosts: state.ownPosts.push(6),
-                // participatePosts: payload.userData.participatePosts,
-                // ownPosts: payload.userData.ownPosts,
+                participatePosts: payload.userData.participatePosts,
+                ownPosts: payload.userData.ownPosts,
                 bookmarkPosts: payload.userData.bookmarkPosts,
             };
         },
