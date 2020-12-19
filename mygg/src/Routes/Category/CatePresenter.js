@@ -249,9 +249,10 @@ const CatePresenter = ({
                                     <BoardBox>
                                         <BoardTitle>
                                             <div>{board.title}</div>
-                                            <BoardContent>
-                                                {board.content}
-                                            </BoardContent>
+                                            <BoardContent
+                                                dangerouslySetInnerHTML={{
+                                                    __html: board.content,
+                                                }}></BoardContent>
                                             <BoardParty>
                                                 현재 참가 :
                                                 {board.currentNumberOfPeople}명
