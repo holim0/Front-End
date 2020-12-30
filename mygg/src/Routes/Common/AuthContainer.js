@@ -19,7 +19,10 @@ const AuthContainer = ({ onSignModal }) => {
     const [err, setErr] = useState("");
     const [form, onChange] = useFormInput({});
 
+    // 로그인 제출 핸들러
     const [onUserSignIn] = useSubmit(signInRequest, form);
+
+    // 회원가입 제출 핸들러
     const [onUserSignUp] = useSubmit(signUpRequest, form);
 
     useEffect(() => {

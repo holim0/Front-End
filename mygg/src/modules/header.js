@@ -12,6 +12,7 @@ const header = createSlice({
     name: "header",
     initialState,
     reducers: {
+        // 모닱창 제어 리듀서
         signFormShowing(state, { payload }) {
             state.isSign = payload ? payload : !state.isSign;
         },

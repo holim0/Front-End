@@ -154,7 +154,7 @@ const Mypage = styled(Link)`
         color: ${(props) => props.theme.white};
     }
 `;
-
+///////////////////////////////////////////////////////////////////////////////
 const Header = () => {
     const dispatch = useDispatch();
 
@@ -174,6 +174,7 @@ const Header = () => {
         dispatch(alertClose());
     };
 
+    // 모달창 제어
     const onSignModal = useCallback(() => {
         dispatch(signFormShowing());
     }, [dispatch]);
@@ -225,6 +226,12 @@ const Header = () => {
                         )}
                         {Noti.isFail && (
                             <Alert severity="error">로그인 실패</Alert>
+                        )}
+                        {Noti.SignUpDone && (
+                            <Alert severity="success">회원가입 성공</Alert>
+                        )}
+                        {Noti.SignUpFail && (
+                            <Alert severity="error">회원가입 실패</Alert>
                         )}
                     </div>
                 </Snackbar>
