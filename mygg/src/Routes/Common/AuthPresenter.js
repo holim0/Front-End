@@ -173,6 +173,8 @@ const SocialButton = styled.div`
     }
 `;
 
+/////////////////////////////////////////////////////////////////////////
+
 const AuthPresenter = ({
     onSignModal,
     onSignUp,

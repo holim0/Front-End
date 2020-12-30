@@ -9,6 +9,8 @@ const initialState = {
         isLogOut: false,
         isFail: false,
         alertOpen: false,
+        SignUpDone: false,
+        SignUpFail: false,
     },
 };
 
@@ -54,28 +56,56 @@ const sign = createSlice({
             state.isLoading = false;
             state.error = payload;
         },
-
+        // 로그인 성공시 모달
         LoginDoneSuccess(state) {
             state.Noti.LoginDone = true;
             state.Noti.isLogOut = false;
             state.Noti.isFail = false;
+            state.Noti.SignUpDone = false;
+            state.Noti.SignUpFail = false;
             state.Noti.alertOpen = true;
         },
-
+        // 로그아웃 성공시 모달
         LogOutSuccess(state) {
             state.Noti.isLogOut = true;
             state.Noti.LoginDone = false;
             state.Noti.isFail = false;
+            state.Noti.SignUpDone = false;
+            state.Noti.SignUpFail = false;
+            state.Noti.alertOpen = true;
+        },
+        // 회원가입 성공시 모달 제어
+        SignUpSuccessModal(state) {
+            state.Noti.SignUpDone = true;
+            state.Noti.LoginDone = false;
+            state.Noti.isLogOut = false;
+            state.Noti.isFail = false;
+            state.Noti.SignUpFail = false;
             state.Noti.alertOpen = true;
         },
 
+        // 회원가입 실패시 모달 제어
+
+        SignUpFailModal(state) {
+            state.Noti.SignUpFail = true;
+            state.Noti.LoginDone = false;
+            state.Noti.isLogOut = false;
+            state.Noti.isFail = false;
+            state.Noti.SignUpDone = false;
+            state.Noti.alertOpen = true;
+        },
+
+        // 로그인 실패 시 모달
         isFailSuccess(state) {
             state.Noti.isFail = true;
             state.Noti.isLogOut = false;
             state.Noti.LoginDone = false;
+            state.Noti.SignUpDone = false;
+            state.Noti.SignUpFail = false;
             state.Noti.alertOpen = true;
         },
 
+        // 모달창 닫기
         alertClose(state) {
             state.Noti.alertOpen = false;
         },
@@ -95,6 +125,8 @@ export const {
     LoginDoneSuccess,
     LogOutSuccess,
     isFailSuccess,
+    SignUpSuccessModal,
+    SignUpFailModal,
     alertClose,
 } = sign.actions;
 
