@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import { RiKakaoTalkFill } from "react-icons/ri";
-import { FaFacebookF } from "react-icons/fa";
 import { Spin } from "antd";
 import "antd/dist/antd.css";
 
@@ -131,47 +129,7 @@ const Button = styled.button`
         `}
 `;
 
-const SocialButton = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    & > button {
-        all: unset;
-        cursor: pointer;
-        margin: 6px 8px;
-        color: ${(props) => props.theme.white};
-        font-weight: 700;
-        display: flex;
-        width: 32px;
-        padding: 3px;
-
-        &:nth-child(1) {
-            background: #1ec800;
-            height: 32px;
-
-            & > div {
-                margin: 0 auto;
-                font-size: 24px;
-                font-weight: 900;
-            }
-        }
-
-        &:nth-child(2) {
-            background: #f9e000;
-        }
-
-        &:nth-child(3) {
-            background: #4867aa;
-        }
-
-        &:hover {
-            border-radius: 12px;
-            transition: all 500ms;
-        }
-    }
-`;
+/////////////////////////////////////////////////////////////////////////
 
 const AuthPresenter = ({
     onSignModal,
@@ -264,17 +222,7 @@ const AuthPresenter = ({
                     <Button type="submit" onClick={setOpen}>
                         {!signUp ? "로그인" : "회원가입"}
                     </Button>
-                    <SocialButton>
-                        <button type="button">
-                            <div>N</div>
-                        </button>
-                        <button type="button">
-                            <RiKakaoTalkFill fill="#371A1A" size={32} />
-                        </button>
-                        <button type="button">
-                            <FaFacebookF size={32} />
-                        </button>
-                    </SocialButton>
+
                     <Button type="button" onClick={onSignUp}>
                         {!signUp ? "Sign Up" : "Sign In"}
                     </Button>

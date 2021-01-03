@@ -14,7 +14,8 @@ const SearchContainer = () => {
         if (!isSearchDone) {
             dispatch(searchRequest(searchText));
         }
-    }, [dispatch, searchText, isSearchDone]);
+    }, [searchText, isSearchDone]);
+
     return (
         <SearchPresenter searchText={searchText} searchBoard={searchBoard} />
     );
