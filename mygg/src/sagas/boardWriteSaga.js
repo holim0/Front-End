@@ -16,10 +16,12 @@ import {
     delay,
 } from "redux-saga/effects";
 
+//글쓰기 요청
 function postBoard(data) {
     return axios.post("/makepostsubmit", data);
 }
 
+//글쓰기 수정
 function postBoardEdit(id, data) {
     return axios.put(`/updatepostsubmit/${id}`, data);
 }
@@ -27,7 +29,11 @@ function postBoardEdit(id, data) {
 function* boardWrite(action) {
     const { history, ...data } = action.payload;
     try {
-        yield call(postBoard, data);
+        const res = yield call(postBoard, data);
+
+        console.log(res);
+
+        alert("작성 완료");
     } catch (e) {}
 
     history.push("/");

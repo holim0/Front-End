@@ -31,7 +31,7 @@ import {
 } from "redux-saga/effects";
 
 function getAuthByToken() {
-    return Axios.post("/checklogin").then((res) => res.data);
+    return Axios.post("/check").then((res) => res.data);
 }
 
 function addBookmarkPost(id) {
@@ -59,7 +59,7 @@ function removePartyPost(postId) {
 
 // 유저 정보 변경 api
 function editAuthPut(modifiedAuth) {
-    return Axios.put(`/mypage/modify`, modifiedAuth);
+    return Axios.put(`/mypage/update`, modifiedAuth);
 }
 
 function* getAuth() {
