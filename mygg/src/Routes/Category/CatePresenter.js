@@ -1,27 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { BsStar, BsStarFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Loader from "Components/Loader";
-import Progress from "Components/Progress/Progress";
+import CateBoardComponent from "./CateBoardComponent";
 
 const Container = styled.div`
     width: 100%;
     min-height: 100vh;
-    background: ${(props) => props.theme.lightenBlack};
+    background: ${(props) => props.theme.white};
 `;
 
 const CateContent = styled.div`
-    max-width: 1060px;
+    max-width: 1200px;
     width: 100%;
-
     display: flex;
     margin: 0 auto;
 `;
 
 const CateNav = styled.nav`
     flex: 1;
-
     h1 {
         padding: 12px;
         margin-bottom: 12px;
@@ -33,143 +30,12 @@ const CateSubMenu = styled.ul`
     padding: 12px;
     margin: 24px;
     margin-left: 0;
-
     position: sticky;
     top: 100px;
     border-radius: 12px;
     li {
         padding: 12px 0;
         font-size: ${(props) => props.theme.ls};
-    }
-`;
-
-const CateTitle = styled.h2`
-    margin: 0;
-    margin-bottom: 12px;
-    padding: 12px;
-    width: 100%;
-`;
-
-const BoardContainer = styled.div`
-    margin: 0 auto;
-    flex: 2;
-    svg {
-        cursor: pointer;
-        z-index: 5;
-
-        path {
-            z-index: -20;
-        }
-    }
-`;
-
-const BoardBox = styled.div`
-    width: 760px;
-    height: 130px;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid ${(props) => props.theme.border};
-    background: ${(props) => props.theme.white};
-    padding: 12px;
-    margin: 24px 0;
-`;
-
-const BoardTitle = styled.div`
-    position: relative;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-
-    & > div:nth-child(1) {
-        width: 80%;
-        font-size: ${(props) => props.theme.ms};
-        margin-right: 3px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        position: relative;
-        font-size: ${(props) => props.theme.ls};
-
-        a:hover {
-            text-decoration: underline;
-        }
-    }
-`;
-
-const BoardContent = styled.div`
-    margin-top: 10px;
-    width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-`;
-
-const BoardParty = styled.div`
-    position: absolute;
-    display: flex;
-    bottom: 1px;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    line-height: 34px;
-`;
-
-const BoardInfo = styled.div`
-    display: grid;
-    position: relative;
-    grid-template-columns: repeat(3, 1fr);
-    width: 30%;
-
-    & > div {
-        text-align: center;
-    }
-
-    & > div:nth-child(1) {
-        position: relative;
-        &::before {
-            content: "마감";
-            width: 96%;
-            height: 16px;
-            font-size: ${(props) => props.theme.ss};
-            position: absolute;
-            left: 0;
-            top: 25px;
-            color: ${(props) => props.theme.white};
-            background: ${(props) => props.theme.black};
-            border-radius: 12px;
-        }
-    }
-    & > div:nth-child(2) {
-        position: relative;
-
-        &::before {
-            content: "현재";
-            width: 96%;
-            height: 16px;
-            font-size: ${(props) => props.theme.ss};
-            position: absolute;
-            left: 0;
-            top: 25px;
-            color: ${(props) => props.theme.white};
-            background: ${(props) => props.theme.lightenBlue};
-            border-radius: 12px;
-        }
-    }
-    & > div:nth-child(3) {
-        position: relative;
-
-        &::before {
-            content: "제한";
-            width: 96%;
-            height: 16px;
-            font-size: ${(props) => props.theme.ss};
-            position: absolute;
-            left: 0;
-            top: 25px;
-            color: ${(props) => props.theme.white};
-            background: ${(props) => props.theme.red};
-            border-radius: 12px;
-        }
     }
 `;
 
@@ -186,14 +52,7 @@ const CateName = styled(Link)`
     }
 `;
 
-const CatePresenter = ({
-    onBook,
-    cateName,
-    category,
-    getBoardAll,
-    userData,
-    boardAll,
-}) => {
+const CatePresenter = ({ cateName, category, boardAll, getBoardAll }) => {
     const selectCate = cateName.split("/")[1].toUpperCase();
     return !getBoardAll ? (
         <Loader />
@@ -213,7 +72,8 @@ const CatePresenter = ({
                                             list === "글쓰기"
                                                 ? "/write"
                                                 : `/${list.toLowerCase()}`
-                                        }>
+                                        }
+                                    >
                                         {list}
                                     </CateName>
                                 </li>
@@ -221,65 +81,10 @@ const CatePresenter = ({
                         )}
                     </CateSubMenu>
                 </CateNav>
-                <BoardContainer>
-                    <CateTitle>{selectCate}</CateTitle>
-                    {boardAll.length > 0 &&
-                        boardAll.map((board) => (
-                            <div key={board.id}>
-                                {!userData.ownPosts.find(
-                                    (v) => v === parseInt(board.id)
-                                ) &&
-                                userData &&
-                                userData.bookmarkPosts.find(
-                                    (v) => parseInt(v) === board.id
-                                ) ? (
-                                    <BsStarFill
-                                        data-id={board.id}
-                                        onClick={onBook}
-                                        size={18}
-                                    />
-                                ) : (
-                                    <BsStar
-                                        data-id={board.id}
-                                        size={18}
-                                        onClick={onBook}
-                                    />
-                                )}
-                                <Link to={`/detail/${board.id}`}>
-                                    <BoardBox>
-                                        <BoardTitle>
-                                            <div>{board.title}</div>
-                                            <BoardContent
-                                                dangerouslySetInnerHTML={{
-                                                    __html: board.content,
-                                                }}></BoardContent>
-                                            <BoardParty>
-                                                현재 참가 :
-                                                {board.currentNumberOfPeople}명
-                                            </BoardParty>
-                                        </BoardTitle>
-                                        <BoardInfo>
-                                            <div>{board.deadline}</div>
-                                            <div>
-                                                {board.currentNumberOfPeople}
-                                            </div>
-                                            <div>
-                                                {board.limitNumberOfPeople}
-                                            </div>
-                                            <Progress
-                                                currentNumberOfPeople={
-                                                    board.currentNumberOfPeople
-                                                }
-                                                limitNumberOfPeople={
-                                                    board.limitNumberOfPeople
-                                                }
-                                            />
-                                        </BoardInfo>
-                                    </BoardBox>
-                                </Link>
-                            </div>
-                        ))}
-                </BoardContainer>
+                <CateBoardComponent
+                    selectCate={selectCate}
+                    boardAll={boardAll}
+                />
             </CateContent>
         </Container>
     );

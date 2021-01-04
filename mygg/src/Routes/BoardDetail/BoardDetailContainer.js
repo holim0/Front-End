@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
 import { boardEditClear } from "modules/boardWrite";
-// import { FaKaggle } from "react-icons/fa";
 
 const Container = styled.div`
     width: 100%;
@@ -260,7 +259,8 @@ const BoardDetailContainer = () => {
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
                 handleDelBoard={handleDelBoard}
-                userData={userData}></BoardDetailPresenter>
+                userData={userData}
+            ></BoardDetailPresenter>
         </Container>
     );
 };

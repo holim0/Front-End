@@ -98,11 +98,11 @@ const BoardWriteContainer = () => {
         };
         if (isEdit) {
             dispatch(actionPack.boardEditRequest({ ...BoardData, id }));
-            // history.push(`/${category.toLowerCase()}`);
+            history.push(`/${category.toLowerCase()}`);
             console.log(category);
         } else {
             dispatch(actionPack.boardRequeset(BoardData));
-            // history.push(`/${category.toLowerCase()}`);
+            history.push(`/${category.toLowerCase()}`);
         }
     };
 

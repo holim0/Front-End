@@ -29,14 +29,11 @@ function postBoardEdit(id, data) {
 function* boardWrite(action) {
     const { history, ...data } = action.payload;
     try {
-        const res = yield call(postBoard, data);
-
-        console.log(res);
-
+        yield call(postBoard, data);
         alert("작성 완료");
-    } catch (e) {}
-
-    history.push("/");
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* boardEdit(action) {

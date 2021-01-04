@@ -257,17 +257,18 @@ const BoardDetailPresenter = ({
             <Content
                 dangerouslySetInnerHTML={{
                     __html: boardById.content,
-                }}></Content>
-            {!boardById.finishCheck ? (
-                userData &&
-                userData.participatePosts.some(
-                    (v) => v === parseInt(boardById.id)
-                ) ? (
+                }}
+            ></Content>
+            {!boardById.finishCheck &&
+            boardById.currentNumberOfPeople !==
+                boardById.limitNumberOfPeople ? (
+                userData?.participatePosts.some((v) => v === +boardById.id) ? (
                     <ButtonBox
                         type="button"
                         onClick={handleAddParty}
                         data-id={boardById.id}
-                        isParticipate={true}>
+                        isParticipate={true}
+                    >
                         나가기
                     </ButtonBox>
                 ) : (
@@ -275,7 +276,8 @@ const BoardDetailPresenter = ({
                         type="button"
                         onClick={handleAddParty}
                         isParticipate={false}
-                        data-id={boardById.id}>
+                        data-id={boardById.id}
+                    >
                         참여
                     </ButtonBox>
                 )
@@ -283,8 +285,13 @@ const BoardDetailPresenter = ({
                 <ButtonBox
                     type="button"
                     isParticipate={false}
-                    finishCheck={boardById.finishCheck}
-                    data-id={boardById.id}>
+                    finishCheck={
+                        boardById.finishCheck ||
+                        boardById.currentNumberOfPeople ===
+                            boardById.limitNumberOfPeople
+                    }
+                    data-id={boardById.id}
+                >
                     마감
                 </ButtonBox>
             )}
@@ -321,7 +328,8 @@ const BoardDetailPresenter = ({
                                         value={cm.content}
                                         onChange={(e) =>
                                             handleEditComment(idx, e)
-                                        }></CommentInput>
+                                        }
+                                    ></CommentInput>
                                 ) : (
                                     <div>{cm.content}</div>
                                 )}
@@ -329,19 +337,22 @@ const BoardDetailPresenter = ({
                                 {cm.isEdit ? (
                                     <Btn
                                         onClick={handleCommentEditDone}
-                                        value={idx}>
+                                        value={idx}
+                                    >
                                         완료
                                     </Btn>
                                 ) : (
                                     <>
                                         <Btn
                                             onClick={handleCommentEdit}
-                                            value={idx}>
+                                            value={idx}
+                                        >
                                             수정
                                         </Btn>
                                         <Btn
                                             onClick={handleDelComment}
-                                            value={idx}>
+                                            value={idx}
+                                        >
                                             삭제
                                         </Btn>
                                     </>
