@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -12,7 +12,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={7} variant="filled" {...props} />;
 }
 
 const Container = styled.div`
@@ -164,8 +164,6 @@ const Header = () => {
     const Noti = useSelector((state) => state.sign.Noti);
     // 알림창 열림 여부 판단.
 
-    console.log(Noti.isFail);
-
     /// 로그인 알람창
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -182,18 +180,27 @@ const Header = () => {
     // search text & text reset
     const history = useHistory();
     const [text, setText, onChange] = useInput("");
+    const [searchFail, setSearchFail] = useState(false);
+
     const onReset = useCallback(() => {
         setText("");
-    }, [setText]);
+    }, [text]);
 
     const onSearch = useCallback(
         (e) => {
             e.preventDefault();
+            if (!text) {
+                setSearchFail(true);
+                setTimeout(() => {
+                    setSearchFail(false);
+                }, 1000);
+                return;
+            }
             dispatch(searchRequest(text));
             setText("");
             history.push(`/searchpost?search=${text}`);
         },
-        [text, setText, dispatch, history]
+        [text, dispatch, searchFail]
     );
 
     // check user
@@ -202,8 +209,6 @@ const Header = () => {
     const onLogOut = useCallback(() => {
         dispatch(signOutRequest());
     }, [dispatch]);
-
-    useEffect(() => {}, []);
 
     return (
         <>
@@ -215,7 +220,8 @@ const Header = () => {
                     }}
                     open={Noti.alertOpen}
                     autoHideDuration={2000}
-                    onClose={handleClose}>
+                    onClose={handleClose}
+                >
                     <div>
                         {Noti.LoginDone && (
                             <Alert severity="success">로그인 성공</Alert>
@@ -233,6 +239,17 @@ const Header = () => {
                             <Alert severity="error">회원가입 실패</Alert>
                         )}
                     </div>
+                </Snackbar>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                    }}
+                    open={searchFail}
+                >
+                    {searchFail && (
+                        <Alert severity="info">검색어를 입력해 주세요!</Alert>
+                    )}
                 </Snackbar>
                 <HeaderContainer>
                     <Logo>
