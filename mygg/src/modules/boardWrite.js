@@ -57,6 +57,7 @@ const boardWrite = createSlice({
         // edit 요청을 위함
         boardEditRequest: (state, action) => {
             state.isEditLoading = true;
+            state.isEditDone = false;
         },
         boardEditSuccess: (state, action) => {
             state.isEditLoading = false;
@@ -65,6 +66,10 @@ const boardWrite = createSlice({
         boardEditFaliure: (state, action) => {
             state.isEditLoading = false;
             state.err = action.payload;
+        },
+
+        boardEditClear: (state, action) => {
+            state.isEditDone = false;
         },
 
         // 새로운 글쓰기 시 값 초기화
@@ -93,6 +98,7 @@ export const {
     boardEditRequest,
     boardEditSuccess,
     boardEditFaliure,
+    boardEditClear,
     writeBoard,
 } = boardWrite.actions;
 

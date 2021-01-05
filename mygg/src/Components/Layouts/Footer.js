@@ -7,7 +7,7 @@ const Container = styled.div`
     color: black;
     font-size: ${(props) => props.theme.ls};
     font-weight: 700;
-    height: 70px;
+    min-height: 70px;
     background-color: white;
 `;
 

@@ -1,11 +1,18 @@
 import React from "react";
+import CateBoardComponent from "Routes/Category/CateBoardComponent";
+import styled from "styled-components";
+
+const Title = styled.h1`
+    width: 100%;
+    text-align: center;
+`;
 
 const SearchPresenter = ({ searchBoard, searchText }) => {
-    console.log(searchBoard);
     return (
-        <div>
-            <div>검색 : {searchText}</div>
-        </div>
+        <>
+            <Title>검색 : {searchText}</Title>
+            <CateBoardComponent boardAll={searchBoard} />
+        </>
     );
 };
 

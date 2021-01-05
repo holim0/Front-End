@@ -4,8 +4,7 @@ const GlobalStyled = createGlobalStyle`
     * {
     box-sizing: border-box;
     }
-    body, html {
-        height: 100%;
+    body {
         width: 100%;
         margin: 0;
         margin-top: 60px;
@@ -13,22 +12,6 @@ const GlobalStyled = createGlobalStyle`
         font-size: ${(props) => props.theme.ms};
         
     }
-
-    #root {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* input {
-        border: none;
-        outline: none;
-    }
-    
-    button {
-        cursor: pointer;
-    } 
-    */
-
 
     ul,li {
         padding: 0;

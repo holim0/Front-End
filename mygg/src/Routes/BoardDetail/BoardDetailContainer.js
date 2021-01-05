@@ -15,7 +15,7 @@ import { signFormShowing } from "modules/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
-// import { FaKaggle } from "react-icons/fa";
+import { boardEditClear } from "modules/boardWrite";
 
 const Container = styled.div`
     width: 100%;
@@ -197,7 +197,7 @@ const BoardDetailContainer = () => {
 
     useEffect(() => {
         dispatch(getBoardByIdRequest(parseInt(id)));
-    }, [dispatch, id]);
+    }, [id]);
 
     // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
@@ -231,6 +231,10 @@ const BoardDetailContainer = () => {
         [isDelete, history]
     );
 
+    useEffect(() => {
+        dispatch(boardEditClear());
+    }, []);
+
     // 로딩 중에는 로더 호출.
     if (isLoading) {
         return <Loader />;
@@ -255,7 +259,8 @@ const BoardDetailContainer = () => {
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
                 handleDelBoard={handleDelBoard}
-                userData={userData}></BoardDetailPresenter>
+                userData={userData}
+            ></BoardDetailPresenter>
         </Container>
     );
 };

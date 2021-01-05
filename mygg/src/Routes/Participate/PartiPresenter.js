@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import theme from "Components/Theme";
 
 const Container = styled.div`
     height: 100vh;
@@ -12,7 +11,6 @@ const Container = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
-
     scroll-behavior: smooth;
     box-shadow: 7px 7px 7px 7px gray;
     background-color: #f5f5f5;
