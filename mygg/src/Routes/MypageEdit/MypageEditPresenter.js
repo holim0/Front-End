@@ -1,7 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import theme from "Components/Theme";
-import { Link } from "react-router-dom";
 
 const Container = styled.form`
     height: 100vh;

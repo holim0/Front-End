@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signFormShowing } from "modules/header";
 import { addBookMarkRequest, removeBookMarkRequest } from "modules/auth";
+import { Empty } from "antd";
 
 const BoardContainer = styled.div`
     margin: 0 auto;
@@ -18,6 +19,14 @@ const BoardContainer = styled.div`
             z-index: 4;
         }
     }
+`;
+
+const EmptyContainer = styled.div`
+    width: 100%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const CateTitle = styled.h2`
@@ -156,6 +165,12 @@ const CateBoardComponent = ({ selectCate, boardAll }) => {
     return (
         <BoardContainer>
             <CateTitle>{selectCate}</CateTitle>
+
+            {boardAll.length > 0 || (
+                <EmptyContainer>
+                    <Empty description={false} />
+                </EmptyContainer>
+            )}
             <BoardCard>
                 {boardAll.length > 0 &&
                     boardAll.map((board) => (

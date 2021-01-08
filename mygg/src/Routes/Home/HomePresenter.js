@@ -85,7 +85,6 @@ const Img = styled.img`
     height: 450px;
     width: 450px;
     border-radius: 100%;
-    /* box-shadow: 10px 10px 20px black; */
     margin: 50px auto;
 `;
 

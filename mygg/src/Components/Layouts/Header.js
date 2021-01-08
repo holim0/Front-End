@@ -8,6 +8,7 @@ import { signOutRequest, alertClose } from "modules/sign";
 import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link, useHistory } from "react-router-dom";
+import { Button } from "antd";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -108,6 +109,7 @@ const UserProfile = styled.div`
     border-radius: 50%;
     width: 30px;
     margin-right: 50px;
+    margin-left: 10px;
     height: 30px;
     line-height: 30px;
     text-align: center;
@@ -271,8 +273,12 @@ const Header = () => {
                     </SearchBar>
                     {user ? (
                         <UserMenu>
+                            <Link to="/write">
+                                <Button type="primary">글쓰기</Button>
+                            </Link>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
+
                                 <UserProfileMenu>
                                     <li>
                                         <Mypage to="/mypage">마이페이지</Mypage>

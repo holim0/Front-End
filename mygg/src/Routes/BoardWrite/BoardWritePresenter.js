@@ -42,15 +42,6 @@ const Form = styled.form`
     width: 100%;
 `;
 
-const Text = styled.textarea`
-    border: solid 2px #1e90ff;
-    border-radius: 5px;
-    width: 100%;
-    height: 500px;
-    font-size: ${(props) => props.font};
-    resize: none;
-`;
-
 const Span = styled.span``;
 
 const FormGroup = styled.div`
@@ -208,7 +199,8 @@ const BoardWritePresenter = ({
                     type="text"
                     placeholder="제목을 입력해 주세요"
                     onChange={handleTitle}
-                    value={title}></Title>
+                    value={title}
+                ></Title>
             </Top>
             <Form>
                 <Editor content={content} handleContent={handleContent} />
@@ -221,7 +213,8 @@ const BoardWritePresenter = ({
                     placeholder="domain.tld"
                     className="form-field"
                     value={goodsLink.split("//")[1]}
-                    onChange={handleLink}></LinkInput>
+                    onChange={handleLink}
+                ></LinkInput>
             </FormGroup>
             <Subspan>마감일</Subspan>
             <DateContainer onChange={setDate} value={date} />
@@ -230,7 +223,8 @@ const BoardWritePresenter = ({
                 type="number"
                 onChange={handlePeople}
                 min={currentNumberOfPeople}
-                value={limitNumberOfPeople}></Input>
+                value={limitNumberOfPeople}
+            ></Input>
             <Box>
                 <Button onClick={handleSubmit}>SUBMIT</Button>
                 <Button as={Link} to="/">

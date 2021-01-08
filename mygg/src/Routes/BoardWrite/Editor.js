@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import { setText } from "modules/boardWrite";
 
 const Container = styled.div`
     margin-bottom: 20px;
     .ql-editor {
         min-height: 400px !important;
         max-height: 300px;
-        overflow: hidden;
-        overflow-y: scroll;
-        overflow-x: scroll;
     }
     .ql-container {
         border-bottom-left-radius: 0.5em;
         border-bottom-right-radius: 0.5em;
-        background: #fefcfc;
     }
 
     .ql-snow.ql-toolbar {
         display: block;
-        background: #eaecec;
         border-top-left-radius: 0.5em;
         border-top-right-radius: 0.5em;
     }

@@ -1,14 +1,13 @@
 import React, { useState, useCallback } from "react";
 import MypageEditPresenter from "./MypageEditPresenter";
 import { useSelector, useDispatch } from "react-redux";
-import { editAuth, editAuthSuccess, editAuthRequest } from "modules/auth";
+import { editAuthRequest } from "modules/auth";
 import { useHistory } from "react-router-dom";
 
 const MypageEditContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     //초기값 설정.
-    const userId = useSelector((state) => state.auth.userData.id);
     const name = useSelector((state) => state.auth.userData.name);
     const username = useSelector((state) => state.auth.userData.nickname);
 
