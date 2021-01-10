@@ -30,7 +30,6 @@ function* boardWrite(action) {
     const { history, ...data } = action.payload;
     try {
         yield call(postBoard, data);
-        alert("작성 완료");
     } catch (e) {
         console.log(e);
     }

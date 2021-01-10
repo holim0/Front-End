@@ -12,8 +12,8 @@ const Container = styled.div`
         display: none;
     }
     scroll-behavior: smooth;
-    box-shadow: 7px 7px 7px 7px gray;
-    background-color: #f5f5f5;
+    border: 1px solid #dbdbdb;
+    background-color: #fafbfc;
 `;
 
 const Title = styled.div`

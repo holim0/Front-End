@@ -63,7 +63,6 @@ const BoardDetailContainer = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [comment, setComment] = useState("");
-    const [date, setDate] = useState(getToday());
     const [page, setPage] = useState(1);
 
     // 로그인이 안돼 있으면 댓글 방지.
@@ -173,7 +172,7 @@ const BoardDetailContainer = () => {
                     id: "",
                     writer: userData.userId,
                     content: comment,
-                    createdDate: date,
+                    createdDate: getToday(),
                     isEdit: false,
                 },
             };
@@ -190,7 +189,7 @@ const BoardDetailContainer = () => {
             }
             setComment("");
         },
-        [comment, dispatch, date, userData, isLogin, boardById]
+        [comment, dispatch, userData, isLogin, boardById]
     );
 
     // detail
@@ -231,6 +230,7 @@ const BoardDetailContainer = () => {
         [isDelete, history]
     );
 
+    // isEdit true일시 게시글 수정이 되지 않아서 게시글을 불러올시 isEdit false로 수정 가능하게 초기화
     useEffect(() => {
         dispatch(boardEditClear());
     }, []);

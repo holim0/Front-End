@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import theme from "Components/Theme";
 
 const Container = styled.div`
     height: 100vh;
@@ -14,8 +13,8 @@ const Container = styled.div`
     }
 
     scroll-behavior: smooth;
-    box-shadow: 7px 7px 7px 7px gray;
-    background-color: #f5f5f5;
+    border: 1px solid #dbdbdb;
+    background-color: #fafbfc;
 `;
 
 const Title = styled.div`
