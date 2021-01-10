@@ -44,7 +44,7 @@ const getCurComment = (TotalComment, curPage) => {
     return CurComment;
 };
 // 댓글 삭제 함수
-const DelComment = (TotalComment, target) => {
+const DelComment = (TotalComment, target, curPage) => {
     const newComment = TotalComment.filter((comment, idx) => {
         return idx !== Number(target);
     });
@@ -107,8 +107,9 @@ const BoardDetailContainer = () => {
 
     const handleDelComment = (e) => {
         e.preventDefault();
-        const idx = e.target.value;
+        const idx = Number(e.target.value) + 10 * (page - 1);
 
+        console.log(idx);
         const NewCommentData = {
             postId: boardById.id,
             commentId: boardById.comments[idx].id,
@@ -165,7 +166,6 @@ const BoardDetailContainer = () => {
     const commentSubmit = useCallback(
         (e) => {
             e.preventDefault();
-
             const CommentData = {
                 postId: boardById.id,
                 newComment: {
@@ -196,7 +196,7 @@ const BoardDetailContainer = () => {
 
     useEffect(() => {
         dispatch(getBoardByIdRequest(parseInt(id)));
-    }, [id]);
+    }, [dispatch, id]);
 
     // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
@@ -233,7 +233,7 @@ const BoardDetailContainer = () => {
     // isEdit true일시 게시글 수정이 되지 않아서 게시글을 불러올시 isEdit false로 수정 가능하게 초기화
     useEffect(() => {
         dispatch(boardEditClear());
-    }, []);
+    }, [dispatch]);
 
     // 로딩 중에는 로더 호출.
     if (isLoading) {
