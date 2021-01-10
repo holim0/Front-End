@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import AuthContainer from "Routes/Common";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -8,11 +8,12 @@ import { signOutRequest, alertClose } from "modules/sign";
 import { searchRequest, signFormShowing } from "modules/header";
 import { useInput } from "hooks";
 import { Link, useHistory } from "react-router-dom";
+import { Button } from "antd";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={7} variant="filled" {...props} />;
 }
 
 const Container = styled.div`
@@ -108,6 +109,7 @@ const UserProfile = styled.div`
     border-radius: 50%;
     width: 30px;
     margin-right: 50px;
+    margin-left: 10px;
     height: 30px;
     line-height: 30px;
     text-align: center;
@@ -164,8 +166,6 @@ const Header = () => {
     const Noti = useSelector((state) => state.sign.Noti);
     // 알림창 열림 여부 판단.
 
-    console.log(Noti.isFail);
-
     /// 로그인 알람창
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -182,18 +182,27 @@ const Header = () => {
     // search text & text reset
     const history = useHistory();
     const [text, setText, onChange] = useInput("");
+    const [searchFail, setSearchFail] = useState(false);
+
     const onReset = useCallback(() => {
         setText("");
-    }, [setText]);
+    }, [text]);
 
     const onSearch = useCallback(
         (e) => {
             e.preventDefault();
+            if (!text) {
+                setSearchFail(true);
+                setTimeout(() => {
+                    setSearchFail(false);
+                }, 1000);
+                return;
+            }
             dispatch(searchRequest(text));
             setText("");
             history.push(`/searchpost?search=${text}`);
         },
-        [text, setText, dispatch, history]
+        [text, dispatch, searchFail]
     );
 
     // check user
@@ -202,8 +211,6 @@ const Header = () => {
     const onLogOut = useCallback(() => {
         dispatch(signOutRequest());
     }, [dispatch]);
-
-    useEffect(() => {}, []);
 
     return (
         <>
@@ -235,6 +242,17 @@ const Header = () => {
                         )}
                     </div>
                 </Snackbar>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                    }}
+                    open={searchFail}
+                >
+                    {searchFail && (
+                        <Alert severity="info">검색어를 입력해 주세요!</Alert>
+                    )}
+                </Snackbar>
                 <HeaderContainer>
                     <Logo>
                         <Link to="/">GongGus</Link>
@@ -255,8 +273,12 @@ const Header = () => {
                     </SearchBar>
                     {user ? (
                         <UserMenu>
+                            <Link to="/write">
+                                <Button type="primary">글쓰기</Button>
+                            </Link>
                             <UserProfile>
                                 <FaUserAlt size={18} fill="#657786" />
+
                                 <UserProfileMenu>
                                     <li>
                                         <Mypage to="/mypage">마이페이지</Mypage>

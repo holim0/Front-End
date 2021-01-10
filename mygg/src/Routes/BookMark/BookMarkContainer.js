@@ -6,8 +6,8 @@ const BookMarkContainer = () => {
     const bookMarkList = useSelector(
         (state) => state.auth.userData.bookmarkPosts
     );
-
     const userNickName = useSelector((state) => state.auth.userData.nickname);
+
     return (
         <BookMarkPresenter
             bookMarkList={bookMarkList}

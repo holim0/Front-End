@@ -9,7 +9,7 @@ const Container = styled.div`
     align-content: center;
     flex: 1;
     min-height: 100%;
-    margin: 20px auto;
+    margin: 0 auto;
     color: white;
     font-size: 40px;
     --def: ${(props) => props.theme.bgColor};
@@ -31,7 +31,7 @@ const Button = styled(Link)`
     width: 1000px;
     color: var(--inv);
     letter-spacing: 1.1rem;
-    margin-top: 40px;
+    margin: 20px 0;
     z-index: 0;
     transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
     cursor: pointer;
@@ -82,13 +82,10 @@ const Button = styled(Link)`
 `;
 
 const Img = styled.img`
-    height: 500px;
-    width: 500px;
+    height: 450px;
+    width: 450px;
     border-radius: 100%;
-    /* box-shadow: 10px 10px 20px black; */
-    margin: 0 auto;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    margin: 50px auto;
 `;
 
 const HomePresenter = ({ isLogin, isLoading }) => {

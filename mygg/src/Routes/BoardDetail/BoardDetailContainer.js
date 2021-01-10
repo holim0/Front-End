@@ -15,7 +15,7 @@ import { signFormShowing } from "modules/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import BoardDetailPresenter from "./BoardDetailPresenter";
-// import { FaKaggle } from "react-icons/fa";
+import { boardEditClear } from "modules/boardWrite";
 
 const Container = styled.div`
     width: 100%;
@@ -34,7 +34,6 @@ function getToday() {
 // 페이지 별 댓글 수 조회.
 const getCurComment = (TotalComment, curPage) => {
     const CurComment = [];
-    console.log(TotalComment);
     if (TotalComment.length <= 10) {
         return TotalComment;
     }
@@ -64,11 +63,7 @@ const BoardDetailContainer = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [comment, setComment] = useState("");
-    const [date, setDate] = useState(getToday());
     const [page, setPage] = useState(1);
-
-    // 댓글 작성시 닉네임 형태로 보여주기 위해 가져옴.
-    const nickName = useSelector((state) => state.auth.userData.nickname);
 
     // 로그인이 안돼 있으면 댓글 방지.
     const isLogin = useSelector((state) => state.sign.isLogin);
@@ -146,19 +141,19 @@ const BoardDetailContainer = () => {
                 userId: userData.userId,
             };
 
-            if (userData.participatePosts.find((v) => v === parseInt(id))) {
-                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+            if (userData.participatePosts.some((v) => v === parseInt(id))) {
+                if (userData.id === boardById.owner.id) {
                     return alert("생성자는 나갈 수 없습니다.");
                 }
                 dispatch(removePartyRequest(data.boardId));
             } else {
-                if (userData.ownPosts.find((v) => v === parseInt(id))) {
+                if (userData.id === boardById.owner.id) {
                     return alert("생성자는 이미 참여 되어있습니다.");
                 }
                 dispatch(addPartyRequest(data));
             }
         },
-        [dispatch, isLogin, userData]
+        [dispatch, isLogin, userData, boardById]
     );
 
     // 댓글 인풋 관리
@@ -175,9 +170,9 @@ const BoardDetailContainer = () => {
                 postId: boardById.id,
                 newComment: {
                     id: "",
-                    writer: nickName,
+                    writer: userData.userId,
                     content: comment,
-                    createdDate: date,
+                    createdDate: getToday(),
                     isEdit: false,
                 },
             };
@@ -194,14 +189,14 @@ const BoardDetailContainer = () => {
             }
             setComment("");
         },
-        [comment, dispatch, date, nickName, isLogin, boardById]
+        [comment, dispatch, userData, isLogin, boardById]
     );
 
     // detail
 
     useEffect(() => {
         dispatch(getBoardByIdRequest(parseInt(id)));
-    }, [dispatch, id]);
+    }, [id]);
 
     // 게시글 edit
     const [isEdit, setIsEdit] = useState(false);
@@ -235,6 +230,11 @@ const BoardDetailContainer = () => {
         [isDelete, history]
     );
 
+    // isEdit true일시 게시글 수정이 되지 않아서 게시글을 불러올시 isEdit false로 수정 가능하게 초기화
+    useEffect(() => {
+        dispatch(boardEditClear());
+    }, []);
+
     // 로딩 중에는 로더 호출.
     if (isLoading) {
         return <Loader />;
@@ -259,7 +259,8 @@ const BoardDetailContainer = () => {
                 handleCommentPage={handleCommentPage}
                 handleEditBoard={handleEditBoard}
                 handleDelBoard={handleDelBoard}
-                userData={userData}></BoardDetailPresenter>
+                userData={userData}
+            ></BoardDetailPresenter>
         </Container>
     );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const WrapLoader = styled.div`
     position: ${(props) => (props.fixed ? "fixed" : "relative")};
-    min-height: calc(100vh - 60px);
+    min-height: 85vh;
     width: 100%;
     left: 0;
     top: 0;
@@ -13,9 +13,9 @@ const WrapLoader = styled.div`
 
 const Container = styled.div`
     position: absolute;
-    top: 50%;
+    top: calc(50% - 60px);
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, calc(-50% - 60px));
     .boxes {
         height: 32px;
         width: 32px;

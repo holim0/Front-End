@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import CatePresenter from "./CatePresenter";
 import { useDispatch, useSelector } from "react-redux";
-import { addBookMarkRequest, removeBookMarkRequest } from "modules/auth";
-import { signFormShowing } from "modules/header";
 import { getBoardAllRequest } from "modules/board";
 import { useLocation } from "react-router-dom";
 
@@ -11,8 +9,6 @@ const CateContainer = ({ children, ...cateName }) => {
     const { pathname } = useLocation();
     // islogin
     const { isLogin } = useSelector((state) => state.sign);
-    // userData
-    const { userData } = useSelector((state) => state.auth);
 
     // get board
     const { boardAll, getBoardAll } = useSelector((state) => state.board);
@@ -24,29 +20,7 @@ const CateContainer = ({ children, ...cateName }) => {
         category.push("글쓰기");
     }
 
-    // bookmark
-    const onBook = useCallback(
-        (e) => {
-            if (!isLogin) {
-                alert("로그인 하셔야 가능합니다.");
-                return dispatch(signFormShowing());
-            }
-            let { id } = e.target.dataset;
-            if (!id) {
-                id = e.target.parentNode.dataset.id;
-            }
-
-            if (
-                userData.bookmarkPosts.find((v) => parseInt(v) === parseInt(id))
-            ) {
-                dispatch(removeBookMarkRequest(id));
-            } else {
-                dispatch(addBookMarkRequest(id));
-            }
-        },
-        [dispatch, userData, isLogin]
-    );
-
+    // 카테고리 페이지일 시 위로 스크롤하고, url에 해당하는 게시글을 불러옵니다
     useEffect(() => {
         window.scroll({ top: 0, behavior: "smooth" });
         const path = pathname.split("/")[1];
@@ -58,10 +32,9 @@ const CateContainer = ({ children, ...cateName }) => {
             {...cateName}
             isLogin={isLogin}
             category={category}
-            getBoardAll={getBoardAll}
-            userData={userData}
             boardAll={boardAll}
-            onBook={onBook}></CatePresenter>
+            getBoardAll={getBoardAll}
+        ></CatePresenter>
     );
 };
 

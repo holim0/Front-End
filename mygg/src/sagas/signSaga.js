@@ -37,10 +37,8 @@ function signOutPost() {
 // 회원가입사가
 function* signUp(action) {
     try {
-        const getUser = yield call(signUpPost, action.payload);
+        yield call(signUpPost, action.payload);
         yield put(signUpSuccess());
-        yield put(signInSuccess());
-        yield put(getAuthSuccess(getUser));
         yield put(SignUpSuccessModal());
         yield put(signFormShowing(false));
     } catch (err) {
